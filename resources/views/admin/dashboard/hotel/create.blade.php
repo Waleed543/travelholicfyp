@@ -107,6 +107,7 @@
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>
+
                                             @enderror
                                         </div>
                                     </div>
@@ -155,6 +156,8 @@
                                 <button type="submit" class="btn btn-primary btn-sm" onkeypress="event.preventDefault();" value="submit" form="create">
                                     Create
                                 </button>
+
+
                             </div>
                         </div>
                     </div>
@@ -168,6 +171,7 @@
     <script src="{{asset('js/tag/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/tag/typeahead.bundle.js')}}" type="text/javascript"></script>
     <script>
+
         var tags = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,

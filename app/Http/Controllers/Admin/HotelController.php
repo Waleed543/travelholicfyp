@@ -44,6 +44,7 @@ class HotelController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        dd('chu');
         $hotel = new Hotel;
 
         //validate file upload
@@ -109,7 +110,7 @@ class HotelController extends Controller
                 ]);
             }
         }
-        dd('chu');
+
 
         return back()->with('popup_success', 'Tour Successfully Created');
     }
