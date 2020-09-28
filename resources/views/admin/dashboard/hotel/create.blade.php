@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboardAdmin')
-@section('title','Tour Create')
+@section('title','Hotel Create')
 @section('tour','current')
-@section('headerName', 'Create Tour')
+@section('headerName', 'Create Hotel')
 @section('content')
 
 @section('css')
@@ -58,10 +58,10 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Create Tour</strong>
+                                <strong>Create Hotel</strong>
                             </div>
                             <div class="card-body card-block">
-                                <form  id="create" method="post" action="{{route('tour.store')}}" enctype="multipart/form-data" class="form-horizontal">
+                                <form  id="create" method="post" action="{{route('admin.dashboard.hotel.store')}}" enctype="multipart/form-data" class="form-horizontal">
                                     @csrf
                                     <div class="row form-group" id="bloodhound">
                                         <div class="col-lg-6">
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="city" class=" form-control-label"><h3>City</h3></label>
-                                        <select name="city" id="destination_city" class="form-control @error('city') is-invalid @enderror" required>
+                                        <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
                                             <option value="">Please select</option>
                                             @if(count($cities)>0)
                                                 @foreach($cities as $city)
