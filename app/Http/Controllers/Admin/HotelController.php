@@ -6,10 +6,9 @@ use App\City;
 use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tour\StoreRequest;
+use App\Http\Requests\Hotel\StoreRequest;
 use App\Model\tags_tour;
 use App\Tag;
-use App\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -22,7 +21,8 @@ class HotelController extends Controller
      */
     public function index()
     {
-        dd('Walled chutya');
+        $hotels = Hotel::all();
+        return view('admin.dashboard.hotel.index',compact('hotels'));
     }
 
     /**
@@ -44,7 +44,7 @@ class HotelController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        dd('chu');
+
         $hotel = new Hotel;
 
         //validate file upload
@@ -65,6 +65,7 @@ class HotelController extends Controller
         }
 
 
+
         //store in db
 
         $hotel->user_id = auth()->user()->id;
@@ -82,15 +83,19 @@ class HotelController extends Controller
         }
         $slug = $slug."".$count;
 
+
         $hotel->slug = strtolower($slug);
 
 
 
+
         $hotel->total_rooms = $request->input('total_rooms');
+        $hotel->available_rooms= $request->input('total_rooms');
         $hotel->description = $request->input('description');
         $hotel->price = $request->input('price');
 
         $hotel->status = Status::InProgress;
+
 
         $hotel->save();
 
