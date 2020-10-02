@@ -96,6 +96,7 @@ class HotelController extends Controller
         $hotel->price = $request->input('price');
 
         $hotel->status = Status::InProgress;
+        $hotel->city= $request->input('city');
 
 
         $hotel->save();
@@ -171,7 +172,7 @@ class HotelController extends Controller
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
 
             Storage::delete('public/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail);
-            $path = $request->file('image')->storeAs(auth()->user()->username.'/hotel/', $fileNameToStore,'public');
+            $path = $request->file('image')->storeAs($hotel->user->username.'/hotel/', $fileNameToStore,'public');
 
             $hotel->thumbnail = $fileNameToStore;
 
@@ -210,6 +211,8 @@ class HotelController extends Controller
         $hotel->available_rooms= $request->input('total_rooms');
         $hotel->description = $request->input('description');
         $hotel->price = $request->input('price');
+        $hotel->city= $request->input('city');
+
 
         $hotel->status = Status::InProgress;
 
@@ -218,6 +221,7 @@ class HotelController extends Controller
 
         //delete changed tags
         $p_tags = $hotel->tags;
+        if($p_tags != null)
         foreach ($p_tags as $p_tag)
         {
             if($request->tags == null or !in_array($p_tag->name,$request->tags))
@@ -252,8 +256,23 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $hotel = Hotel::where('slug' , $slug)->first();
+        abort_if($hotel == null,'404');
+        abort_unless($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+        //Deleting Tour Thumbnail
+        Storage::delete('public/'.auth()->user()->username.'/hotel/'.$hotel->thumbnail);
+
+        //delete rooms
+
+        //deleting tags;
+        $hotel->tags()->detach();
+
+        //Deleting Tour
+        $hotel->delete();
+
+        return back()->with('popup_success','Hotel deleted successfully');
+
     }
 }

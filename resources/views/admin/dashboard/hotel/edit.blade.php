@@ -99,9 +99,9 @@
 
                                     <div class="row form-group">
                                         <div class="col-lg-6">
-                                            <label for="total_seats" class=" form-control-label"><h3>Total seats</h3></label>
-                                            <input type="number" id="total_seats" name="total_seats" value="{{old('total_seats') ? old('total_seats') : $hotel->total_rooms}}" class="form-control @error('total_seats') is-invalid @enderror" required>
-                                            @error('total_seats')
+                                            <label for="total_rooms" class=" form-control-label"><h3>Total Rooms</h3></label>
+                                            <input type="number" id="total_rooms" name="total_rooms" value="{{old('total_rooms') ? old('total_rooms') : $hotel->total_rooms}}" class="form-control @error('total_rooms') is-invalid @enderror" required>
+                                            @error('total_rooms')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>

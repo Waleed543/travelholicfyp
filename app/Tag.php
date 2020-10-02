@@ -18,5 +18,10 @@ class Tag extends Model
         return $this->belongsToMany('App\Tour','tags_tour','tag_id','tour_id','id','id');
     }
 
+    public function hotels()
+    {
+        return $this->belongsToMany('App\Hotel','hotel','tag_id','hotel_id','id','id');
+    }
+
 
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\City;
 use App\Hotel;
 use App\Http\Controllers\Controller;
+use App\Tour;
 use Illuminate\Http\Request;
 use App\Http\Requests\hotel\StoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
@@ -31,8 +33,15 @@ class HotelController extends Controller
 
 
         $cities = City::all();
-        dd($hotel->city);
+
 
         return view('admin.dashboard.hotel.edit',compact('hotel','cities'));
+    }
+    public function  delete($slug)
+    {
+
+
+
+
     }
 }
