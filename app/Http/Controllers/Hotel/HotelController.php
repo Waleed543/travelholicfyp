@@ -262,7 +262,7 @@ class HotelController extends Controller
         abort_if($hotel == null,'404');
         abort_unless($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
         //Deleting Tour Thumbnail
-        Storage::delete('public/'.auth()->user()->username.'/hotel/'.$hotel->thumbnail);
+        Storage::delete('public/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail);
 
         //delete rooms
 
