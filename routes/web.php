@@ -85,7 +85,8 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 //            Route::post('/{slug}/status','Admin\TourController@status')->name('.status');
               Route::get('/create', 'Admin\HotelController@create')->name('.create');
               Route::post('/store', 'Admin\HotelController@store')->name('.store');
-//            Route::get('/{slug}/edit', 'Admin\TourController@edit')->name('.edit');
+              Route::post('/update', 'Admin\HotelController@store')->name('.update');
+              Route::get('/{slug}/edit', 'Admin\HotelController@edit')->name('.edit');
 //            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
 //            Route::delete('/{slug}', 'Admin\TourController@destroy')->name('.delete');
               Route::get('/setting','Admin\HotelController@setting')->name('.setting');

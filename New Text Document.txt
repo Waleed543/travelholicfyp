@@ -1,0 +1,16 @@
+<!--              <form  id="update" method="post" action="{{route('hotel.edit',$hotel->slug)}}" enctype="multipart/form-data" class="form-horizontal"> <
+                                    {{ csrf_field() }}
+                                    @method('PUT')
+
+                                    <div class="row form-group" id="bloodhound">
+                                        <div class="col-lg-6">
+                                            <label for="tags" class=" form-control-label"><h3>Tags</h3></label>
+                                            <input type="text" data-role="tagsinput" id="blood" name="tags" value="{{old('tags') ?? implode(',',$hotel->tags->pluck('name')->toArray())}}" class="form-control @error('tags') is-invalid @enderror">
+                                            @error('tags')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    -->

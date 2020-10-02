@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Hotel\StoreRequest;
 use App\Model\tags_tour;
 use App\Tag;
+use App\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -22,7 +23,8 @@ class HotelController extends Controller
     public function index()
     {
         $hotels = Hotel::all();
-        return view('admin.dashboard.hotel.index',compact('hotels'));
+        $cities= city::all();
+        return view('admin.dashboard.hotel.index',compact('hotels','cities'));
     }
 
     /**
@@ -136,9 +138,17 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+
+        $hotel = Hotel::where('slug' , $slug)->first();
+
+        abort_if($hotel == null,'404','Hotel not found');
+
+
+        $cities = City::all();
+
+        return view('admin.dashboard.hotel.edit',compact('hotel','cities'));
     }
 
     /**

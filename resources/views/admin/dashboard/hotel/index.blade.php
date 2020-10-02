@@ -127,10 +127,10 @@
                                             {{-- Edit Tour Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
+                                                   document.getElementById('edit-hotel-{{$loop->iteration}}').submit();">
                                                 Edit
                                             </a>
-                                            <form id="edit-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.edit',$hotel->slug) }}" method="POST" style="display: none;">
+                                            <form id="edit-hotel-{{$loop->iteration}}" action="{{ route('admin.dashboard.hotel.edit',$hotel->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
