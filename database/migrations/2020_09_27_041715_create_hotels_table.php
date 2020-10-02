@@ -22,6 +22,7 @@ class CreateHotelsTable extends Migration
             $table->integer('total_rooms');
             $table->integer('available_rooms');
             $table->integer('price');
+            $table->unsignedInteger('city');
             $table->string('thumbnail');
             $table->string('status',50);
             $table->timestamps();

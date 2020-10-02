@@ -9,4 +9,6 @@ class tags_blog extends Model
     protected $table = 'tags_blog';
 
     protected $guarded = [];
+
+
 }

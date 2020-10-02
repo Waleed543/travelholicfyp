@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Hotel;
+namespace App\Http\Controllers\Admin;
 
 use App\City;
 use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Hotel\EditRequest;
 use App\Http\Requests\Hotel\StoreRequest;
-use App\Model\tags_hotel;
+use App\Model\tags_tour;
 use App\Tag;
+use App\Tour;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class HotelController extends Controller
@@ -24,7 +22,9 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('hotel.index');
+        $hotels = Hotel::all();
+        $cities= city::all();
+        return view('admin.dashboard.hotel.index',compact('hotels','cities'));
     }
 
     /**
@@ -34,7 +34,8 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        $cities = City::all();
+        return view('admin.dashboard.hotel.create',compact('cities'));
     }
 
     /**
@@ -45,8 +46,8 @@ class HotelController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $hotel = new Hotel;
 
+        $hotel = new Hotel;
 
         //validate file upload
         if ($request->hasFile('image')) {
@@ -110,7 +111,7 @@ class HotelController extends Controller
                     'slug' => Str::slug($name)
                 ]);
 
-                $tags_tour = tags_hotel::create([
+                $tags_tour = tags_tour::create([
                     'hotel_id' => $hotel->id,
                     'tag_id' => $hotel->id
                 ]);
@@ -118,9 +119,8 @@ class HotelController extends Controller
         }
 
 
-        return back()->with('popup_success', 'Hotel Successfully Created');
+        return back()->with('popup_success', 'Tour Successfully Created');
     }
-
     /**
      * Display the specified resource.
      *
@@ -138,9 +138,17 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+
+        $hotel = Hotel::where('slug' , $slug)->first();
+
+        abort_if($hotel == null,'404','Hotel not found');
+
+
+        $cities = City::all();
+
+        return view('admin.dashboard.hotel.edit',compact('hotel','cities'));
     }
 
     /**
@@ -150,100 +158,9 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditRequest $request, $slug)
+    public function update(Request $request, $slug)
     {
-        $hotel = Hotel::where('slug' , $slug)->first();
-
-        abort_if($hotel == null,'404');
-        abort_unless($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
-
-
-
-        //validate file upload
-        if ($request->hasFile('image')) {
-            //get file name with extension
-            $fileNameWithExt = $request->file('image')->getClientOriginalName();
-            //get file name
-            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            //get extension
-            $extension = $request->file('image')->getClientOriginalExtension();
-            //file name
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-
-            Storage::delete('public/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail);
-            $path = $request->file('image')->storeAs(auth()->user()->username.'/hotel/', $fileNameToStore,'public');
-
-            $hotel->thumbnail = $fileNameToStore;
-
-        }
-
-
-
-        //update in db
-
-        $hotel->name = $request->input('name');
-        //Slug Create
-        if($hotel->name != $request->name)
-        {
-            $slug = Str::slug( $request->name, "-");
-            $slug = $slug."-";
-            $temp = Hotel::where('slug','like',"{$slug}%")->orderBy('slug')->get()->last();
-            if($temp != null)
-            {
-                $count = Str::afterLast($temp->slug, '-');
-                $count +=1;
-            }else{
-                $count = 1;
-            }
-            $slug = $slug."".$count;
-
-            $hotel->slug = strtolower($slug);
-        }
-
-
-        $hotel->slug = strtolower($slug);
-
-
-
-
-        $hotel->total_rooms = $request->input('total_rooms');
-        $hotel->available_rooms= $request->input('total_rooms');
-        $hotel->description = $request->input('description');
-        $hotel->price = $request->input('price');
-
-        $hotel->status = Status::InProgress;
-
-
-        $hotel->save();
-
-        //delete changed tags
-        $p_tags = $hotel->tags;
-        foreach ($p_tags as $p_tag)
-        {
-            if($request->tags == null or !in_array($p_tag->name,$request->tags))
-            {
-                $hotel->tags()->detach($p_tag);
-            }
-        }
-        //create new tags
-        if($request->tags != null)
-        {
-            foreach ($request->tags as $name)
-            {
-                $tag = Tag::firstOrCreate([
-                    'name' => $name,
-                    'slug' => Str::slug($name)
-                ]);
-
-                $tags_hotel = tags_tour::firstOrCreate([
-                    'hotel_id' => $hotel->id,
-                    'tag_id' => $tag->id
-                ]);
-            }
-        }
-
-
-        return back()->with('popup_success', 'Hotel Successfully Updated');
+        dd("Travelholic");
     }
 
     /**
@@ -255,5 +172,9 @@ class HotelController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function setting()
+    {
+
     }
 }

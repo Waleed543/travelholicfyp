@@ -60,6 +60,9 @@
                             <div class="card-body card-block">
 
                                 <form  id="update" method="post" action="{{route('hotel.update',$hotel->slug)}}" enctype="multipart/form-data" class="form-horizontal">
+                                    {{ csrf_field() }}
+                                    @method('PUT')
+
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label for="name" class=" form-control-label"><h3>Name</h3></label>
@@ -70,6 +73,27 @@
                                                     </span>
                                             @enderror
                                         </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <label for="city" class=" form-control-label"><h3>City</h3></label>
+                                        <select name="city" id="city" Value="{{old('city') ?? $hotel->city}}" class="form-control @error('city') is-invalid @enderror" required>
+                                            <option value="">Please select</option>
+                                            @if(count($cities)>0)
+                                                @foreach($cities as $city)
+                                                    @if(old('city') == $city->id)
+                                                        <option selected value="{{$city->id}}">{{$city->name}}</option>
+                                                    @else
+                                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                        @enderror
                                     </div>
 
 

@@ -62,7 +62,6 @@
                                 </div>
                                 <div class="card-body card-block">
                                     <form  id="create" method="post" action="{{route('tour.store')}}" enctype="multipart/form-data" class="form-horizontal">
-                                        @csrf
                                         <div class="row form-group" id="bloodhound">
                                             <div class="col-lg-6">
                                                 <label for="tags" class=" form-control-label"><h3>Tags</h3></label>
