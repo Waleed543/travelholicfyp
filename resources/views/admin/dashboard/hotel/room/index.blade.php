@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboardAdmin')
-@section('title','Hotel')
+@section('title','Rooms')
 @section('Hotel','current')
-@section('headerName', 'Hotels')
+@section('headerName', 'Rooms')
 @section('content')
 @section('css')
     <style>
@@ -27,7 +27,7 @@
                                 </div>
                                 <div id="search" class="collapse">
                                     <hr>
-                                    <form  id="search" method="GET" action="{{route('admin.dashboard.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
+                                    <form  id="search" method="GET" action="" enctype="multipart/form-data" class="form-horizontal">
                                         {{-- Name --}}
                                         <div class="row form-group">
                                             <div class="col-12 col-md-12">
@@ -77,7 +77,7 @@
         <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class="row">
                 <div class="col-xl-12 col-12">
-                    <h3 class="text-muted text-center mb-3">All Hotels</h3>
+                    <h3 class="text-muted text-center mb-3">All Rooms</h3>
                     <table class="table table-dark table-hover text-center">
                         <thead>
                         <tr class="">
@@ -90,11 +90,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($hotels) > 0)
-                            @foreach($hotels as $hotel)
+                        @if(count(Rooms) > 0)
+                            @foreach($Rooms as $room)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <td><a href="{{route('hotel.show',$hotel->slug)}}" target="_blank">{{$hotel->name}}</a></td>
+                                    <td><a href="{{route('hotel.show',$room->slug)}}" target="_blank">{{$room->name}}</a></td>
                                     <td>{{$hotel->slug}}</td>
                                     <td>{{$hotel->created_at}}</td>
                                     <td>
@@ -195,7 +195,7 @@
             var form = document.getElementById("status-form-"+slug);
 
             $.ajax({
-                url:"/admin/dashboard/hotel/"+slug+"/status",
+                url:"/admin/dashboard/tour/"+slug+"/status",
                 method:"POST",
                 data:new FormData(form),
                 dataType:'JSON',
@@ -211,10 +211,6 @@
                     show_message(data);
                 }
             });
-        }
-        function show_message(data)
-        {
-            alert(data.message);
         }
 
     </script>

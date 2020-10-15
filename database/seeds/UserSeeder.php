@@ -33,5 +33,11 @@ class UserSeeder extends Seeder
         DB::table('role_user')->insert(
             ['user_id' => 2, 'role_id' => 2]
         );
+        Role::create([
+            'name' => 'Tour Vendor'
+        ]);
+        Role::create([
+            'name' => 'Hotel Vendor'
+        ]);
     }
 }

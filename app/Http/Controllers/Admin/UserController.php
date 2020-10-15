@@ -147,6 +147,7 @@ class UserController extends Controller
 
         $user->roles()->sync($request->role);
 
+
         return back()->with('popup_success','User has been updated');
     }
 

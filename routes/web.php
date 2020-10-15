@@ -82,7 +82,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
         //Hotel Routes
         Route::prefix('/hotel')->name('admin.dashboard.hotel')->group(function () {
             Route::get('/', 'Admin\HotelController@index');
-//            Route::post('/{slug}/status','Admin\TourController@status')->name('.status');
+            Route::post('/{slug}/status','Admin\HotelController@status')->name('.status');
               Route::get('/create', 'Admin\HotelController@create')->name('.create');
              // Route::post('/update', 'Admin\HotelController@update')->name('.update');
               Route::get('/{slug}/edit', 'Admin\HotelController@edit')->name('.edit');
@@ -90,6 +90,15 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 //            Route::delete('/{slug}', 'Admin\TourController@destroy')->name('.delete');
               Route::get('/setting','Admin\HotelController@setting')->name('.setting');
 //            Route::get('/search', 'Tour\TourSearchController')->name('.search');
+
+              //Rooms Routes
+               Route::prefix('/room')->name('admin.dashboard.hotel.room')->group(function () {
+                    Route::get('/create', 'Admin\RoomController@create')->name('.create');
+
+               });
+
+
+
 
         });
 
@@ -134,6 +143,16 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/edit', 'User\TourController@edit')->name('dashboard.tour.edit');
         Route::get('/{slug}/profile','User\TourController@profile')->name('dashboard.tour.profile');
         Route::delete('/{slug}', 'User\TourController@destroy')->name('dashboard.tour.delete');
+        Route::get('/{slug}/status', 'User\TourController@status')->name('dashboard.tour.status.inactive');
+    });
+    //Hotel Routes
+    Route::prefix('hotel')->middleware(['auth','can:notAdmin'])->group(function () {
+        Route::get('/', 'User\HotelController@index')->name('dashboard.hotel');
+        Route::get('/create', 'User\HotelController@create')->name('dashboard.hotel.create');
+        Route::get('/{slug}/edit', 'User\HotelController@edit')->name('dashboard.hotel.edit');
+        Route::get('/{slug}/profile','User\HotelController@profile')->name('dashboard.hotel.profile');
+        Route::delete('/{slug}', 'User\HotelController@destroy')->name('dashboard.hotel.delete');
+        Route::get('/{slug}/status', 'User\HotelController@status')->name('dashboard.hotel.status.inactive');
     });
     //My Bookings Routes
     Route::prefix('booking')->middleware(['auth','can:isStandard'])->group(function () {
@@ -143,6 +162,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/tour/{slug}edit','Tour\TourBookController@edit')->name('dashboard.tour.book.edit');
         //Show Tour Bookings
         Route::get('/tour', 'User\BookingController@tour')->name('dashboard.tour.booking');
+
     });
 });
 /*
@@ -184,7 +204,8 @@ Route::resource('/tour','Tour\TourController');
 */
 
 Route::resource('/hotel','Hotel\HotelController');
-
+//rooms
+Route::resource('/hotel/room','Hotel\RoomController');
 
 
 

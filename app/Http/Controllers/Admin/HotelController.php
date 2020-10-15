@@ -7,8 +7,11 @@ use App\Hotel;
 use App\Http\Controllers\Controller;
 use App\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\hotel\StoreRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use App\Enums\Status;
 
 class HotelController extends Controller
 {
@@ -37,11 +40,44 @@ class HotelController extends Controller
 
         return view('admin.dashboard.hotel.edit',compact('hotel','cities'));
     }
-    public function  delete($slug)
-    {
+
+    public function status(Request $request, $slug)
+        {
+
+            $validator = Validator::make($request->all(), [
+                'status' => 'required|string'
+            ]);
 
 
+            $hotel = Hotel::where('slug' , $slug)->first();
+
+            if ($validator->fails() or $hotel == null)
+            {
+                return response()->json([
+                    'message'   => 'Status was unable to change',
+                    'error' => 1
+                ]);
+            }
+
+            switch ($request->status)
+            {
+                case Status::InProgress:
+                    $hotel->status = Status::InProgress;
+                    break;
+                case Status::InActive:
+                    $hotel->status = Status::InActive;
+                    break;
+                case Status::Active:
+                    $hotel->status = Status::Active;
+                    break;
+            }
 
 
-    }
+            $hotel->save();
+
+            return response()->json([
+                'message'   => 'Status changed',
+                'error' => 0
+            ]);
+        }
 }

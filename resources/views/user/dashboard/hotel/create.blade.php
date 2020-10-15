@@ -1,8 +1,9 @@
-@extends('admin.layouts.dashboardAdmin')
-@section('title','Hotel Edit')
+@extends('layouts.dashboard')
+@section('title','Hotel Create')
 @section('hotel','current')
-@section('headerName', 'Edit Hotel')
+@section('headerName', 'Create Hotel')
 @section('content')
+
 @section('css')
     <link rel="stylesheet" type href="/css/bootstrap-tagsinput.css">
     <link rel="stylesheet" type href="/css/tag/app.css">
@@ -47,6 +48,8 @@
 
     </style>
 @endsection
+
+
 <section>
     <div class="container-fluid">
         <div class="row">
@@ -55,19 +58,16 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Update Hotel</strong>
+                                <strong>Create Hotel</strong>
                             </div>
                             <div class="card-body card-block">
-
-                                <form  id="update" method="post" action="{{route('hotel.update',$hotel->slug)}}" enctype="multipart/form-data" class="form-horizontal">
-                                    {{ csrf_field() }}
-                                    @method('PUT')
-
-                                    <div class="row form-group">
+                                <form  id="create" method="post" action="{{route('hotel.store')}}" enctype="multipart/form-data" class="form-horizontal">
+                                    @csrf
+                                    <div class="row form-group" id="bloodhound">
                                         <div class="col-lg-6">
-                                            <label for="name" class=" form-control-label"><h3>Name</h3></label>
-                                            <input type="text" id="name" name="name" value="{{old('name') ?? $hotel->name}}" class="form-control @error('name') is-invalid @enderror" required>
-                                            @error('name')
+                                            <label for="tags" class=" form-control-label"><h3>Tags</h3></label>
+                                            <input type="text" data-role="tagsinput" id="blood" name="tags" value="{{old('tags')}}" class="form-control @error('tags') is-invalid @enderror">
+                                            @error('tags')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>
@@ -75,13 +75,49 @@
                                         </div>
                                     </div>
 
+
+
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <label for="name" class=" form-control-label"><h3>Name</h3></label>
+                                            <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" required>
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <label for="total_rooms" class=" form-control-label"><h3>Total Rooms</h3></label>
+                                            <input type="number" id="total_rooms" name="total_rooms" value="{{old('total_rooms')}}" class="form-control @error('total_rooms') is-invalid @enderror" required>
+                                            @error('total_rooms')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <label for="price" class=" form-control-label"><h3>Price</h3></label>
+                                            <input type="number" id="price" name="price" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" required>
+                                            @error('price')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-lg-6">
                                         <label for="city" class=" form-control-label"><h3>City</h3></label>
-                                        <select name="city" id="city" Value="{{old('city') ?? $hotel->city}}" class="form-control @error('city') is-invalid @enderror" required>
+                                        <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
                                             <option value="">Please select</option>
                                             @if(count($cities)>0)
                                                 @foreach($cities as $city)
-                                                    @if(old('city') == $city->id or $hotel->city == $city->id)
+                                                    @if(old('city') == $city->id)
                                                         <option selected value="{{$city->id}}">{{$city->name}}</option>
                                                     @else
                                                         <option value="{{$city->id}}">{{$city->name}}</option>
@@ -95,38 +131,10 @@
                                                     </span>
                                         @enderror
                                     </div>
-
-
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="total_rooms" class=" form-control-label"><h3>Total Rooms</h3></label>
-                                            <input type="number" id="total_rooms" name="total_rooms" value="{{old('total_rooms') ? old('total_rooms') : $hotel->total_rooms}}" class="form-control @error('total_rooms') is-invalid @enderror" required>
-                                            @error('total_rooms')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="price" class=" form-control-label"><h3>Price</h3></label>
-                                            <input type="number" id="price" name="price" value="{{old('price') ? old('price') : $hotel->price}}" class="form-control @error('price') is-invalid @enderror" required>
-                                            @error('price')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-
-
                                     <div class="row form-group">
                                         <div class="col-12 col-md-12">
                                             <label for="inputContent" class=" form-control-label"><h3>Description</h3></label>
-                                            <textarea  rows="7" name="description"class="form-control @error('description') is-invalid @enderror">{{old('description') ?? $hotel->description}}</textarea>
+                                            <textarea  rows="7" name="description"class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
                                             @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -139,15 +147,17 @@
                                             <label for="file-input" class=" form-control-label">Cover Image</label>
                                         </div>
                                         <div class="col-12 col-md-3">
-                                            <input type="file" id="file-input" name="image" class="form-control-file">
+                                            <input type="file" id="file-input" name="image" class="form-control-file" required>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm" value="submit" form="update">
-                                    Update
+                                <button type="submit" class="btn btn-primary btn-sm" onkeypress="event.preventDefault();" value="submit" form="create">
+                                    Create
                                 </button>
+
+
                             </div>
                         </div>
                     </div>
@@ -156,10 +166,12 @@
         </div>
     </div>
 </section>
+
 @section('js')
     <script src="{{asset('js/tag/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/tag/typeahead.bundle.js')}}" type="text/javascript"></script>
     <script>
+
         var tags = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,

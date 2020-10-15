@@ -1,4 +1,4 @@
-@extends('admin.layouts.dashboardAdmin')
+@extends('layouts.dashboard')
 @section('title','Hotel')
 @section('Hotel','current')
 @section('headerName', 'Hotels')
@@ -27,7 +27,7 @@
                                 </div>
                                 <div id="search" class="collapse">
                                     <hr>
-                                    <form  id="search" method="GET" action="{{route('admin.dashboard.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
+                                    <form  id="search" method="GET" action="" enctype="multipart/form-data" class="form-horizontal">
                                         {{-- Name --}}
                                         <div class="row form-group">
                                             <div class="col-12 col-md-12">
@@ -90,57 +90,54 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($hotels) > 0)
+                        @if($hotels != null and count($hotels) > 0)
                             @foreach($hotels as $hotel)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
                                     <td><a href="{{route('hotel.show',$hotel->slug)}}" target="_blank">{{$hotel->name}}</a></td>
                                     <td>{{$hotel->slug}}</td>
                                     <td>{{$hotel->created_at}}</td>
-                                    <td>
-                                        <form id="status-form-{{$hotel->slug}}">
-                                            @csrf
-                                            <select onchange="submit_status_form('{{$hotel->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
-                                                <option value="">Please select</option>
-                                                @foreach(App\Enums\Status::toArray() as $status)
-                                                    @if(old('status') ?? $hotel->status == $status)
-                                                        <option selected value="{{$status}}">{{$status}}</option>
-                                                    @else
-                                                        <option value="{{$status}}">{{$status}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </form>
-                                    </td>
+                                    <td> {{$hotel->status}}</td>
+
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Profile Tour Button--}}
-                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                            {{-- Inactive Hotel Button--}}
+                                            <a type="button" href="" class="btn btn-warning btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('profile-tour-{{$loop->iteration}}').submit();">
-                                                Profile
+                                                   document.getElementById('inactive-hotel-{{$loop->iteration}}').submit();">
+                                                Inavtive
                                             </a>
-                                            <form id="profile-tour-{{$loop->iteration}}" action="" method="POST" style="display: none;">
+                                            <form id="inactive-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.status.inactive',$hotel->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
-                                            {{-- Edit Tour Button--}}
+                                            {{-- Profile Hotel Button--}}
+                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                               onclick="event.preventDefault();
+                                                   document.getElementById('profile-hotel-{{$loop->iteration}}').submit();">
+                                                Profile
+                                            </a>
+                                            <form id="profile-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.profile',$hotel->slug) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                            {{-- Edit Hotel Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
                                                    document.getElementById('edit-hotel-{{$loop->iteration}}').submit();">
                                                 Edit
                                             </a>
-                                            <form id="edit-hotel-{{$loop->iteration}}" action="{{ route('admin.dashboard.hotel.edit',$hotel->slug) }}" method="POST" style="display: none;">
+                                            <form id="edit-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.edit',$hotel->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
-                                            {{-- Delete Tour Button--}}
+                                            {{-- Delete Hotel Button--}}
                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
+                                                   document.getElementById('delete-hotel-{{$loop->iteration}}').submit();">
                                                 Delete
                                             </a>
-                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('hotel.destroy',$hotel->slug) }}" method="POST" style="display: none;">
+                                            <form id="delete-hotel-{{$loop->iteration}}" action="{{ route('hotel.destroy',$hotel->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -195,7 +192,7 @@
             var form = document.getElementById("status-form-"+slug);
 
             $.ajax({
-                url:"/admin/dashboard/hotel/"+slug+"/status",
+                url:"/admin/dashboard/tour/"+slug+"/status",
                 method:"POST",
                 data:new FormData(form),
                 dataType:'JSON',
@@ -211,10 +208,6 @@
                     show_message(data);
                 }
             });
-        }
-        function show_message(data)
-        {
-            alert(data.message);
         }
 
     </script>

@@ -55,4 +55,15 @@ class UserRole
         return false;
     }
 
+    public function isHotelVendor(User $user)
+    {
+        $this->rolesToSession($user);
+        $roles = session('roles');
+        if(in_array('Hotel Vendor',$roles))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

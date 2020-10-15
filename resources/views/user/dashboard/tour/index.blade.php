@@ -31,7 +31,7 @@
                                             <td>{{$tour->created_at}}</td>
                                             <td>
                                                 @if($tour->status == \App\Enums\Status::Active)
-                                                    <span class="badge badge-success w-75 py-2">Avtive</span>
+                                                    <span class="badge badge-success w-75 py-2">Active</span>
                                                 @elseif($tour->status == \App\Enums\Status::InProgress)
                                                     <span class="badge badge-warning w-75 py-2">In progress</span>
                                                 @elseif($tour->status == \App\Enums\Status::InActive)
@@ -40,6 +40,16 @@
                                             </td>
                                             <td>
                                                 <div class="d-inline" role="group">
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('inactive-tour-{{$loop->iteration}}').submit();">
+                                                        Inavtive
+                                                    </a>
+                                                    <form id="inactive-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.status.inactive',$tour->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
                                                     {{-- Profile Tour Button--}}
                                                     <a type="button" href="" class="btn btn-success btn-sm"
                                                        onclick="event.preventDefault();

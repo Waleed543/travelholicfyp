@@ -24,7 +24,11 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return view('hotel.index');
+        $hotels = Hotel::with('user')
+            ->where('status','=',Status::Active)
+            ->orderBy('id','desc')->paginate(6);
+
+        return view('hotel.index', compact('hotels'));
     }
 
     /**
@@ -93,7 +97,6 @@ class HotelController extends Controller
         $hotel->total_rooms = $request->input('total_rooms');
         $hotel->available_rooms= $request->input('total_rooms');
         $hotel->description = $request->input('description');
-        $hotel->price = $request->input('price');
 
         $hotel->status = Status::InProgress;
         $hotel->city= $request->input('city');
@@ -128,9 +131,16 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $hotel = Hotel::with('user')->where('slug','=',$slug)
+            ->where('status','=',Status::Active)
+            ->first();
+
+        abort_if($hotel == null,'404');
+        dd($hotel);
+
+        return view('hotel.show',compact('hotel'));
     }
 
     /**
@@ -210,7 +220,6 @@ class HotelController extends Controller
         $hotel->total_rooms = $request->input('total_rooms');
         $hotel->available_rooms= $request->input('total_rooms');
         $hotel->description = $request->input('description');
-        $hotel->price = $request->input('price');
         $hotel->city= $request->input('city');
 
 
@@ -264,7 +273,7 @@ class HotelController extends Controller
         //Deleting Tour Thumbnail
         Storage::delete('public/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail);
 
-        //delete rooms
+        //delete rooms  1123
 
         //deleting tags;
         $hotel->tags()->detach();

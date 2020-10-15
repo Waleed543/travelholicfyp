@@ -83,8 +83,14 @@ class TourController extends Controller
         //Deleting Tour Thumbnail
         Storage::delete('public/'.$tour->user->username.'/tour/'.$tour->thumbnail);
 
-        //deleting tags;
+        //deleting tags
         $tour->tags()->detach();
+        //deleting tour days
+        $tour_days = $tour->tour_days;
+        foreach($tour_days as $day)
+        {
+            $day->delete();
+        }
 
         //Deleting Tour
         $tour->delete();

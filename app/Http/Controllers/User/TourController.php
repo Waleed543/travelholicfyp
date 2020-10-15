@@ -8,6 +8,7 @@ use App\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\Status;
 
 class TourController extends Controller
 {
@@ -50,6 +51,21 @@ class TourController extends Controller
 
         return back()->with('popup_success','Tour deleted successfully');
     }
+
+    public function status($slug)
+        {
+                $tour = Tour::where('slug' , $slug)->first();
+
+                abort_if($tour == null,'404','Tour not found');
+                abort_if($tour->user_id != auth()->user()->id,'401');
+
+                $tour->status= Status::InActive;
+
+                $tour->save();
+
+                return back()->with('popup_success','Success');
+
+        }
 
     public function profile($slug)
     {

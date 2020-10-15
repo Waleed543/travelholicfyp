@@ -44,7 +44,7 @@
                             </div>
                         </li>
 
-                        {{-- Blog--}}
+                        {{-- Tour --}}
                         @can('isTourVendor')
                             <li class="nav-item dropdown" >
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white p-3 mb-2 sidebar-link @yield('tour')" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
@@ -57,6 +57,25 @@
                                     </a>
 
                                     <a href="{{route('dashboard.tour.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Create
+                                    </a>
+                                </div>
+                            </li>
+                        @endcan
+
+                        {{-- Tour --}}
+                        @can('isHotelVendor')
+                            <li class="nav-item dropdown" >
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white p-3 mb-2 sidebar-link @yield('hotel')" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                                    <i class="fas fa-envelope text-light fa-lg mr-3"></i>
+                                    Hotel
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('dashboard.hotel')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Index
+                                    </a>
+
+                                    <a href="{{route('dashboard.hotel.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Create
                                     </a>
                                 </div>

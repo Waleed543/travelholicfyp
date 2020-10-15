@@ -1,4 +1,4 @@
-@extends('admin.layouts.dashboardAdmin')
+@extends('layouts.dashboard')
 @section('title','Hotel Edit')
 @section('hotel','current')
 @section('headerName', 'Edit Hotel')
