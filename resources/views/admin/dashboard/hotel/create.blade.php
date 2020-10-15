@@ -88,29 +88,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="total_rooms" class=" form-control-label"><h3>Total Rooms</h3></label>
-                                            <input type="number" id="total_rooms" name="total_rooms" value="{{old('total_rooms')}}" class="form-control @error('total_rooms') is-invalid @enderror" required>
-                                            @error('total_rooms')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="price" class=" form-control-label"><h3>Price</h3></label>
-                                            <input type="number" id="price" name="price" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" required>
-                                            @error('price')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-lg-6">
                                         <label for="city" class=" form-control-label"><h3>City</h3></label>
                                         <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>

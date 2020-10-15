@@ -1,7 +1,7 @@
-@extends('layouts.dashboard')
-@section('title','Hotel Create')
+@extends('admin.layouts.dashboardAdmin')
+@section('title','Add Room Type')
 @section('hotel','current')
-@section('headerName', 'Create Hotel')
+@section('headerName', 'Add Room')
 @section('content')
 
 @section('css')
@@ -61,22 +61,8 @@
                                 <strong>Create Hotel</strong>
                             </div>
                             <div class="card-body card-block">
-                                <form  id="create" method="post" action="{{route('hotel.store')}}" enctype="multipart/form-data" class="form-horizontal">
+                                <form  id="create" method="post" action="{{route('room.store',$slug)}}" enctype="multipart/form-data" class="form-horizontal">
                                     @csrf
-                                    <div class="row form-group" id="bloodhound">
-                                        <div class="col-lg-6">
-                                            <label for="tags" class=" form-control-label"><h3>Tags</h3></label>
-                                            <input type="text" data-role="tagsinput" id="blood" name="tags" value="{{old('tags')}}" class="form-control @error('tags') is-invalid @enderror">
-                                            @error('tags')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label for="name" class=" form-control-label"><h3>Name</h3></label>
@@ -89,25 +75,44 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <label for="city" class=" form-control-label"><h3>City</h3></label>
-                                        <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
-                                            <option value="">Please select</option>
-                                            @if(count($cities)>0)
-                                                @foreach($cities as $city)
-                                                    @if(old('city') == $city->id)
-                                                        <option selected value="{{$city->id}}">{{$city->name}}</option>
-                                                    @else
-                                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                                    @endif
+                                        <label for="facilities" class=" form-control-label"><h3>Select Facilities</h3></label>
+                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select form-control" name="facilities[]">
+                                            <option value=""></option>
+                                            @if(count($facilities)>0)
+                                                @foreach($facilities as $facility)
+                                                    <option>{{$facility->name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
-                                        @error('city')
+                                        @error('facilities')
                                         <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>
                                         @enderror
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <label for="total" class=" form-control-label"><h3>Total Rooms</h3></label>
+                                            <input type="number" id="total" name="total" value="{{old('total')}}" class="form-control @error('total') is-invalid @enderror" required>
+                                            @error('total')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <label for="price" class=" form-control-label"><h3>Price Per Room</h3></label>
+                                            <input type="number" id="price" name="price" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" required>
+                                            @error('price')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group">
                                         <div class="col-12 col-md-12">
                                             <label for="inputContent" class=" form-control-label"><h3>Description</h3></label>
@@ -145,39 +150,12 @@
 </section>
 
 @section('js')
-    <script src="{{asset('js/tag/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('js/tag/typeahead.bundle.js')}}" type="text/javascript"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
     <script>
-
-        var tags = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            prefetch: {
-                url: '/tag/name',
-                filter: function(list) {
-                    return $.map(list, function(tag) {
-                        return { name: tag }; });
-                },
-                cache:true,
-                ttl:60000
-            }
-        });
-        tags.initialize();
-        $('#blood').tagsinput({
-            typeaheadjs: {
-                name: 'tags',
-                displayKey: 'name',
-                valueKey: 'name',
-                source: tags.ttAdapter()
-            }
-        });
-        $(document).ready(function(){
-            $(".tt-input").keypress(function(e){
-                if(e.which == 13) {
-                    event.preventDefault();
-                }
-            });
-        });
+        $(".chosen-select").chosen({
+            no_results_text: "Oops, nothing found!"
+        })
     </script>
 @endsection
 @endsection

@@ -94,8 +94,7 @@ class HotelController extends Controller
 
 
 
-        $hotel->total_rooms = $request->input('total_rooms');
-        $hotel->available_rooms= $request->input('total_rooms');
+        $hotel->total_rooms = $hotel->available_rooms = 0;
         $hotel->description = $request->input('description');
 
         $hotel->status = Status::InProgress;
@@ -138,7 +137,6 @@ class HotelController extends Controller
             ->first();
 
         abort_if($hotel == null,'404');
-        dd($hotel);
 
         return view('hotel.show',compact('hotel'));
     }
@@ -217,8 +215,7 @@ class HotelController extends Controller
 
 
 
-        $hotel->total_rooms = $request->input('total_rooms');
-        $hotel->available_rooms= $request->input('total_rooms');
+        $hotel->total_rooms = $hotel->available_rooms = 0;
         $hotel->description = $request->input('description');
         $hotel->city= $request->input('city');
 

@@ -92,8 +92,9 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 //            Route::get('/search', 'Tour\TourSearchController')->name('.search');
 
               //Rooms Routes
-               Route::prefix('/room')->name('admin.dashboard.hotel.room')->group(function () {
+               Route::prefix('/{slug}/room')->name('.room')->group(function () {
                     Route::get('/create', 'Admin\RoomController@create')->name('.create');
+                   Route::get('/store', 'Admin\RoomController@store')->name('.store');
 
                });
 
@@ -205,11 +206,11 @@ Route::resource('/tour','Tour\TourController');
 
 Route::resource('/hotel','Hotel\HotelController');
 //rooms
-Route::resource('/hotel/room','Hotel\RoomController');
+Route::resource('/hotel/{slug}/room','Hotel\RoomController');
 
 
 
-
+Route::get('/roomcheck','HomeController@index');
 
 
 

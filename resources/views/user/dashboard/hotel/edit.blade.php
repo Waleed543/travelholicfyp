@@ -95,34 +95,6 @@
                                                     </span>
                                         @enderror
                                     </div>
-
-
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="total_rooms" class=" form-control-label"><h3>Total Rooms</h3></label>
-                                            <input type="number" id="total_rooms" name="total_rooms" value="{{old('total_rooms') ? old('total_rooms') : $hotel->total_rooms}}" class="form-control @error('total_rooms') is-invalid @enderror" required>
-                                            @error('total_rooms')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-lg-6">
-                                            <label for="price" class=" form-control-label"><h3>Price</h3></label>
-                                            <input type="number" id="price" name="price" value="{{old('price') ? old('price') : $hotel->price}}" class="form-control @error('price') is-invalid @enderror" required>
-                                            @error('price')
-                                            <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-
-
-
                                     <div class="row form-group">
                                         <div class="col-12 col-md-12">
                                             <label for="inputContent" class=" form-control-label"><h3>Description</h3></label>

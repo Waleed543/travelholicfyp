@@ -114,13 +114,13 @@
                                     </td>
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Profile Tour Button--}}
+                                            {{-- Add Room Hotel Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('profile-tour-{{$loop->iteration}}').submit();">
-                                                Profile
+                                                   document.getElementById('add-room-hotel-{{$loop->iteration}}').submit();">
+                                                Add Room
                                             </a>
-                                            <form id="profile-tour-{{$loop->iteration}}" action="" method="POST" style="display: none;">
+                                            <form id="add-room-hotel-{{$loop->iteration}}" action="{{route('admin.dashboard.hotel.room.create',$hotel->slug)}}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>

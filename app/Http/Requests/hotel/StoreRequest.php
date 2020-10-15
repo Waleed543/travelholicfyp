@@ -38,10 +38,8 @@ class StoreRequest extends FormRequest
             'tags' => 'nullable|array',
             'tags.*' => 'regex:/^[a-zA-Z ]*$/',
             'name'=>'required|string|regex:/^[a-zA-Z ]*$/',
-            'total_rooms'=>'required|integer|gt:0',
             'city'=>'required',
             'description'=>'required',
-            'price'=>'required|integer|gt:0',
             'image'=>'image|required|max:1999'
             //
         ];

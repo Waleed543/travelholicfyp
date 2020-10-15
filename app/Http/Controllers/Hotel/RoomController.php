@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Hotel;
 
+use App\Hotel;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Hotel\Room\StoreRequest;
+use App\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -33,9 +36,14 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($slug, StoreRequest $request)
     {
-        //
+        $hotel = Hotel::where('slug',$slug)->first();
+
+        abort_if($hotel == null,'404');
+
+        $room = new Room;
+
     }
 
     /**
