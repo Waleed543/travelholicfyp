@@ -2,7 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Status;
+use App\Hotel;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Hotel\EditRequest;
+use App\Http\Requests\Hotel\StoreRequest;
+use App\Model\tags_hotel;
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -13,7 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        dd(34);
-        return view('home');
+        $slug= 'asdasd-1';
+        $hotel = Hotel::with('user')->where('slug','=',$slug)
+            ->where('status','=',Status::Active)
+            ->first();
+
+
+        return view('hotel/rooms/show', compact('hotel'));
     }
 }

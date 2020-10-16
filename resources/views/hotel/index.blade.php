@@ -116,8 +116,8 @@
                     <!--- Cards -->
                     <div class="container-fluid">
                         <div class="row">
-                            @if(count($hotels) > 0)
-                                @foreach($hotels as $hotel)
+                            @if(count($hotels ?? '') > 0)
+                                @foreach($hotels ?? '' as $hotel)
                                     <div class="col-sm-12 col-md-10 col-lg-6 col-xl-4">
                                         <div class="card">
                                             <img class="card-img-top" style="height: 15rem" src="{{asset('storage/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail)}}">
