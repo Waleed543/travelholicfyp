@@ -23,12 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slug= 'asdasd-1';
-        $hotel = Hotel::with('user')->where('slug','=',$slug)
-            ->where('status','=',Status::Active)
-            ->first();
 
 
-        return view('hotel/rooms/show', compact('hotel'));
+
+        return view('home');
     }
 }
