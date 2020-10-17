@@ -21,6 +21,93 @@
         </div>
     </div>
     <!--- Start Course Section -->
+    <div  class="col-md-12" style="padding: 0; padding-top: 15px">
+        <div  class="card" style="margin-left: 0">
+
+            <div class="card-body">
+                <h3 class="heading" style="text-align: center">Rooms</h3>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 1</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+
+                                <div class="card col-md-3" style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 2</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+
+                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 3</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 4</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+
+                                <div class="card col-md-3" style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 5</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+
+                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                    <div class="card-header" style="background-color: grey;">
+                                        <strong class="card-title">Room 6</strong>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <h1>sdafasdfasdf</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" style="color: black"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true" style="color: black"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--- Start Features Section -->
     <div>

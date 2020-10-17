@@ -93,34 +93,85 @@
                                         <div  class="col-md-12" style="padding: 0; padding-top: 15px">
                                             <div  class="card" style="margin-left: 0">
                                                 <div class="card-header" style="background-color: black">
-                                                    <strong class="card-title">Rooms</strong>
+                                                    <strong class="card-title" style="color: white">Rooms</strong>
                                                 </div>
                                                 <div class="card-body">
                                                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                                         <div class="carousel-inner">
                                                             <div class="carousel-item active">
-                                                                <div class="card col-md-3">
-                                                                    <div class="card-header">
+                                                                <div class="row">
+                                                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                                                    <div class="card-header" style="background-color: grey;">
+                                                                        <strong class="card-title">Room 1</strong>
 
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <h1>sdafasdfasdf</h1>
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="card col-md-3" style="margin-left: 3.5rem">
+                                                                    <div class="card-header" style="background-color: grey;">
+                                                                        <strong class="card-title">Room 2</strong>
+
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <h1>sdafasdfasdf</h1>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                                                    <div class="card-header" style="background-color: grey;">
+                                                                        <strong class="card-title">Room 3</strong>
+
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <h1>sdafasdfasdf</h1>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
                                                             </div>
                                                             <div class="carousel-item">
-                                                                <img class="d-block w-100" src="..." alt="Second slide">
+                                                                <div class="row">
+                                                                    <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                                                        <div class="card-header" style="background-color: grey;">
+                                                                            <strong class="card-title">Room 4</strong>
+
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h1>sdafasdfasdf</h1>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card col-md-3" style="margin-left: 3.5rem">
+                                                                        <div class="card-header" style="background-color: grey;">
+                                                                            <strong class="card-title">Room 5</strong>
+
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h1>sdafasdfasdf</h1>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card col-md-3 " style="margin-left: 3.5rem">
+                                                                        <div class="card-header" style="background-color: grey;">
+                                                                            <strong class="card-title">Room 6</strong>
+
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <h1>sdafasdfasdf</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="carousel-item">
-                                                                <img class="d-block w-100" src="..." alt="Third slide">
-                                                            </div>
+
                                                         </div>
                                                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                           <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" style="color: black"></i>
                                                             <span class="sr-only">Previous</span>
                                                         </a>
                                                         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                            <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true" style="color: black"></i>
                                                             <span class="sr-only">Next</span>
                                                         </a>
                                                     </div>
