@@ -158,7 +158,7 @@
                     return $.map(list, function(tag) {
                         return { name: tag }; });
                 },
-                cache:false,
+                cache:true,
                 ttl:60000
             }
         });

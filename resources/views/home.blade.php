@@ -20,7 +20,7 @@
             <a class="btn btn-secondary btn-md" href="#" target="_blank">Bootstrap Course</a>
         </div>
     </div>
-    <!--- Start Courese Section -->
+    <!--- Start Course Section -->
 
     <!--- Start Features Section -->
     <div>
