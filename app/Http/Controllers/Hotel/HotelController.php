@@ -25,6 +25,7 @@ class HotelController extends Controller
      */
     public function index()
     {
+
         $hotels = Hotel::with('user')
             ->where('status','=',Status::Active)
             ->orderBy('id','desc')->paginate(6);
@@ -116,7 +117,7 @@ class HotelController extends Controller
 
                 $tags_tour = tags_hotel::create([
                     'hotel_id' => $hotel->id,
-                    'tag_id' => $hotel->id
+                    'tag_id' => $tag->id
                 ]);
             }
         }
@@ -139,7 +140,9 @@ class HotelController extends Controller
 
         abort_if($hotel == null,'404');
 
-        return view('hotel.show',compact('hotel'));
+        $rooms = $hotel->rooms;
+
+        return view('hotel.show',compact('hotel','rooms'));
     }
 
     /**

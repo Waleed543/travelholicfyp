@@ -83,7 +83,6 @@ class RoomController extends Controller
         $room->total = $request->total;
         $room->available = $request->total;
         $room->description = $request->description;
-        $room->description = $request->description;
         $room->price = $request->price;
 
         $room->save();
@@ -106,9 +105,19 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug, $room_slug)
     {
-        //
+        $hotel = Hotel::where('slug',$slug)->first();
+
+        abort_if($hotel == null,'404');
+
+        $room = Room::where('slug',$room_slug)
+            ->where('hotel_id',$hotel->id)->first();
+        abort_if($room == null,'404');
+
+        $facilities = $room->facilities;
+
+        return view('hotel.rooms.show',compact('hotel','room','facilities'));
     }
 
     /**
@@ -170,7 +179,6 @@ class RoomController extends Controller
         $room->name = $request->name;
         $room->total = $request->total;
         $room->available = $request->total;
-        $room->description = $request->description;
         $room->description = $request->description;
         $room->price = $request->price;
 

@@ -149,22 +149,39 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/status', 'User\TourController@status')->name('dashboard.tour.status.inactive');
     });
     //Hotel Routes
-    Route::prefix('hotel')->middleware(['auth','can:notAdmin'])->group(function () {
-        Route::get('/', 'User\HotelController@index')->name('dashboard.hotel');
-        Route::get('/create', 'User\HotelController@create')->name('dashboard.hotel.create');
-        Route::get('/{slug}/edit', 'User\HotelController@edit')->name('dashboard.hotel.edit');
-        Route::get('/{slug}/profile','User\HotelController@profile')->name('dashboard.hotel.profile');
-        Route::delete('/{slug}', 'User\HotelController@destroy')->name('dashboard.hotel.delete');
-        Route::get('/{slug}/status', 'User\HotelController@status')->name('dashboard.hotel.status.inactive');
+    Route::prefix('hotel')->middleware(['auth','can:notAdmin'])->name('dashboard.hotel')->group(function () {
+        Route::get('/', 'User\HotelController@index');
+        Route::get('/create', 'User\HotelController@create')->name('.create');
+        Route::get('/{slug}/edit', 'User\HotelController@edit')->name('.edit');
+        Route::get('/{slug}/profile','User\HotelController@profile')->name('.profile');
+        Route::delete('/{slug}', 'User\HotelController@destroy')->name('.delete');
+        Route::get('/{slug}/status', 'User\HotelController@status')->name('.status.inactive');
+
+        //Rooms Routes
+        Route::prefix('/{slug}/room')->name('.room')->group(function () {
+            Route::get('/', 'User\RoomController@index')->name('.index');
+            Route::get('/create', 'User\RoomController@create')->name('.create');
+            Route::get('/store', 'User\RoomController@store')->name('.store');
+            Route::get('/edit/{room_slug}', 'User\RoomController@edit')->name('.edit');
+
+        });
+
     });
     //My Bookings Routes
     Route::prefix('booking')->middleware(['auth','can:isStandard'])->group(function () {
         //Tour Book
         Route::get('/tour/{slug}','Tour\TourBookController@index')->name('dashboard.tour.book');
         Route::post('tour/{slug}/store','Tour\TourBookController@book')->name('dashboard.tour.book.store');
-        Route::get('/tour/{slug}edit','Tour\TourBookController@edit')->name('dashboard.tour.book.edit');
+        Route::get('/tour/{slug}/edit','Tour\TourBookController@edit')->name('dashboard.tour.book.edit');
         //Show Tour Bookings
         Route::get('/tour', 'User\BookingController@tour')->name('dashboard.tour.booking');
+
+        //Hotel Room Book
+        Route::get('/hotel/{slug}/room/{room_slug}','Hotel\HotelBookController@index')->name('dashboard.hotel.book');
+        Route::post('hotel/{slug}/room/{room_slug}/store','Hotel\HotelBookController@book')->name('dashboard.hotel.book.store');
+        Route::get('/hotel/{slug}/room/{room_slug}/edit','Hotel\HotelBookController@edit')->name('dashboard.hotel.book.edit');
+        //Show Tour Bookings
+        Route::get('/hotel', 'User\BookingController@hotel')->name('dashboard.hotel.booking');
 
     });
 });

@@ -111,13 +111,13 @@
                                                 @csrf
                                                 @method('GET')
                                             </form>
-                                            {{-- Profile Hotel Button--}}
+                                            {{-- Add Room Hotel Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('profile-hotel-{{$loop->iteration}}').submit();">
-                                                Profile
+                                                   document.getElementById('add-room-hotel-{{$loop->iteration}}').submit();">
+                                                Rooms
                                             </a>
-                                            <form id="profile-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.profile',$hotel->slug) }}" method="POST" style="display: none;">
+                                            <form id="add-room-hotel-{{$loop->iteration}}" action="{{route('dashboard.hotel.room.index',$hotel->slug)}}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>

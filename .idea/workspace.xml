@@ -174,19 +174,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\inc" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\layouts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\travelholicFYP\public\css" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\Blog" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\User" />
       <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\dashboard\user\setting" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\inc" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\layouts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -266,7 +266,7 @@
       <workItem from="1602781598204" duration="8284000" />
       <workItem from="1602848230504" duration="7686000" />
       <workItem from="1602958527671" duration="35000" />
-      <workItem from="1603118544990" duration="10602000" />
+      <workItem from="1603118544990" duration="21296000" />
     </task>
     <servers />
   </component>

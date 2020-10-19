@@ -1,9 +1,9 @@
-@extends('admin.layouts.dashboardAdmin')
-@section('title','Add Room Type')
-@section('hotel','current')
-@section('headerName', 'Add Room')
+@extends('layouts.dashboard')
+@section('title','Room Type Create')
+@section('tour','current')
+@section('headerName', 'Room Type')
 @section('content')
-
+    <!-- cards -->
 @section('css')
     <link rel="stylesheet" type href="/css/bootstrap-tagsinput.css">
     <link rel="stylesheet" type href="/css/tag/app.css">
@@ -58,15 +58,16 @@
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Create New Room Type</strong>
+                                <strong>Create Hotel</strong>
                             </div>
                             <div class="card-body card-block">
-                                <form  id="create" method="post" action="{{route('room.store',$slug)}}" enctype="multipart/form-data" class="form-horizontal">
+                                <form  id="create" method="post" action="{{route('room.update',[$slug,$room_slug])}}" enctype="multipart/form-data" class="form-horizontal">
                                     @csrf
+                                    @method('PUT')
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label for="name" class=" form-control-label"><h3>Name</h3></label>
-                                            <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" required>
+                                            <input type="text" id="name" name="name" value="{{old('name')?? $room->name}}" class="form-control @error('name') is-invalid @enderror" required>
                                             @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -93,7 +94,7 @@
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label for="total" class=" form-control-label"><h3>Total Rooms</h3></label>
-                                            <input type="number" id="total" name="total" value="{{old('total')}}" class="form-control @error('total') is-invalid @enderror" required>
+                                            <input type="number" id="total" name="total" value="{{old('total')?? $room->total}}" class="form-control @error('total') is-invalid @enderror" required>
                                             @error('total')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -104,7 +105,7 @@
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label for="price" class=" form-control-label"><h3>Price Per Room</h3></label>
-                                            <input type="number" id="price" name="price" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" required>
+                                            <input type="number" id="price" name="price" value="{{old('price')?? $room->price}}" class="form-control @error('price') is-invalid @enderror" required>
                                             @error('price')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -116,7 +117,7 @@
                                     <div class="row form-group">
                                         <div class="col-12 col-md-12">
                                             <label for="inputContent" class=" form-control-label"><h3>Description</h3></label>
-                                            <textarea  rows="7" name="description"class="form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                                            <textarea  rows="7" name="description"class="form-control @error('description') is-invalid @enderror">{{old('name')?? $room->description}}</textarea>
                                             @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -129,14 +130,14 @@
                                             <label for="file-input" class=" form-control-label">Cover Image</label>
                                         </div>
                                         <div class="col-12 col-md-3">
-                                            <input type="file" id="file-input" name="image" class="form-control-file" required>
+                                            <input type="file" id="file-input" name="image" class="form-control-file">
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary btn-sm" onkeypress="event.preventDefault();" value="submit" form="create">
-                                    Create
+                                    Update
                                 </button>
 
 
@@ -158,4 +159,5 @@
         })
     </script>
 @endsection
+
 @endsection

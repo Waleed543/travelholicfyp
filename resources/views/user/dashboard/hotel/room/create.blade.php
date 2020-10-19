@@ -1,9 +1,9 @@
-@extends('admin.layouts.dashboardAdmin')
-@section('title','Add Room Type')
-@section('hotel','current')
-@section('headerName', 'Add Room')
+@extends('layouts.dashboard')
+@section('title','Room Type Create')
+@section('tour','current')
+@section('headerName', 'Room Type')
 @section('content')
-
+    <!-- cards -->
 @section('css')
     <link rel="stylesheet" type href="/css/bootstrap-tagsinput.css">
     <link rel="stylesheet" type href="/css/tag/app.css">
@@ -158,4 +158,5 @@
         })
     </script>
 @endsection
+
 @endsection
