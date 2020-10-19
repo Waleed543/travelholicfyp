@@ -3,11 +3,9 @@
 namespace App\Http\Requests\Hotel\Room;
 
 use App\Facility;
-use App\Hotel;
-use App\Model\rooms_facilities;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class EditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +30,7 @@ class StoreRequest extends FormRequest
             'total'=>'required|integer|gt:0',
             'price'=>'required|integer|gt:0',
             'description'=>'required',
-            'image'=>'image|required|max:1999'
+            'image'=>'image|nullable|max:1999'
         ];
     }
 

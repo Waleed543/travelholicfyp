@@ -93,8 +93,10 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 
               //Rooms Routes
                Route::prefix('/{slug}/room')->name('.room')->group(function () {
-                    Route::get('/create', 'Admin\RoomController@create')->name('.create');
+                   Route::get('/', 'Admin\RoomController@index')->name('.index');
+                   Route::get('/create', 'Admin\RoomController@create')->name('.create');
                    Route::get('/store', 'Admin\RoomController@store')->name('.store');
+                   Route::get('/edit/{room_slug}', 'Admin\RoomController@edit')->name('.edit');
 
                });
 

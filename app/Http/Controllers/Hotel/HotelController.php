@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Hotel\EditRequest;
 use App\Http\Requests\Hotel\StoreRequest;
 use App\Model\tags_hotel;
+use App\Room;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -215,7 +216,19 @@ class HotelController extends Controller
 
 
 
-        $hotel->total_rooms = $hotel->available_rooms = 0;
+        $rooms = $hotel->rooms;
+        $sum = 0;
+        $available = 0;
+        if($rooms != null)
+        {
+            foreach ($rooms as $room)
+            {
+                $total = $sum + $room->total;
+                $available = $available + $room->available;
+            }
+        }
+        $hotel->total_rooms = $total;
+        $hotel->available_rooms = $available;
         $hotel->description = $request->input('description');
         $hotel->city= $request->input('city');
 
@@ -270,8 +283,17 @@ class HotelController extends Controller
         //Deleting Tour Thumbnail
         Storage::delete('public/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail);
 
-        //delete rooms  1123
-
+        //delete rooms
+        $rooms = Room::where('hotel_id',$hotel->id)->get();
+        foreach ($rooms as  $room)
+        {
+            //Deleting Room Thumbnail
+            Storage::delete('public/'.$hotel->user->username.'/hotel/room'.$room->thumbnail);
+            //deleting facilities
+            $room->facilities()->detach();
+            //Deleting room
+            $room->delete();
+        }
         //deleting tags;
         $hotel->tags()->detach();
 

@@ -118,9 +118,9 @@
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
                                                    document.getElementById('add-room-hotel-{{$loop->iteration}}').submit();">
-                                                Add Room
+                                                Rooms
                                             </a>
-                                            <form id="add-room-hotel-{{$loop->iteration}}" action="{{route('admin.dashboard.hotel.room.create',$hotel->slug)}}" method="POST" style="display: none;">
+                                            <form id="add-room-hotel-{{$loop->iteration}}" action="{{route('admin.dashboard.hotel.room.index',$hotel->slug)}}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
