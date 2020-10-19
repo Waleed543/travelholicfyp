@@ -14,7 +14,7 @@
     </style>
     <div class="landing">
         <div class="home-wrap">
-            <div class="home-inner" style="background-image: url('{{asset('img/blog.jpg')}}')">
+            <div class="home-inner" style="background-image: url('{{asset('img/hotel.jpg')}}')">
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
     <div class="jumbotron">
         <div class="narrow text-center">
             <div class="col-12">
-                <h1>All Blogs Related To Tourism</h1>
-                <p class="lead">You will find all the tips and articles which will help you in tourism.</p>
-                <a class="btn btn-secondary btn-md" href="#" target="_blank">Write Your Own Blog</a>
+
+                <p class="lead">All the hotels posted by vendors.</p>
+                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.hotel.create')}}" target="_blank">Add your hotel</a>
             </div>
         </div><!--- End Narrow Section -->
     </div>
