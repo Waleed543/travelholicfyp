@@ -18,9 +18,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('hotel.index')}}">Hotel</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#clients">Clients</a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
             </li>

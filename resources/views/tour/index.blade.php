@@ -14,22 +14,22 @@
     </style>
     <div class="landing">
         <div class="home-wrap">
-            <div class="home-inner" style="background-image: url('{{asset('img/blog.jpg')}}')">
+            <div class="home-inner" style="background-image: url('{{asset('img/tour.jpg')}}')">
             </div>
         </div>
     </div>
     <div class="caption text-center">
         <h1>Tour</h1>
         <h3>Check Our Latest Tour</h3>
-        <a class="btn btn-outline-light btn-lg" href="#course">Tour</a>
+        <a class="btn btn-outline-light btn-lg" href="#course">Tours</a>
     </div>
     <!--- Start Courese Section -->
     <div class="jumbotron">
         <div class="narrow text-center">
             <div class="col-12">
-                <h1>All Blogs Related To Tourism</h1>
-                <p class="lead">You will find all the tips and articles which will help you in tourism.</p>
-                <a class="btn btn-secondary btn-md" href="#" target="_blank">Write Your Own Blog</a>
+
+                <p class="lead">You will find all the tours here that are posted by either users or by us.</p>
+                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.tour.create')}}" target="_blank">Create tour</a>
             </div>
         </div><!--- End Narrow Section -->
     </div>

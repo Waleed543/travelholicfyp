@@ -15,9 +15,9 @@
     <!--- Start Courese Section -->
     <div>
         <div class="col-12 narrow text-center">
-            <h1>Nuno Theme Advance Bootstrap Course</h1>
-            <p class="lead">This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
-            <a class="btn btn-secondary btn-md" href="#" target="_blank">Bootstrap Course</a>
+            <h1>Customizable and reliable Tours</h1>
+            <p class="lead">Book hotels, vehicles and restaurants</p>
+
         </div>
     </div>
     <!--- Start Course Section -->
@@ -25,7 +25,7 @@
         <div  class="card" style="margin-left: 0">
 
             <div class="card-body">
-                <h3 class="heading" style="text-align: center">Rooms</h3>
+                <h3 class="heading" style="text-align: center">Rooms for you</h3>
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -124,25 +124,25 @@
 
                     <div class="col-md-4">
                         <div class="feature">
-                            <i class="fas fa-play-circle fa-4x" data-fa-transform="shrink-3 up-5"></i>
-                            <h3>Custom Animation</h3>
-                            <p>This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
+                            <i class="fas fa-wrench fa-4x" data-fa-transform="shrink-3 up-5"></i>
+                            <h3>Custom Tours</h3>
+                            <p>Cant find a suitable tour? Customize the tour according to your need.</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="feature">
-                            <i class="fas fa-sliders-h fa-4x" data-fa-transform="shrink-4.5 up-4.5"></i>
-                            <h3>Content Slider</h3>
-                            <p>This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
+                            <i class="fas fa-user-check fa-4x" data-fa-transform="shrink-4.5 up-4.5"></i>
+                            <h3>Verified</h3>
+                            <p>Everything is posted on the website after being verified by the admins.</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="feature">
-                            <i class="fab fa-wpforms fa-4x" data-fa-transform="shrink-4 up-5"></i>
-                            <h3>Contact Form</h3>
-                            <p>This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
+                            <i class="fab fa-blogger fa-4x" data-fa-transform="shrink-4 up-5"></i>
+                            <h3>Blog</h3>
+                            <p>Write your own stories about your tours.</p>
                         </div>
                     </div>
 
@@ -191,7 +191,7 @@
             </div><!--- End Row Dark Section -->
 
             <div class="fixed-wrap">
-                <div class="fixed" style="background-image: url('{{asset('img/apple.png')}}')">
+                <div class="fixed" style="background-image: url('{{asset('img/img1.jpeg')}}')">
                 </div>
             </div>
 
@@ -201,57 +201,5 @@
     <!--- End Resources Section -->
 
     <!--- Start Clients Section -->
-    <div>
-
-        <!--- Start Jumbotron -->
-        <div class="jumbotron">
-
-            <div class="col-12 text-center">
-                <h3 class="heading">Clients</h3>
-                <div class="heading-underline"></div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6 clients">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="img/client1.png">
-                        </div>
-                        <div class="col-md-8">
-                            <blockquote>
-                                <i class="fas fa-quote-left"></i>
-                                This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.
-                                <hr class="clients-hr">
-                                <cite>&#8212; Eric, Small Business Owner</cite>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 clients">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="img/client2.png">
-                        </div>
-                        <div class="col-md-8">
-                            <blockquote>
-                                <i class="fas fa-quote-left"></i>
-                                This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.This is dummy data.
-                                <hr class="clients-hr">
-                                <cite>&#8212; Rachel, Professional Photographer</cite>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!--- End Row -->
-
-        </div><!--- End Jumbotron -->
-        <div class="col-12 narrow text-center">
-            <p class="lead">This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
-            <a class="btn btn-secondary btn-md" href="#" target="_blank">Bootstrap Course</a>
-        </div>
-    </div>
 
 @endsection
