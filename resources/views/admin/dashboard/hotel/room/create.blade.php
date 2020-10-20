@@ -103,6 +103,17 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-lg-6">
+                                            <label for="beds" class=" form-control-label"><h3>No. of Beds</h3></label>
+                                            <input type="number" id="beds" name="beds" value="{{old('beds')}}" class="form-control @error('beds') is-invalid @enderror" required>
+                                            @error('beds')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
                                             <label for="price" class=" form-control-label"><h3>Price Per Room</h3></label>
                                             <input type="number" id="price" name="price" value="{{old('price')}}" class="form-control @error('price') is-invalid @enderror" required>
                                             @error('price')

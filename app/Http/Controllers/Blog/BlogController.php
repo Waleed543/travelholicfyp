@@ -35,7 +35,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('user')->orderBy('id','desc')->paginate(6);
+        $blogs = Blog::with('user')
+            ->where('status','=',Status::Active)
+            ->orderBy('id','desc')->paginate(6);
         $categories = blog_category::all();
         return view('blog.index',compact('blogs','categories'));
     }
@@ -156,7 +158,9 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $slug)->first();
+        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $slug)
+            ->where('status','=',Status::Active)
+            ->first();
 
         abort_if($blog == null , '404');
 

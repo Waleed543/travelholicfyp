@@ -142,6 +142,10 @@
                 alert('Status was unable to change');
             }
         }
+        function show_message(data)
+        {
+            alert(data.message);
+        }
 
     </script>
 @endsection

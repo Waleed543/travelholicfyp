@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Blog;
 
+use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use App\Model\blog_category;
@@ -25,32 +26,34 @@ class BlogSearchController extends Controller
 
 
         $this->category_id = $request->category_id;
-        $blogs = null;
 
-        if($request->filled(['category_id' , 'name']))
+        $blogs = Blog::query();
+
+        if($request->filled('name'))
         {
-            $blogs = Blog::whereHas('categories', function (Builder $query) {
+            $blogs->where('title' , 'LIKE' , "%{$request->name}%" );
+        }
+        if($request->filled('category_id'))
+        {
+            $blogs->wherewhereHas('categories', function (Builder $query) {
                 $query->where('category_id', '=', $this->category_id);
-                })
-                ->where('title' ,'LIKE' , "%{$request->name}%")->paginate(6);
+            });
         }
-        elseif($request->filled(['category_id']))
-        {
-            $blogs = Blog::whereHas('categories', function (Builder $query) {
-                $query->where('category_id', '=',  $this->category_id);
-            })->paginate(6);
-        }
-        elseif($request->filled(['name']))
-        {
-            $blogs = Blog::where('title' ,'LIKE' , "%{$request->name}%")
-                ->paginate(6);
-        }
-        else{
-            $blogs = Blog::with('user')->orderBy('id','desc')->paginate(6);
-        }
-
 
         $categories = blog_category::all();
+
+        //Check if request is from admin dashboard
+        if($request->routeIs('admin*'))
+        {
+            $blogs = $blogs->get();
+
+            return view('admin.dashboard.blog.index',compact('blogs','categories'));
+        }
+        //Check if status is Active
+        $blogs->where('status','=',Status::Active);
+
+        $blogs = $blogs->paginate(6);
+
         $request->flash();
         return view('blog.index',compact('blogs','categories'));
     }
