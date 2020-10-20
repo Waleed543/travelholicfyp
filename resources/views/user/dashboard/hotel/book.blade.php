@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
-@section('title','Book Create')
-@section('tour','current')
-@section('headerName', 'Book Tour')
+@section('title','Book Hotel')
+@section('hotel','current')
+@section('headerName', 'Book Hotel')
 @section('content')
     <!-- cards -->
     <section>

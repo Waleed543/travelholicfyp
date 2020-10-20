@@ -22,7 +22,7 @@ class HotelBookController extends Controller
         return view('user.dashboard.hotel.book',compact('hotel','room'));
     }
 
-    public function book(book_hotel $request, $slug, $room_slug)
+    public function book(\App\Http\Requests\Hotel\book_hotel $request, $slug, $room_slug)
     {
         $hotel = $request->hotel;
 
