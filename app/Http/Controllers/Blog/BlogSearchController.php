@@ -35,7 +35,7 @@ class BlogSearchController extends Controller
         }
         if($request->filled('category_id'))
         {
-            $blogs->wherewhereHas('categories', function (Builder $query) {
+            $blogs->whereHas('categories', function (Builder $query) {
                 $query->where('category_id', '=', $this->category_id);
             });
         }
