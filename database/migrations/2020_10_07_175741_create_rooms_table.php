@@ -20,6 +20,7 @@ class CreateRoomsTable extends Migration
             $table->string('name', 50);
             $table->mediumText('description');
             $table->integer('total');
+            $table->integer('beds');
             $table->integer('available');
             $table->integer('price');
             $table->string('thumbnail');

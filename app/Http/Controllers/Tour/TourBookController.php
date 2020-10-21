@@ -43,6 +43,8 @@ class TourBookController extends Controller
         ]);
 
 
+
+
         return back()->with('popup_success','Tour has been booked');
     }
 }

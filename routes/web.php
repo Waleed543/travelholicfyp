@@ -247,7 +247,3 @@ Route::get('/roomcheck','HomeController@index');
 
 
 
-
-
-
-

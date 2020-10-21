@@ -36,16 +36,16 @@
     <!--- Start Courese Section -->
     <!--- Start Product Section -->
     <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <div class="row welcome text-center">
-                    <div class="col-12">
-                        <h1 class="display-4">Blogs</h1>
-                    </div>
-                    <hr>
+        <div class="container">
+            <div class="row welcome text-center">
+                <div class="col-12">
+                    <h1 class="display-4">Blogs</h1>
                 </div>
+                <hr>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 search-card">
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-3 search-card">
                 <!-- Material form contact -->
                 <div class="card search">
                     <!--Card content-->
@@ -101,7 +101,7 @@
                 </div>
                 <!-- Material form contact -->
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-8">
+            <div class="col-sm-6 col-md-6 col-lg-9">
                 <div class="product">
                     <!--- Cards -->
                     <div class="container-fluid">

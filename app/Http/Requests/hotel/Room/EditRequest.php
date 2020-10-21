@@ -28,6 +28,7 @@ class EditRequest extends FormRequest
             'facilities' => 'required|array',
             'name'=>'required|string|regex:/^[a-zA-Z ]*$/',
             'total'=>'required|integer|gt:0',
+            'beds'=>'required|integer|gt:0',
             'price'=>'required|integer|gt:0',
             'description'=>'required',
             'image'=>'image|nullable|max:1999'
