@@ -23,12 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="353b5c7f-0bca-4fde-b4d1-77aa00f93fe6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/viewProfile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/travelholicFYP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/travelholicFYP.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/payment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Hotel/HotelBookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Hotel/HotelBookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/dashboard/hotel/book.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/dashboard/hotel/book.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/viewProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/viewProfile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -256,7 +254,8 @@
       <workItem from="1602958527671" duration="35000" />
       <workItem from="1603118544990" duration="21296000" />
       <workItem from="1603174068858" duration="1479000" />
-      <workItem from="1603216510485" duration="2767000" />
+      <workItem from="1603216510485" duration="4936000" />
+      <workItem from="1603269871149" duration="9974000" />
     </task>
     <servers />
   </component>
@@ -293,9 +292,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1603217928247" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602099386118">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="498" y="178" width="538" height="538" key="search.everywhere.popup" timestamp="1603286244800">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="178" width="538" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603286244800" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602099386118" />
   </component>
   <component name="XDebuggerManager">
