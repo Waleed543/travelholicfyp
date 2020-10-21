@@ -18,7 +18,7 @@ class TourBookController extends Controller
         $tour = Tour::where('slug','=',$slug)->first();
         abort_if($tour == null,'404','Tour not found');
 
-        return view('user.dashboard.tour.book',compact('tour'));
+        return view('tour.book',compact('tour'));
     }
 
     public function book(book_tour $request, $slug)
