@@ -34,12 +34,12 @@
                                             <td>{{$booking->children}}</td>
                                             <td>{{$booking->phone}}</td>
                                             <td>
-                                                @if($booking->status == \App\Enums\Status::Active)
-                                                    <span class="badge badge-success w-75 py-2">Active</span>
-                                                @elseif($booking->status == \App\Enums\Status::InProgress)
-                                                    <span class="badge badge-warning w-75 py-2">In progress</span>
-                                                @elseif($booking->status == \App\Enums\Status::InActive)
-                                                    <span class="badge badge-danger w-75 py-2">InActive</span>
+                                                @if($booking->status == \App\Enums\BookingStatus::Reserved)
+                                                    <span class="badge badge-danger w-75 py-2">Reserved</span>
+                                                @elseif($booking->status == \App\Enums\BookingStatus::UnderReview)
+                                                    <span class="badge badge-warning w-75 py-2">Under Review</span>
+                                                @elseif($booking->status == \App\Enums\BookingStatus::Booked)
+                                                    <span class="badge badge-success w-75 py-2">Booked</span>
                                                 @endif
                                             </td>
                                             <td>{{$booking->payment_type}}</td>
@@ -53,23 +53,13 @@
 
                                             <td>
                                                 <div class="d-inline" role="group">
-                                                     {{-- Edit Order Button --}}
-                                                    <a type="button" href="" class="btn btn-success btn-sm"
-                                                       onclick="event.preventDefault();
-                                                           document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
-                                                        Edit
-                                                    </a>
-                                                    <form id="edit-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.edit',$tour->slug) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('GET')
-                                                    </form>
                                                      {{-- Delete Order Button --}}
                                                     <a type="button" href="" class="btn btn-danger btn-sm"
                                                        onclick="event.preventDefault();
                                                            document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
                                                         Delete
                                                     </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.delete',$tour->slug) }}" method="POST" style="display: none;">
+                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.delete',$booking->number) }}" method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

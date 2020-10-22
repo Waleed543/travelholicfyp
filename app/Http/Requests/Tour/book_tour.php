@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Tour;
 
+use App\Enums\Payment;
 use App\Tour;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -52,6 +53,17 @@ class book_tour extends FormRequest
             if($this->seats <> $this->adults+$this->children)
             {
                 $validator -> errors() -> add('seats', 'Seats must be equal to adult and children sum');
+            }
+
+            if ($this->payment_type = 1)
+            {
+                $this->payment_type = Payment::EasyPaisa;
+                //$this->request->add(['payment_type'=>$this->tour]);
+            }elseif($this->payment_type = 2)
+            {
+                $this->payment_type = Payment::Cash;
+            }else{
+                $validator -> errors() -> add('payment_type', 'Error in Payment type field');
             }
 
 //            $departure_date = new \Illuminate\Support\Carbon( $this->tour->departure_date);

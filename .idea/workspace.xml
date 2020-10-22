@@ -29,6 +29,7 @@
       <change beforePath="$PROJECT_DIR$/resources/views/viewProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/viewProfile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,25 +169,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/user/dashboard/tour" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sun Fiber\Desktop\Bilal\University\htdocs\travelholicFYP\resources\views\user\dashboard\tour" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\inc" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\travelholicFYP\public\css" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\Blog" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\User" />
       <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\dashboard\user\setting" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\inc" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\layouts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -270,11 +271,12 @@
       <workItem from="1603174068858" duration="1479000" />
       <workItem from="1603216510485" duration="4936000" />
       <workItem from="1603269871149" duration="9974000" />
+      <workItem from="1603385015593" duration="13410000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
