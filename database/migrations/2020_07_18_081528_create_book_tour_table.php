@@ -24,7 +24,7 @@ class CreateBookTourTable extends Migration
             $table->string('phone');
             $table->string('status');
             $table->string('payment_type');
-            $table->boolean('payment_status');
+            $table->string('payment_status');
             $table->string('trxid')->nullable();
             $table->timestamps();
 

@@ -36,16 +36,16 @@
                                             <td>
                                                 @if($booking->status == \App\Enums\BookingStatus::Reserved)
                                                     <span class="badge badge-danger w-75 py-2">Reserved</span>
-                                                @elseif($booking->status == \App\Enums\BookingStatus::UnderReview)
-                                                    <span class="badge badge-warning w-75 py-2">Under Review</span>
                                                 @elseif($booking->status == \App\Enums\BookingStatus::Booked)
                                                     <span class="badge badge-success w-75 py-2">Booked</span>
                                                 @endif
                                             </td>
                                             <td>{{$booking->payment_type}}</td>
                                             <td>
-                                                @if($booking->payment_status == \App\Enums\PaymentStatus::InProgress)
-                                                    <span class="badge badge-warning w-75 py-2">In Progress</span>
+                                                @if($booking->payment_status == \App\Enums\PaymentStatus::Unpaid)
+                                                    <span class="badge badge-danger w-75 py-2">Unpaid</span>
+                                                @elseif($booking->payment_status == \App\Enums\PaymentStatus::UnderReview)
+                                                    <span class="badge badge-warning w-75 py-2">Under Review</span>
                                                 @elseif($booking->payment_status == \App\Enums\PaymentStatus::Successful)
                                                     <span class="badge badge-success w-75 py-2">Successful</span>
                                                 @endif

@@ -99,10 +99,13 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
                    Route::get('/edit/{room_slug}', 'Admin\RoomController@edit')->name('.edit');
 
                });
+        });
 
-
-
-
+        //Booking Routes
+        Route::prefix('/booking')->name('admin.dashboard.booking')->group(function () {
+            Route::get('/tour', 'Admin\BookingController@tour')->name('.tour');
+            Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
+            Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
         });
 
     });

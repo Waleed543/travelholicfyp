@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tour;
 
 use App\Enums\BookingStatus;
 use App\Enums\Payment;
+use App\Enums\PaymentStatus;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tour\book_tour;
@@ -28,10 +29,6 @@ class TourBookController extends Controller
     {
         $tour = $request->tour;
 
-        $tour->remaining_seats -= $request->seats;
-
-        $tour->save();
-
         $number = book::select('number')->orderBy('created_at','desc')->limit(1)->first();
 
         if($number == null)
@@ -50,7 +47,7 @@ class TourBookController extends Controller
             'children' => $request->children,
             'phone' => $request->phone,
             'status' => BookingStatus::Reserved,
-            'payment_status' => 0,
+            'payment_status' => PaymentStatus::Unpaid,
             'payment_type' => $request->payment_type,
         ]);
 
@@ -63,14 +60,10 @@ class TourBookController extends Controller
         $book_tour = book::where('number',$number)->first();
         abort_if($book_tour == null,'404','Reservation not found');
 
-        if($book_tour->status == BookingStatus::UnderReview or $book_tour->status == BookingStatus::Booked)
+        if($book_tour->status == BookingStatus::Booked or $book_tour->payment_status == PaymentStatus::Successful or $book_tour->payment_status == PaymentStatus::UnderReview)
         {
-            return back()->with('popop_error', 'Order cannot be deleted because its payment has been received or under review. Kindly contact support');
+            return back()->with('popup_error', 'Order cannot be deleted because its payment has been received or under review. Kindly contact support');
         }
-        $tour = $book_tour->tour;
-
-        $tour->remaining_seats += $book_tour->seats;
-        $tour->save();
 
         $book_tour->delete();
 
@@ -99,7 +92,7 @@ class TourBookController extends Controller
         ]);
 
         $book_tour->trxid = $request->trxinput;
-        $book_tour->status = BookingStatus::UnderReview;
+        $book_tour->payment_status = PaymentStatus::UnderReview;
         $book_tour->save();
 
 

@@ -99,6 +99,18 @@
                                 </a>
                             </div>
                         </li>
+                        {{-- Booking --}}
+                        <li class="nav-item dropdown" >
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white p-3 mb-2 sidebar-link @yield('booking')" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                                <i class="fas fa-envelope text-light fa-lg mr-3"></i>
+                                Bookings
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="{{route('admin.dashboard.booking.tour')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                    Tour
+                                </a>
+                            </div>
+                        </li>
 {{--                        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link @yield('current')"><i class="fas fa-shopping-cart text-light fa-lg mr-3"></i>Sales</a></li>--}}
 {{--                        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link @yield('current')"><i class="fas fa-chart-line text-light fa-lg mr-3"></i>Analytics</a></li>--}}
 {{--                        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link @yield('current')"><i class="fas fa-chart-bar text-light fa-lg mr-3"></i>Charts</a></li>--}}

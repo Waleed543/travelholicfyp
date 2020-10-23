@@ -12,6 +12,5 @@ use BenSampo\Enum\Enum;
 final class BookingStatus extends Enum
 {
     const Reserved =   'Reserved';
-    const UnderReview =   'Under Review';
     const Booked =   'Booked';
 }
