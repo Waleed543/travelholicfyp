@@ -186,6 +186,14 @@ class TourController extends Controller
         abort_if($tour == null,'404');
         abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
 
+        $booked_seats = $tour->total_seats-$tour->remaining_seats;
+        if ($booked_seats > $request->total_seats)
+        {
+            return back()->with('popup_error', 'Seats has been booked, you cannot reduce the total seats. Kindly contact support');
+        }else{
+            $tour->remaining_seats = $request->total_seats - $booked_seats;
+        }
+
         //validate file upload
         if ($request->hasFile('image')) {
             //get file name with extension
@@ -242,7 +250,6 @@ class TourController extends Controller
 
         $tour->nights_to_stay = $request->input('nights_to_stay');
         $tour->total_seats = $request->input('total_seats');
-        $tour->remaining_seats = $request->input('total_seats');
         $tour->description = $request->input('description');
         $tour->price = $request->input('price');
 
@@ -312,8 +319,31 @@ class TourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $tour = Tour::where('slug', $slug)->first();
+        abort_if($tour == null, '404', 'Tour not found');
+        abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        $booked_seats = $tour->total_seats - $tour->remaining_seats;
+        if ($booked_seats != 0) {
+            return back()->with('popup_error', 'Seats has been booked, you cannot delete the tour. Kindly contact support');
+        }
+
+        //Deleting Tour Thumbnail
+        Storage::delete('public/' . $tour->user->username . '/tour/' . $tour->thumbnail);
+
+        //deleting tags
+        $tour->tags()->detach();
+        //deleting tour days
+        $tour_days = $tour->tour_days;
+        foreach ($tour_days as $day) {
+            $day->delete();
+        }
+
+        //Deleting Tour
+        $tour->delete();
+
+        return back()->with('popup_success', 'Tour deleted successfully');
     }
 }

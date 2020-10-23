@@ -272,7 +272,7 @@
       <workItem from="1603216510485" duration="4936000" />
       <workItem from="1603269871149" duration="9974000" />
       <workItem from="1603385015593" duration="13410000" />
-      <workItem from="1603469061938" duration="8741000" />
+      <workItem from="1603469061938" duration="10148000" />
     </task>
     <servers />
   </component>
@@ -315,20 +315,5 @@
     </state>
     <state x="498" y="178" width="538" height="538" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603286244800" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602099386118" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/Tour/TourController.php</url>
-          <line>61</line>
-          <properties>
-            <option name="className" value="\App\Http\Controllers\Tour\TourController" />
-            <option name="methodName" value="store" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

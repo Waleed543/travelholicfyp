@@ -194,7 +194,7 @@
                                                            document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
                                                         Delete
                                                     </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.delete',$tour->slug) }}" method="POST" style="display: none;">
+                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('tour.destroy',$tour->slug) }}" method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

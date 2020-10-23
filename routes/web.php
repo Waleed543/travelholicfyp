@@ -65,7 +65,6 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::get('/create', 'Admin\TourController@create')->name('.create');
             Route::get('/{slug}/edit', 'Admin\TourController@edit')->name('.edit');
             Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
-            Route::delete('/{slug}', 'Admin\TourController@destroy')->name('.delete');
             Route::get('/setting','Admin\TourController@setting')->name('.setting');
             Route::get('/search', 'Tour\TourSearchController')->name('.search');
 
@@ -148,7 +147,6 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/create', 'User\TourController@create')->name('dashboard.tour.create');
         Route::get('/{slug}/edit', 'User\TourController@edit')->name('dashboard.tour.edit');
         Route::get('/{slug}/profile','User\TourController@profile')->name('dashboard.tour.profile');
-        Route::delete('/{slug}', 'User\TourController@destroy')->name('dashboard.tour.delete');
         Route::get('/{slug}/status', 'User\TourController@status')->name('dashboard.tour.status.inactive');
     });
     //Hotel Routes

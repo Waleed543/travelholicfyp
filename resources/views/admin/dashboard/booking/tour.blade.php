@@ -77,7 +77,7 @@
         <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div class="row">
                 <div class="col-xl-12 col-12">
-                    <h3 class="text-muted text-center mb-3">All Hotels</h3>
+                    <h3 class="text-muted text-center mb-3">All Tour Bookings</h3>
                     <table class="table table-dark table-hover text-center">
                         <thead>
                         <tr class="">
@@ -126,7 +126,7 @@
                                             <select onchange="submit_payment_status_form('{{$book_tour->number}}')" name="payment_status" id="payment_status" class="form-control @error('payment_status') is-invalid @enderror" required>
                                                 <option value="">Please select</option>
                                                 @foreach(App\Enums\PaymentStatus::toArray() as $status)
-                                                    @if(old('payment_status') ?? $book_tour->status == $status)
+                                                    @if(old('payment_status') ?? $book_tour->payment_status == $status)
                                                         <option selected value="{{$status}}">{{$status}}</option>
                                                     @else
                                                         <option value="{{$status}}">{{$status}}</option>
@@ -135,6 +135,7 @@
                                             </select>
                                         </form>
                                     </td>
+                                    <td>{{$book_tour->trxid}}</td>
 {{--                                    <td>--}}
 {{--                                        <div class="d-inline" role="group">--}}
 {{--                                            --}}{{-- Add Room Hotel Button--}}
