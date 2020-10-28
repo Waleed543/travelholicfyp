@@ -45,9 +45,16 @@ class BlogSearchController extends Controller
         //Check if request is from admin dashboard
         if($request->routeIs('admin*'))
         {
-            $blogs = $blogs->get();
+            $blogs = $blogs->paginate(15);
 
             return view('admin.dashboard.blog.index',compact('blogs','categories'));
+        }
+        elseif ($request->routeIs('dashboard*'))
+        {
+            $blogs->where('user_id','=',auth()->user()->id);
+            $blogs = $blogs->paginate(15);
+
+            return view('user.dashboard.blog.index',compact('blogs','categories'));
         }
         //Check if status is Active
         $blogs->where('status','=',Status::Active);

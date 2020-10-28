@@ -39,12 +39,26 @@ class BookingController extends Controller
         switch ($request->status)
         {
             case BookingStatus::Reserved:
+                if($book_tour->status == BookingStatus::Booked)
+                {
+                    if($book_tour->status == BookingStatus::Reserved)
+                    {
+                        break;
+                    }
+                    $tour = $book_tour->tour;
+                    $tour->remaining_seats += $book_tour->seats;
+                    $tour->save();
+                }
                 $book_tour->status = BookingStatus::Reserved;
                 break;
-            case BookingStatus::UnderReview:
-                $book_tour->status = BookingStatus::UnderReview;
-                break;
             case BookingStatus::Booked:
+                if($book_tour->status == BookingStatus::Booked)
+                {
+                    break;
+                }
+                $tour = $book_tour->tour;
+                $tour->remaining_seats -= $book_tour->seats;
+                $tour->save();
                 $book_tour->status = BookingStatus::Booked;
                 break;
         }
@@ -76,15 +90,44 @@ class BookingController extends Controller
         switch ($request->payment_status)
         {
             case PaymentStatus::Unpaid:
+                if($book_tour->payment_status == PaymentStatus::Unpaid)
+                {
+                    break;
+                }
+                if($book_tour->status == BookingStatus::Booked)
+                {
+                    $tour = $book_tour->tour;
+                    $tour->remaining_seats += $book_tour->seats;
+                    $tour->save();
+                    $book_tour->status = BookingStatus::Reserved;
+                }
                 $book_tour->payment_status = PaymentStatus::Unpaid;
                 break;
             case PaymentStatus::UnderReview:
+                if($book_tour->payment_status == PaymentStatus::UnderReview)
+                {
+                    break;
+                }
+                if($book_tour->status == BookingStatus::Booked)
+                {
+                    $tour = $book_tour->tour;
+                    $tour->remaining_seats += $book_tour->seats;
+                    $tour->save();
+                    $book_tour->status = BookingStatus::Reserved;
+                }
                 $book_tour->payment_status = PaymentStatus::UnderReview;
                 break;
             case PaymentStatus::Successful:
-                $tour = $book_tour->tour;
-                $tour->remaining_seats -= $book_tour->seats;
-                $tour->save;
+                if($book_tour->payment_status == PaymentStatus::Successful)
+                {
+                    break;
+                }
+                if($book_tour->status != BookingStatus::Booked)
+                {
+                    $tour = $book_tour->tour;
+                    $tour->remaining_seats -= $book_tour->seats;
+                    $tour->save();
+                }
                 $book_tour->status = BookingStatus::Booked;
                 $book_tour->payment_status = PaymentStatus::Successful;
                 break;

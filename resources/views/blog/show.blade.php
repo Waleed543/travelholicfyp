@@ -262,7 +262,11 @@
             <div class="col-12 col-md-4">
                 <div class="card writer">
                     <!--Card content-->
-                    <img src="{{asset('storage/'.$blog->user->username.'/profile_image/'.$blog->user->profile->image)}}" alt="John" style="width:100%">
+                    @if($blog->user->profile->image != NULL)
+                        <a href="{{route('show.user.profile',$blog->user->username)}}"><img src="{{asset('storage/'.$blog->user->username.'/profile_image/'.$blog->user->profile->image)}}" alt="John" style="width:100%"></a>
+                    @else
+                        <a href="{{route('show.user.profile',$blog->user->username)}}"><img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail"></a>
+                    @endif
                     <br>
                     <h1>{{$blog->user->name}}</h1>
                     <p class="title">CEO & Founder, Example</p>

@@ -129,6 +129,9 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {{$blogs->links()}}
+        </div>
     </div>
     <!--- End Product Section -->
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tour;
 
 use App\City;
+use App\Enums\PaymentStatus;
 use App\Model\tags_tour;
 use App\Model\tour_day;
 use App\Tag;
@@ -325,9 +326,14 @@ class TourController extends Controller
         abort_if($tour == null, '404', 'Tour not found');
         abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
 
+        $bookings = $tour->bookings;
+        $bookings_count = $bookings->where('payment_status',PaymentStatus::Successful)->count() > 0;
         $booked_seats = $tour->total_seats - $tour->remaining_seats;
         if ($booked_seats != 0) {
             return back()->with('popup_error', 'Seats has been booked, you cannot delete the tour. Kindly contact support');
+        }elseif($bookings_count > 0)
+        {
+            return back()->with('popup_error', 'Payment has been made against your tour, you cannot delete the tour. Kindly contact support');
         }
 
         //Deleting Tour Thumbnail
@@ -341,6 +347,11 @@ class TourController extends Controller
             $day->delete();
         }
 
+        //Deleting Tour Bookings
+        foreach ($bookings as $book)
+        {
+            $book->delete();
+        }
         //Deleting Tour
         $tour->delete();
 

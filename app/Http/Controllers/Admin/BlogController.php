@@ -15,9 +15,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::all();
-
-        return view('admin.dashboard.blog.index',compact('blogs'));
+        $categories = blog_category::all();
+        $blogs = Blog::paginate(15);
+        return view('admin.dashboard.blog.index',compact('blogs','categories'));
     }
 
     public function create()

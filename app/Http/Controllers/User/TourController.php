@@ -14,8 +14,9 @@ class TourController extends Controller
 {
     public function index()
     {
-        $tours = auth()->user()->tours;
-        return view('user.dashboard.tour.index',compact('tours'));
+        $cities = City::all();
+        $tours = auth()->user()->tours()->paginate(15);
+        return view('user.dashboard.tour.index',compact('tours','cities'));
     }
 
     public function create()

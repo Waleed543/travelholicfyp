@@ -13,21 +13,21 @@
 
 
     <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                    <div class="row pt-md-5 mt-md-3">
-                        <div class="col-md-12 search-card">
-                            <!-- Material form contact -->
-                            <div class="card search">
-                                <!--Card content-->
-                                <div class="card-body px-lg-5 pt-0">
-                                    <div class="text-center">
-                                        <a class="mt-3 btn btn-light" href="#search" data-toggle="collapse">Search</a>
-                                    </div>
-                                    <div id="search" class="collapse">
-                                        <hr>
-                                        <form  id="search" method="GET" action="{{route('admin.dashboard.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div class="row pt-md-5 mt-md-3">
+                    <div class="col-md-12 search-card">
+                        <!-- Material form contact -->
+                        <div class="card search">
+                            <!--Card content-->
+                            <div class="card-body px-lg-5 pt-0">
+                                <div class="text-center">
+                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Search</a>
+                                </div>
+                                <div id="searchs" class="collapse">
+                                    <hr>
+                                    <form  id="search" method="GET" action="{{route('admin.dashboard.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
                                         {{-- Name --}}
                                         <div class="row form-group">
                                             <div class="col-12 col-md-12">
@@ -120,128 +120,128 @@
                                             Search
                                         </button>
                                     </form>
-                                    </div>
                                 </div>
                             </div>
-                            <!-- Material form contact -->
                         </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                    <div class="row">
-                        <div class="col-xl-12 col-12">
-                            <h3 class="text-muted text-center mb-3">All Tours</h3>
-                            <table class="table table-dark table-hover text-center">
-                                <thead>
-                                <tr class="">
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Created at</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if(count($tours) > 0)
-                                    @foreach($tours as $tour)
-                                        <tr>
-                                            <th>{{$loop->iteration}}</th>
-                                            <td><a href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
-                                            <td>{{$tour->slug}}</td>
-                                            <td>{{$tour->created_at}}</td>
-                                            <td>
-                                                <form id="status-form-{{$tour->slug}}">
-                                                    @csrf
-                                                    <select onchange="submit_status_form('{{$tour->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
-                                                        <option value="">Please select</option>
-                                                        @foreach(App\Enums\Status::toArray() as $status)
-                                                            @if(old('status') ?? $tour->status == $status)
-                                                                <option selected value="{{$status}}">{{$status}}</option>
-                                                            @else
-                                                                <option value="{{$status}}">{{$status}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <div class="d-inline" role="group">
-                                                    {{-- Profile Tour Button--}}
-                                                    <a type="button" href="" class="btn btn-success btn-sm"
-                                                       onclick="event.preventDefault();
-                                                           document.getElementById('profile-tour-{{$loop->iteration}}').submit();">
-                                                        Profile
-                                                    </a>
-                                                    <form id="profile-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.profile',$tour->slug) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('GET')
-                                                    </form>
-                                                    {{-- Edit Tour Button--}}
-                                                    <a type="button" href="" class="btn btn-success btn-sm"
-                                                       onclick="event.preventDefault();
-                                                           document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
-                                                        Edit
-                                                    </a>
-                                                    <form id="edit-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.edit',$tour->slug) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('GET')
-                                                    </form>
-                                                    {{-- Delete Tour Button--}}
-                                                    <a type="button" href="" class="btn btn-danger btn-sm"
-                                                       onclick="event.preventDefault();
-                                                           document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
-                                                        Delete
-                                                    </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('tour.destroy',$tour->slug) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
-                            <!-- pagination -->
-                            <nav>
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            <span>Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            <span>Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!-- end of pagination -->
-                        </div>
+                        <!-- Material form contact -->
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <h3 class="text-muted text-center mb-3">All Tours</h3>
+                    <table class="table table-dark table-hover text-center">
+                        <thead>
+                        <tr class="">
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Slug</th>
+                            <th>Created at</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($tours) > 0)
+                            @foreach($tours as $tour)
+                                <tr>
+                                    <th>{{$loop->iteration}}</th>
+                                    <td><a href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
+                                    <td>{{$tour->slug}}</td>
+                                    <td>{{$tour->created_at}}</td>
+                                    <td>
+                                        <form id="status-form-{{$tour->slug}}">
+                                            @csrf
+                                            <select onchange="submit_status_form('{{$tour->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
+                                                <option value="">Please select</option>
+                                                @foreach(App\Enums\Status::toArray() as $status)
+                                                    @if(old('status') ?? $tour->status == $status)
+                                                        <option selected value="{{$status}}">{{$status}}</option>
+                                                    @else
+                                                        <option value="{{$status}}">{{$status}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="d-inline" role="group">
+                                            {{-- Profile Tour Button--}}
+                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                               onclick="event.preventDefault();
+                                                   document.getElementById('profile-tour-{{$loop->iteration}}').submit();">
+                                                Profile
+                                            </a>
+                                            <form id="profile-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.profile',$tour->slug) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                            {{-- Edit Tour Button--}}
+                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                               onclick="event.preventDefault();
+                                                   document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
+                                                Edit
+                                            </a>
+                                            <form id="edit-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.edit',$tour->slug) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                            {{-- Delete Tour Button--}}
+                                            <a type="button" href="" class="btn btn-danger btn-sm"
+                                               onclick="event.preventDefault();
+                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
+                                                Delete
+                                            </a>
+                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('tour.destroy',$tour->slug) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        </tbody>
+                    </table>
+                    <!-- pagination -->
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a href="#" class="page-link py-2 px-3">
+                                    <span>Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a href="#" class="page-link py-2 px-3">
+                                    1
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link py-2 px-3">
+                                    2
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link py-2 px-3">
+                                    3
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a href="#" class="page-link py-2 px-3">
+                                    <span>Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- end of pagination -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
 
 @section('js')
     <script>

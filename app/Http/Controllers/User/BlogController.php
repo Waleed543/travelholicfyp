@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Blog;
 use App\Http\Controllers\Controller;
+use App\Model\blog_category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,8 +12,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = auth()->user()->blogs;
-        return view('user.dashboard.blog.index',compact('blogs'));
+        $categories = blog_category::all();
+        $blogs = auth()->user()->blogs()->paginate(15);
+        return view('user.dashboard.blog.index',compact('blogs','categories'));
     }
 
     public function create()

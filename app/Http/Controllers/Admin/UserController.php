@@ -143,7 +143,10 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
+        $user->force_logout = 1;
+
         $user->save();
+
 
         $user->roles()->sync($request->role);
 

@@ -169,25 +169,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/user/dashboard/tour" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/blog" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Sun Fiber\Desktop\Bilal\University\htdocs\travelholicFYP\resources\views\user\dashboard\tour" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
-      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\inc" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\travelholicFYP\public\css" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\Blog" />
       <recent name="C:\xampp\htdocs\travelholicFYP\app\Model\User" />
       <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\Admin\dashboard\user\setting" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sun Fiber\Desktop\Bilal\University\htdocs\travelholicFYP\resources\views\blog" />
+      <recent name="C:\Users\Sun Fiber\Desktop\Bilal\University\htdocs\travelholicFYP\resources\views\user\dashboard\tour" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\hotel\rooms" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\resources\views\user\dashboard" />
+      <recent name="C:\xampp\htdocs\travelholicFYP\app\Http\Controllers\User" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -273,6 +273,8 @@
       <workItem from="1603269871149" duration="9974000" />
       <workItem from="1603385015593" duration="13410000" />
       <workItem from="1603469061938" duration="10148000" />
+      <workItem from="1603561901289" duration="7201000" />
+      <workItem from="1603902676586" duration="9092000" />
     </task>
     <servers />
   </component>

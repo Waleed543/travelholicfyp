@@ -18,7 +18,7 @@ class TourController extends Controller
     public function index()
     {
         $cities = City::all();
-        $tours = Tour::all();
+        $tours = Tour::all()->pa;
         return view('admin.dashboard.tour.index',compact('tours','cities'));
     }
 

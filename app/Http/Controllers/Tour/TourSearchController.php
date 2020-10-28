@@ -53,15 +53,21 @@ class TourSearchController extends Controller
         //Check if request is from admin dashboard
         if($request->routeIs('admin*'))
         {
-            $tours = $tours->get();
+            $tours = $tours()->paginate(15);
 
             return view('admin.dashboard.tour.index',compact('tours','cities'));
+        }elseif ($request->routeIs('dashboard*'))
+        {
+            $tours->where('user_id','=',auth()->user()->id);
+            $tours = $tours->paginate(15);
+
+            return view('user.dashboard.tour.index',compact('tours','cities'));
         }
 
         //Check if status is Active
         $tours->where('status','=',Status::Active);
 
-        $tours = $tours->get();
+        $tours = $tours()->paginate(15);
 
         return view('tour.index',compact('tours','cities'));
     }

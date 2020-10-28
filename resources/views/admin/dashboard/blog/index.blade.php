@@ -8,7 +8,66 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-                    <div class="row pt-md-5 mt-md-3 mb-5">
+                    <div class="row pt-md-5 mt-md-3">
+                        <div class="col-md-12 search-card">
+                            <!-- Material form contact -->
+                            <div class="card search">
+                                <!--Card content-->
+                                <div class="card-body px-lg-5 pt-0">
+                                    <div class="text-center">
+                                        <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Search</a>
+                                    </div>
+                                    <div id="searchs" class="collapse">
+                                        <hr>
+                                        <form  id="search" method="GET" action="{{route('admin.dashboard.blog.search')}}" enctype="multipart/form-data" class="form-horizontal">
+                                            {{-- Name --}}
+                                            <div class="row form-group">
+                                                <div class="col-12 col-md-12">
+                                                    <label for="name" class=" form-control-label">Name</label>
+                                                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            {{-- Cities --}}
+                                            <div class="row form-group">
+                                                <div class="col-12 col-md-6">
+                                                    <label for="category_id" class=" form-control-label">Category</label>
+                                                    <select name="category_id" id="select" class="form-control @error('category_id') is-invalid @enderror">
+                                                        <option value="">Select</option>
+                                                        @if(count($categories)>0)
+                                                            @foreach($categories as $category)
+                                                                @if(old('category_id') == $category->id)
+                                                                    <option selected value="{{$category->id}}">{{$category->name}}</option>
+                                                                @else
+                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    @error('departure_city')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-secondary btn-sm" value="submit" form="search">
+                                                Search
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Material form contact -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                    <div class="row mb-5">
                         <div class="col-xl-12 col-12">
                             <h3 class="text-muted text-center mb-3">All Blogs</h3>
                             <table class="table table-dark table-hover text-center">
@@ -77,31 +136,7 @@
                             <!-- pagination -->
                             <nav>
                                 <ul class="pagination justify-content-center">
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            <span>Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            2
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a href="#" class="page-link py-2 px-3">
-                                            <span>Next</span>
-                                        </a>
-                                    </li>
+                                    {{$blogs->links()}}
                                 </ul>
                             </nav>
                             <!-- end of pagination -->

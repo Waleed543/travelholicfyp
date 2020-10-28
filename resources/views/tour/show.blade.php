@@ -133,7 +133,11 @@
             <div class="col-12 col-md-4">
                 <div class="card writer">
                     <!--Card content-->
-                    <img src="{{asset('storage/'.$tour->user->username.'/profile_image/'.$tour->user->profile->image)}}" alt="John" style="width:100%">
+                    @if($tour->user->profile->image != NULL)
+                        <a href="{{route('show.user.profile',$tour->user->username)}}"><img src="{{asset('storage/'.$tour->user->username.'/profile_image/'.$tour->user->profile->image)}}" alt="John" style="width:100%"></a>
+                    @else
+                        <a href="{{route('show.user.profile',$tour->user->username)}}"><img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail"></a>
+                    @endif
                     <br>
                     <h1>{{$tour->user->name}}</h1>
                     <p class="title">CEO & Founder, Example</p>

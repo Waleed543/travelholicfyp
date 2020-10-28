@@ -6,38 +6,42 @@
 
     <div class="row">
         <div class="col-lg-3" style="height: 600px; background-color: white; padding: 0; margin-top: 3rem;margin-left: 2rem; border-radius: 20px">
-            <h3 style="text-align: center; margin-top: 1rem">John Snow</h3>
+            <h3 style="text-align: center; margin-top: 1rem">{{$user->name}}</h3>
             <div style="height: 300px; overflow-y: hidden;margin-bottom: 1.5rem" >
-            <img style="width: 100%; margin-left: 0;" src={{asset('img/john.png')}}>
+                @if($profile->image != NULL)
+                    <img src="{{asset('storage/'.$user->username.'/profile_image/'.$profile->image)}}" class="img-thumbnail">
+                @else
+                    <img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail">
+                @endif
             </div>
             <div class="row" style="margin-bottom: 0;">
                 <div class="col-lg-6">
             <label style=" margin-left: 1.5rem"><b>Gender:</b></label>
                 </div>
-                <label class="col-lg-6">Male</label>
+                <label class="col-lg-6">{{$profile->gender}}</label>
             </div>
 
             <div class="row" style="">
                 <div class="col-lg-6">
                     <label style=" margin-left: 1.5rem"><b>City:</b></label>
                 </div>
-                <label class="col-lg-6">Patoki</label>
+                <label class="col-lg-6">@if($city != NULL){{$city->name}}@endif</label>
             </div>
         </div>
         <div class="col-lg-8" style="height: 600px; background-color: white; padding: 0; margin-top: 3rem;margin-left: 2rem; border-radius: 20px">
             <div class="row" style="margin-top: 3rem">
                 <div class="col-3" style="margin-left: 3.5rem">
-                    <label style=" "><b>Total Blogs:</b></label>
-                    <label>0</label>
+                    <label style=" "><b>Total Blogs: </b></label>
+                    <label>{{$user->blogs->count()}}</label>
                 </div>
                 <div class="col-3" style="">
                     <label style=" "><b>Tours Posted:</b></label>
-                    <label>0</label>
+                    <label>{{$user->tours->count()}}</label>
                 </div>
 
                 <div class="col-3" style="">
                     <label style=""><b>Hotels added:</b></label>
-                    <label>0</label>
+                    <label>{{$user->hotels->count()}}</label>
                 </div>
 
             </div>
@@ -47,14 +51,10 @@
                     <label style=" "><b>Vehicles added:</b></label>
                     <label>0</label>
                 </div>
-                <div class="col-3" style="">
-                    <label style=" "><b>Bookings:</b></label>
-                    <label>0</label>
-                </div>
 
-                <div class="col-4" style="">
+                <div class="col-6" style="">
                     <label style=""><b>Member Since:</b></label>
-                    <label>The winter</label>
+                    <label>{{$user->created_at}}</label>
                 </div>
 
             </div>
@@ -67,13 +67,13 @@
 
                 <div class="col-6" style="margin-left: 3.5rem">
                     <label style=" "><b>Address:</b></label>
-                    <label>near attok petrol pump, Patoki</label>
+                    <label>{{$user->address}}</label>
                 </div>
 
 
                 <div class="col-5" style="">
                     <label style=""><b>Phone:</b></label>
-                    <label>03334545921</label>
+                    <label>{{$user->phone}}</label>
                 </div>
 
             </div>

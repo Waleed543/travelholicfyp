@@ -52,6 +52,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::get('/create', 'Admin\BlogController@create')->name('admin.dashboard.blog.create');
             Route::get('/{slug}/edit', 'Admin\BlogController@edit')->name('admin.dashboard.blog.edit');
             Route::delete('/{slug}', 'Admin\BlogController@destroy')->name('admin.dashboard.blog.delete');
+            Route::get('/search', 'Blog\BlogSearchController')->name('admin.dashboard.blog.search');
             Route::get('/setting','Admin\BlogController@setting')->name('admin.dashboard.blog.setting');
             Route::post('/{slug}/status','Admin\BlogController@status')->name('admin.dashboard.blog.status');
             //Add Blog Category
@@ -140,12 +141,14 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/create', 'User\BlogController@create')->name('dashboard.blog.create');
         Route::get('/{slug}/edit', 'User\BlogController@edit')->name('dashboard.blog.edit');
         Route::delete('/{slug}', 'User\BlogController@destroy')->name('dashboard.blog.delete');
+        Route::get('/search', 'Blog\BlogSearchController')->name('dashboard.blog.search');
     });
     //Tour Routes
     Route::prefix('tour')->middleware(['auth','can:notAdmin'])->group(function () {
         Route::get('/', 'User\TourController@index')->name('dashboard.tour');
         Route::get('/create', 'User\TourController@create')->name('dashboard.tour.create');
         Route::get('/{slug}/edit', 'User\TourController@edit')->name('dashboard.tour.edit');
+        Route::get('/search', 'Tour\TourSearchController')->name('dashboard.tour.search');
         Route::get('/{slug}/profile','User\TourController@profile')->name('dashboard.tour.profile');
         Route::get('/{slug}/status', 'User\TourController@status')->name('dashboard.tour.status.inactive');
     });
@@ -195,6 +198,13 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
 });
 /*
 |--------------------------------------------------------------------------
+| User Profile Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('profile/{username}','HomeController@showProfile')->name('show.user.profile');
+
+/*
+|--------------------------------------------------------------------------
 | Blogs Routes
 |--------------------------------------------------------------------------
 */
@@ -237,8 +247,7 @@ Route::resource('/hotel/{slug}/room','Hotel\RoomController');
 
 
 
-Route::get('/roomcheck','HomeController@index');
-
+Route::get('/profileee','HomeController@index');
 
 
 
