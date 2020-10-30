@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,7 @@ use App\Http\Requests\Hotel\EditRequest;
 use App\Http\Requests\Hotel\StoreRequest;
 use App\Model\tags_hotel;
 use App\Tag;
+use App\Tour;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,11 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::with('user')->where('status','=',Status::Active)
-            ->orderBy('created_at','desc')->paginate(6);
+        $tours = Tour::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc')->limit(6)->get();
+        $blogs = Blog::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc')->limit(6)->get();
 
 
-        return view('home',compact('hotels'));
+        return view('home',compact('tours','blogs'));
     }
 
     public function showProfile($username)

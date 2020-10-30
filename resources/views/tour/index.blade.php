@@ -189,6 +189,9 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            {{$tours->links()}}
+        </div>
     </div>
     <!--- End Product Section -->
 

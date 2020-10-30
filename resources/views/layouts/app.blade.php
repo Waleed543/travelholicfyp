@@ -19,6 +19,7 @@
 
 <body>
 
+@yield('css_top')
     <!-- Navigation -->
     @include('inc.header')
     <!-- End Navigation -->
@@ -35,6 +36,6 @@
     <script src="https://kit.fontawesome.com/15ce08dfb5.js" crossorigin="anonymous"></script>
     <!-- MDB core JavaScript -->
 <!--- End of Script Source Files -->
-
+    @yield('js_bottom')
 </body>
 </html>
