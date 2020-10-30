@@ -18,7 +18,7 @@ class TourController extends Controller
     public function index()
     {
         $cities = City::all();
-        $tours = Tour::all()->pa;
+        $tours = Tour::paginate(15);
         return view('admin.dashboard.tour.index',compact('tours','cities'));
     }
 

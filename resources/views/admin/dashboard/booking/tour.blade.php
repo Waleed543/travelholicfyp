@@ -23,42 +23,51 @@
                             <!--Card content-->
                             <div class="card-body px-lg-5 pt-0">
                                 <div class="text-center">
-                                    <a class="mt-3 btn btn-light" href="#search" data-toggle="collapse">Search</a>
+                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Seaaaaaarch</a>
                                 </div>
-                                <div id="search" class="collapse">
+                                <div id="searchs" class="collapse">
                                     <hr>
-                                    <form  id="search" method="GET" action="{{route('admin.dashboard.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
-                                        {{-- Name --}}
-                                        <div class="row form-group">
-                                            <div class="col-12 col-md-12">
-                                                <label for="name" class=" form-control-label">Name</label>
-                                                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
-                                                @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
+                                    <form  id="search" method="GET" action="{{route('admin.dashboard.booking.tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
+                                        {{-- Tour Name --}}
+                                        <div class="col-12 col-md-6">
+                                            <label for="departure_city" class=" form-control-label">Tour Name</label>
+                                            <select name="tour_slug" id="select" class="form-control @error('tour_slug') is-invalid @enderror">
+                                                <option value="">Select</option>
+                                                @if(count($tours)>0)
+                                                    @foreach($tours as $tour)
+                                                        @if(old('tour_slug') == $tour->slug)
+                                                            <option selected value="{{$tour->slug}}">{{$tour->name}}</option>
+                                                        @else
+                                                            <option value="{{$tour->slug}}">{{$tour->name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @error('departure_city')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
 
-                                        {{-- Price --}}
+                                        {{-- Order No --}}
                                         <div class="row form-group">
                                             <div class="col-12 col-md-6">
-                                                <label for="min_price" class=" form-control-label">Min Price</label>
-                                                <input type="min_price" min="0" max="120000" id="min_price" name="min_price" value="{{old('min_price')  ?? 0}}" class="form-control @error('min_price') is-invalid @enderror">
-                                                @error('min_price')
+                                                <label for="order_no" class=" form-control-label">Order Number</label>
+                                                <input type="number" id="order_no" name="order_no" value="{{old('order_no')}}" class="form-control @error('order_no') is-invalid @enderror">
+                                                @error('order_no')
                                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <label for="max_price" class=" form-control-label">Max Pice</label>
-                                                <input type="number" min="0" max="120000" id="max_price" name="max_price" value="{{old('max_price') ?? 120000}}" class="form-control @error('max_price') is-invalid @enderror">
-                                                @error('max_price')
+                                                <label for="phone_no" class=" form-control-label">Phone Number</label>
+                                                <input type="number" id="phone_no" name="phone_no" value="{{old('phone_no')}}" class="form-control @error('phone_no') is-invalid @enderror">
+                                                @error('phone_no')
                                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -135,7 +144,7 @@
                                             </select>
                                         </form>
                                     </td>
-                                    <td>{{$book_tour->trxid}}</td>
+                                    <td>{{$book_tour->trxid ?? 'NULL'}}</td>
 {{--                                    <td>--}}
 {{--                                        <div class="d-inline" role="group">--}}
 {{--                                            --}}{{-- Add Room Hotel Button--}}
@@ -178,31 +187,7 @@
                     <!-- pagination -->
                     <nav>
                         <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    <span>Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link py-2 px-3">
-                                    1
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    2
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    3
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    <span>Next</span>
-                                </a>
-                            </li>
+                            {{$book_tours->links()}}
                         </ul>
                     </nav>
                     <!-- end of pagination -->

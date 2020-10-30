@@ -7,6 +7,7 @@ use App\Enums\PaymentStatus;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Model\book_tour;
+use App\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,9 +15,11 @@ class BookingController extends Controller
 {
     public function tour()
     {
-        $book_tours = book_tour::all();
+        $book_tours = book_tour::paginate(15);
 
-        return view('admin.dashboard.booking.tour',compact('book_tours'));
+        $tours = Tour::select('slug','name')->where('status',Status::Active)->get();
+
+        return view('admin.dashboard.booking.tour',compact('book_tours','tours'));
     }
 
     public function status(Request $request, $number)

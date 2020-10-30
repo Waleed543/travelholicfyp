@@ -11,7 +11,7 @@ class BookingController extends Controller
 {
     public function tour()
     {
-        $bookings = auth()->user()->book_tour;
+        $bookings = auth()->user()->book_tour()->paginate(15);
         return view('user.dashboard.booking.tour',compact('bookings'));
     }
 

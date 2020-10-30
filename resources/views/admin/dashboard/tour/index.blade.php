@@ -208,31 +208,7 @@
                     <!-- pagination -->
                     <nav>
                         <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    <span>Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link py-2 px-3">
-                                    1
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    2
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    3
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link py-2 px-3">
-                                    <span>Next</span>
-                                </a>
-                            </li>
+                            {{$tours->links()}}
                         </ul>
                     </nav>
                     <!-- end of pagination -->
