@@ -26,84 +26,45 @@
 
             <div class="card-body">
                 <h3 class="heading" style="text-align: center">Rooms for you</h3>
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="card col-md-3 " style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 1</strong>
+                <div class="card-body">
+                    @if(count($hotels) != 0)
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        @foreach($hotels as $hotel)
+                                            <div class="card col-md-3" style="margin-left: 3.5rem">
+                                                <div class="card-header" style="background-color: grey;">
+                                                    <strong class="card-title">{{$hotel->name}}</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img class="img-thumbnail" src="{{asset('storage/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail)}}">
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="row">
+                                                        <h5>Created at : {{$hotel->created_at}}</h5>
+                                                        <a class="btn btn-sm btn-primary ml-auto" href="{{route('hotel.show',[$hotel->slug])}}">Show Now</a>
 
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
-                                    </div>
-                                </div>
 
-                                <div class="card col-md-3" style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 2</strong>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
-                                    </div>
-                                </div>
-
-                                <div class="card col-md-3 " style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 3</strong>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" style="color: black"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true" style="color: black"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="card col-md-3 " style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 4</strong>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
-                                    </div>
-                                </div>
-
-                                <div class="card col-md-3" style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 5</strong>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
-                                    </div>
-                                </div>
-
-                                <div class="card col-md-3 " style="margin-left: 3.5rem">
-                                    <div class="card-header" style="background-color: grey;">
-                                        <strong class="card-title">Room 6</strong>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <h1>sdafasdfasdf</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" style="color: black"></i>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true" style="color: black"></i>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    @else
+                        No Room Type Found
+                    @endif
                 </div>
             </div>
         </div>

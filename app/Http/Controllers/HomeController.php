@@ -25,7 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $hotels = Hotel::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc')->paginate(6);
+
+
+        return view('home',compact('hotels'));
     }
 
     public function showProfile($username)
