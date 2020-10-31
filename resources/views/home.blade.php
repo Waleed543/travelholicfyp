@@ -52,13 +52,55 @@
         </div><!--- End Narrow Section -->
     </div>
     <!--- End Jumbotron Section -->
+    <!--- Start Resources Section -->
+    <div >
+
+        <div class="fixed-background">
+            <div class="row dark text-center">
+                <div class="col-md-4">
+                    <h3>Numbers of Trips</h3>
+                    <div class="feature">
+                        <i class="fas fa-code fa-3x"></i>
+                    </div>
+                    <p class="lead">{{$tours_count}}</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Numbers of Blogs</h3>
+                    <div class="feature">
+                        <i class="fas fa-bold fa-3x"></i>
+                    </div>
+                    <p class="lead">{{$blogs_count}}</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h3>Numbers of User</h3>
+                    <div class="feature">
+                        <i class="fab fa-css3 fa-3x"></i>
+                    </div>
+                    <p class="lead">{{$users_count}}</p>
+                </div>
+
+            </div><!--- End Row Dark Section -->
+
+            <div class="fixed-wrap">
+                <div class="fixed" style="background-image: url('{{asset('img/img1.jpeg')}}')">
+                </div>
+            </div>
+
+        </div><!--- End Fixed Background Section -->
+
+    </div>
+    <!--- End Resources Section -->
+
     <!--- Start Blogs Section -->
 
     @if(count($blogs) > 0)
     <div class="container text-center my-3">
         <h2 class="font-weight-bold">Our Latest Blogs</h2>
+        <div style=" width: 12rem" class="heading-underline"></div>
         <div class="row mx-auto my-auto">
-            <div id="TourCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div id="BlogCarousel" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner w-100" role="listbox">
                     @foreach($blogs as $blog)
                         <div class="carousel-item @if($loop->iteration == 1) active @endif">
@@ -77,11 +119,11 @@
                         </div>
                     @endforeach
                 </div>
-                <a class="carousel-control-prev w-auto" href="#TourCarousel" role="button" data-slide="prev">
+                <a class="carousel-control-prev w-auto" href="#BlogCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next w-auto" href="#TourCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next w-auto" href="#BlogCarousel" role="button" data-slide="next">
                     <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -93,7 +135,8 @@
 
     @if(count($tours) > 0)
         <div class="container text-center my-3">
-            <h2 class="font-weight-bold">Our Latest Tours</h2>
+            <h2 class="font-weight-bold mt-2">Our Latest Tours</h2>
+            <div style=" width: 12rem" class="heading-underline"></div>
             <div class="row mx-auto my-auto">
                 <div id="TourCarousel" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner w-100" role="listbox">
@@ -135,57 +178,6 @@
         </div>
     @endif
 
-    <!--- Start Features Section -->
-    <div>
-    </div>
-    <!--- End Features Section -->
-
-    <!--- Start Resources Section -->
-    <div >
-
-        <div class="fixed-background">
-            <div class="row dark text-center">
-                <div class="col-12">
-                    <h3 class="heading">Build With Care</h3>
-                    <div class="heading-underline"></div>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>HTML 5</h3>
-                    <div class="feature">
-                        <i class="fas fa-code fa-3x"></i>
-                    </div>
-                    <p class="lead">This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>Bootstrap 4</h3>
-                    <div class="feature">
-                        <i class="fas fa-bold fa-3x"></i>
-                    </div>
-                    <p class="lead">This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
-                </div>
-
-                <div class="col-md-4">
-                    <h3>CSS 3</h3>
-                    <div class="feature">
-                        <i class="fab fa-css3 fa-3x"></i>
-                    </div>
-                    <p class="lead">This is dummy data.This is dummy data.This is dummy data.This is dummy data.</p>
-                </div>
-
-            </div><!--- End Row Dark Section -->
-
-            <div class="fixed-wrap">
-                <div class="fixed" style="background-image: url('{{asset('img/img1.jpeg')}}')">
-                </div>
-            </div>
-
-        </div><!--- End Fixed Background Section -->
-
-    </div>
-    <!--- End Resources Section -->
-
     <!--- Start Clients Section -->
 
 @endsection
@@ -196,7 +188,7 @@
             interval: 8000
         });
         $('#BlogCarousel').carousel({
-            interval: 8000
+            interval: 7500
         });
 
         $('.carousel .carousel-item').each(function(){

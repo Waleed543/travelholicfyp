@@ -28,12 +28,19 @@ class HomeController extends Controller
     public function index()
     {
         $tours = Tour::with('user')->where('status','=',Status::Active)
-            ->orderBy('created_at','desc')->limit(6)->get();
+            ->orderBy('created_at','desc');
+        $tours_count = count($tours->get());
+        $tours = $tours->limit(6)->get();
+
         $blogs = Blog::with('user')->where('status','=',Status::Active)
-            ->orderBy('created_at','desc')->limit(6)->get();
+            ->orderBy('created_at','desc');
 
+        $blogs_count = count($blogs->get());
+        $blogs = $blogs->limit(6)->get();
 
-        return view('home',compact('tours','blogs'));
+        $users_count = count(User::all());
+
+        return view('home',compact('tours','blogs','tours_count','blogs_count','users_count'));
     }
     public function  contactus()
     {
