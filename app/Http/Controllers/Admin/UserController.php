@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->withTrashed()->paginate(100);
+        $users = User::with('roles')->withTrashed()->paginate(15);
 
         return view('admin.dashboard.user.index',compact('users'));
     }

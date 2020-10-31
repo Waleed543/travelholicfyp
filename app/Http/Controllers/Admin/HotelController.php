@@ -17,7 +17,7 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::paginate(15);
         $cities= city::all();
         return view('admin.dashboard.hotel.index',compact('hotels','cities'));
     }

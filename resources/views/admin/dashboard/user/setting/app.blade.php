@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboardAdmin')
 @section('title', 'User Setting')
 @section('user','current')
-@section('headerName', 'Blog Setting')
+@section('headerName', 'User Setting')
 @section('content')
 
     <section>

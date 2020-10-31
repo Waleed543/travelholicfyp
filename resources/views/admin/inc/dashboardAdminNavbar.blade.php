@@ -129,19 +129,19 @@
                         </div>
 
                         <div class="col-md-5">
-                            <div class="search-bar">
+                            {{--<div class="search-bar">
                                 <form>
                                     <div class="input-group">
                                         <input type="text" class="form-control search-input" placeholder="Search...">
                                         <button type="button" class="btn btn-white search-button"><i class="fas fa-search text-danger"></i></button>
                                     </div>
                                 </form>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="col-md-3">
                             <ul class="navbar-nav">
-                                <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
-                                <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
+                                {{--<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
+                                <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>--}}
                                 <li class="nav-item ml-md-auto"><a  href="" class="nav-link" data-toggle="modal" data-target="#sign-out"><i class="fas fa-sign-out-alt text-danger fa-lg"></i></a></li>
                             </ul>
                         </div>

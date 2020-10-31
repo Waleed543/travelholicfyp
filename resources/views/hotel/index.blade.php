@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-4 search-card">
                 <!-- Material form contact -->
-                <div class="card search">
+                <div class="card ">
                     <!--Card content-->
                     <div class="card-body px-lg-5 pt-0">
                         <div class="text-center">
