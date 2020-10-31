@@ -35,6 +35,10 @@ class HomeController extends Controller
 
         return view('home',compact('tours','blogs'));
     }
+    public function  contactus()
+    {
+        return view('contactus');
+    }
 
     public function showProfile($username)
     {

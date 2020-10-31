@@ -249,7 +249,7 @@ Route::resource('/hotel/{slug}/room','Hotel\RoomController');
 
 
 
-Route::get('/profileee','HomeController@index');
+Route::get('/contactus','HomeController@contactus')->name('contactus');
 
 
 

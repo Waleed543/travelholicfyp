@@ -18,9 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('hotel.index')}}">Hotel</a>
             </li>
-           
+
             <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact</a>
+                <a class="nav-link" href="{{route('contactus')}}">Contact</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
