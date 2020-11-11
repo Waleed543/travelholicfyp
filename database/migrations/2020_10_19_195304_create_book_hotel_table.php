@@ -19,8 +19,6 @@ class CreateBookHotelTable extends Migration
             $table->unsignedInteger('hotel_id');
             $table->unsignedInteger('room_id');
             $table->integer('total_rooms');
-            $table->integer('adults');
-            $table->integer('children');
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->string('status');
