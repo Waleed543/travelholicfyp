@@ -17,7 +17,7 @@ class CreateBookTourTable extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('tour_id');
-            $table->string('number',100)->unique();
+            $table->string('number')->unique();
             $table->integer('seats');
             $table->integer('adults');
             $table->integer('children');

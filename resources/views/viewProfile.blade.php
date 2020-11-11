@@ -67,13 +67,13 @@
 
                 <div class="col-6" style="margin-left: 3.5rem">
                     <label style=" "><b>Address:</b></label>
-                    <label>{{$profile->address}}</label>
+                    <label>{{$user->address}}</label>
                 </div>
 
 
                 <div class="col-5" style="">
                     <label style=""><b>Phone:</b></label>
-                    <label>{{$profile->phone}}</label>
+                    <label>{{$user->phone}}</label>
                 </div>
 
             </div>

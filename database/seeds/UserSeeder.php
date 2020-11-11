@@ -21,7 +21,6 @@ class UserSeeder extends Seeder
             'username' => 'bilal',
             'email' => 'bilal@gmail.com',
             'password' => Hash::make('11223344'),
-		'force_logout' => 0,
         ]);
         Profile::create([
             'user_id' => 2,

@@ -15,8 +15,8 @@ class CreateFacilitiesTable extends Migration
     {
         Schema::create('facilities', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('name',100)->unique();
-            $table->string('slug',100)->unique();
+            $table->string('name',150)->unique();
+            $table->string('slug',200)->unique();
             $table->timestamps();
         });
     }

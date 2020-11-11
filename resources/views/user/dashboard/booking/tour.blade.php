@@ -54,15 +54,8 @@
                                             <td>
                                                 <div class="d-inline" role="group">
                                                      {{-- Delete Order Button --}}
-                                                    <a type="button" href="" class="btn btn-danger btn-sm"
-                                                       onclick="event.preventDefault();
-                                                           document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
-                                                        Delete
-                                                    </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.delete',$booking->number) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
+
+
                                                 </div>
                                             </td>
                                         </tr>

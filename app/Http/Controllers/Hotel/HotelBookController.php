@@ -26,12 +26,13 @@ class HotelBookController extends Controller
     {
         $hotel = $request->hotel;
 
-        $hotel->available -= $request->total_rooms;
+        $hotel->available_rooms -= $request->total_rooms;
 
         $room = Room::where('slug','=',$room_slug)
             ->where('hotel_id',$hotel->id)->first();
 
         abort_if($room == null,'404','Room not found');
+        $user = $request->user();
 
         $room->available -= $request->total_rooms;
 
@@ -43,6 +44,9 @@ class HotelBookController extends Controller
         $book_hotel = book_hotel::create([
             'total_rooms' => $request->total_rooms,
             'adults' => $request->adults,
+            'user_id' => $user->id,
+            'hotel_id' => $hotel->id,
+            'room_id' => $room->id,
             'children' => $request->children,
             'check_in_date' => $request->check_in_date,
             'check_out_date' => $request->check_out_date,
