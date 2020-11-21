@@ -27,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+
         $tours = Tour::with('user')->where('status','=',Status::Active)
             ->orderBy('created_at','desc');
         $tours_count = count($tours->get());
@@ -44,6 +46,7 @@ class HomeController extends Controller
     }
     public function  contactus()
     {
+
         return view('contactus');
     }
 

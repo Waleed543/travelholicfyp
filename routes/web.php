@@ -99,6 +99,14 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
                    Route::get('/edit/{room_slug}', 'Admin\RoomController@edit')->name('.edit');
 
                });
+
+               //Setting Routes
+            Route::get('/setting/facility','Admin\HotelController@indexFacility')->name('.setting.facility');
+            Route::get('/setting/create/facility','Admin\HotelController@createFacility')->name('.setting.create.facility');
+            Route::post('/setting/store/facility','Admin\HotelController@storeFacility')->name('.setting.store.facility');
+            Route::get('/setting/facility/{facility}/edit','Admin\HotelController@editFacility')->name('.setting.facility.edit');
+            Route::post('/setting/update/{facility}','Admin\HotelController@updateFacility')->name('.setting.update.facility');
+            Route::get('/setting/facility/{facility}/destroy','Admin\HotelController@destroyFacility')->name('.setting.destroy.facility');
         });
 
         //Booking Routes

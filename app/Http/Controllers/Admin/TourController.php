@@ -139,7 +139,7 @@ class TourController extends Controller
 
         $validator->validate();
 
-        $tag = Tag::create([
+        $tag = Tag::firstOrCreate([
             'name' => $request->name,
             'slug' => Str::slug($request->name)
         ]);
