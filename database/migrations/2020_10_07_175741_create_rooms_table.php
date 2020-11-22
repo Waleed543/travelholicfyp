@@ -19,6 +19,7 @@ class CreateRoomsTable extends Migration
             $table->string('slug',100)->unique();
             $table->string('name', 100);
             $table->mediumText('description');
+            $table->integer('capacity');
             $table->integer('total');
             $table->integer('beds');
             $table->integer('available');

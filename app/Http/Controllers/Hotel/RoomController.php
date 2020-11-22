@@ -82,6 +82,7 @@ class RoomController extends Controller
         $room->name = $request->name;
         $room->total = $request->total;
         $room->beds = $request->beds;
+        $room->capacity = $request->capacity;
         $room->available = $request->total;
         $room->description = $request->description;
         $room->price = $request->price;
@@ -180,6 +181,7 @@ class RoomController extends Controller
         $room->name = $request->name;
         $room->total = $request->total;
         $room->beds = $request->beds;
+        $room->capacity = $request->capacity;
         $room->available = $request->total;
         $room->description = $request->description;
         $room->price = $request->price;

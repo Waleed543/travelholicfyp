@@ -115,6 +115,17 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-lg-6">
+                                            <label for="capacity" class=" form-control-label"><h3>Capacity(Person allowed in one room)</h3></label>
+                                            <input type="number" id="capacity" name="capacity" value="{{old('capacity')?? $room->capacity}}" class="form-control @error('beds') is-invalid @enderror" required>
+                                            @error('capacity')
+                                            <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
                                             <label for="price" class=" form-control-label"><h3>Price Per Room</h3></label>
                                             <input type="number" id="price" name="price" value="{{old('price')?? $room->price}}" class="form-control @error('price') is-invalid @enderror" required>
                                             @error('price')
