@@ -40,6 +40,11 @@ class HotelBookController extends Controller
             return back()->with('popup_error','There are not enough rooms');
         }
 
+        if($room->capacity < $request->adults+$request->children)
+        {
+            return back()->with('popup_error','Only '.$room->capacity.' persons allowed');
+        }
+
         $book_hotel = book_hotel::create([
             'total_rooms' => $request->total_rooms,
             'adults' => $request->adults,
