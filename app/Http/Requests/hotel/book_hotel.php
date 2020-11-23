@@ -16,7 +16,7 @@ class book_hotel extends FormRequest
     {
         $this->hotel = Hotel::where('slug' , $this->route('slug'))->first();
         abort_if($this->hotel == null,'404','Hotel not found');
-        $this->request->add(['tour'=>$this->tour]);
+        $this->request->add(['hotel'=>$this->hotel]);
         return true;
     }
 

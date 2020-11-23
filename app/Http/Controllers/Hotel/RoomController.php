@@ -81,12 +81,10 @@ class RoomController extends Controller
         $room->hotel_id = $hotel->id;
         $room->name = $request->name;
         $room->total = $request->total;
-<<<<<<< Updated upstream
+
         $room->beds = $request->beds;
         $room->capacity = $request->capacity;
-=======
-        $room->beds = $request->beds;//dsfgdfsgdsfgdddd
->>>>>>> Stashed changes
+        $room->beds = $request->beds;
         $room->available = $request->total;
         $room->description = $request->description;
         $room->price = $request->price;

@@ -18,17 +18,21 @@ class CreateBookHotelTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('hotel_id');
             $table->unsignedInteger('room_id');
+            $table->string('number',100)->unique();
+            $table->integer('adults');
+            $table->integer('children');
             $table->integer('total_rooms');
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->string('status');
             $table->string('payment_type');
-            $table->boolean('payment_status');
+            $table->string('payment_status');
+            $table->string('trxid')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->on('users')->references('id');
-            $table->foreign('hotel_id')->on('tours')->references('id');
-            $table->foreign('room_id')->on('tours')->references('id');
+            $table->foreign('hotel_id')->on('hotels')->references('id');
+            $table->foreign('room_id')->on('rooms')->references('id');
         });
     }
 

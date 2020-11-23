@@ -87,4 +87,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Hotel','user_id','id');
     }
+    public function book_hotel()
+    {
+        return $this->hasMany('App\Model\book_hotel','user_id','id');
+    }
 }

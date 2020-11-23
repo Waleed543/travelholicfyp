@@ -20,11 +20,12 @@ class CreateRoomsTable extends Migration
             $table->string('name', 100);
             $table->mediumText('description');
             $table->integer('capacity');
-            $table->integer('total');
             $table->integer('beds');
+            $table->integer('total');
             $table->integer('available');
             $table->integer('price');
             $table->string('thumbnail');
+            $table->string('status');
             $table->timestamps();
             $table->foreign('hotel_id')->references('id')->on('hotels');
         });
