@@ -16,7 +16,8 @@ class BookingController extends Controller
     }
     public function hotel()
     {
-        $bookings = auth()->user()->book_hotel()->paginate(15);
+        $bookings = auth()->user()->book_hotel()->with('hotel','room')->paginate(15);
+
         return view('user.dashboard.booking.hotel',compact('bookings'));
     }
 

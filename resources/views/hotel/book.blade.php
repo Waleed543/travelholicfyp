@@ -40,6 +40,10 @@
                         <label style=""><b>Price Per Room :</b></label>
                         <label>{{$room->price}}</label>
                     </div>
+                    <div class="col-3" style="margin-left: 5rem">
+                        <label style=""><b>Available Rooms :</b></label>
+                        <label>{{$room->available}}</label>
+                    </div>
 
 
                 </div>

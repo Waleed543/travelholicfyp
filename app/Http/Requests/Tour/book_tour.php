@@ -62,6 +62,8 @@ class book_tour extends FormRequest
             }elseif($this->payment_type = 2)
             {
                 $this->payment_type = Payment::Cash;
+            }elseif($this->payment_type = 3){
+                $this->payment_type = Payment::CreditCard;
             }else{
                 $validator -> errors() -> add('payment_type', 'Error in Payment type field');
             }

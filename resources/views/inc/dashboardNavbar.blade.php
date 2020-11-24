@@ -92,6 +92,9 @@
                                     <a href="{{route('dashboard.tour.booking')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Tour
                                     </a>
+                                    <a href="{{route('dashboard.hotel.booking')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Hotel
+                                    </a>
                                 </div>
                             </li>
                         @endcan

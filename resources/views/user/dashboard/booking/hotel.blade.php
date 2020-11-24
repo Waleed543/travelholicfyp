@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title','Tour Book')
+@section('title','Hotel Book')
 @section('booking','current')
 @section('headerName', 'Booking')
 @section('content')
@@ -14,13 +14,17 @@
                                 <thead>
                                 <tr class="">
                                     <th>#</th>
-                                    <th>Rooms</th>
+                                    <th>Hotel</th>
+                                    <th>Room Type</th>
+                                    <th>Total Rooms</th>
                                     <th>Adults</th>
                                     <th>Children</th>
-                                    <th>Phone</th>
+                                    <th>Check-In Date</th>
+                                    <th>Check-Out Date</th>
                                     <th>Status</th>
                                     <th>Payment Type</th>
                                     <th>Payment Status</th>
+                                    <th>TrxId</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -29,10 +33,13 @@
                                     @foreach($bookings as $booking)
                                         <tr>
                                             <th>{{$loop->iteration}}</th>
-                                            <td>{{$booking->rooms}}</td>
+                                            <td>{{$booking->hotel->name}}</td>
+                                            <td>{{$booking->room->name}}</td>
+                                            <td>{{$booking->total_rooms}}</td>
                                             <td>{{$booking->adults}}</td>
                                             <td>{{$booking->children}}</td>
-                                            <td>{{$booking->phone}}</td>
+                                            <td>{{$booking->check_in_date}}</td>
+                                            <td>{{$booking->check_out_date}}</td>
                                             <td>
                                                 @if($booking->status == \App\Enums\BookingStatus::Reserved)
                                                     <span class="badge badge-danger w-75 py-2">Reserved</span>
@@ -50,16 +57,23 @@
                                                     <span class="badge badge-success w-75 py-2">Successful</span>
                                                 @endif
                                             </td>
+                                            <td>
+                                                @if($booking->trxid != NULL)
+                                                    {{$booking->trxid}}
+                                                @else
+                                                    Null
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 <div class="d-inline" role="group">
                                                      {{-- Delete Order Button --}}
                                                     <a type="button" href="" class="btn btn-danger btn-sm"
                                                        onclick="event.preventDefault();
-                                                           document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
+                                                           document.getElementById('delete-hotel-{{$loop->iteration}}').submit();">
                                                         Delete
                                                     </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.delete',$booking->number) }}" method="POST" style="display: none;">
+                                                    <form id="delete-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.delete',$booking->number) }}" method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

@@ -76,7 +76,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::get('/setting/tag/{tag}/edit','Admin\TourController@editTag')->name('.setting.tag.edit');
             Route::post('/setting/update/{tag}','Admin\TourController@updateTag')->name('.setting.update.tag');
             Route::get('/setting/tag/{tag}/destroy','Admin\TourController@destroyTag')->name('.setting.destroy.tag');
-            //
+
         });
 
         //Hotel Routes
@@ -97,7 +97,6 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
                    Route::get('/create', 'Admin\RoomController@create')->name('.create');
                    Route::get('/store', 'Admin\RoomController@store')->name('.store');
                    Route::get('/edit/{room_slug}', 'Admin\RoomController@edit')->name('.edit');
-
                });
 
                //Setting Routes
@@ -116,6 +115,14 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
             Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
             Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
+            Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
+
+            //Hotel
+            Route::get('/hotel', 'Admin\BookingController@tour')->name('.tour');
+            Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
+            Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
+            Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
+            Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
         });
 
     });
@@ -195,9 +202,9 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/tour', 'User\BookingController@tour')->name('dashboard.tour.booking');
 
         //Hotel Room Book
-        Route::get('/hotel/{slug}/room/{room_slug}','Hotel\HotelBookController@index')->name('dashboard.hotel.book');
-        Route::post('hotel/{slug}/room/{room_slug}/store','Hotel\HotelBookController@book')->name('dashboard.hotel.book.store');
-        Route::get('/hotel/{slug}/room/{room_slug}/edit','Hotel\HotelBookController@edit')->name('dashboard.hotel.book.edit');
+        Route::get('/hotel/{slug}/room/{room_slug}/bookings','Hotel\HotelBookController@index')->name('dashboard.hotel.book');
+        Route::post('hotel/{slug}/room/{room_slug}/reserve','Hotel\HotelBookController@book')->name('dashboard.hotel.book.store');
+        Route::delete('hotel/order/{number}/delete', 'Hotel\HotelBookController@destroy')->name('dashboard.hotel.book.delete');
         //Hotel Payment
         Route::get('hotel/order/{number}/payment','Hotel\HotelBookController@payment')->name('dashboard.hotel.book.payment');
         Route::post('hotel/order/{number}/payment/easypaisa/trxid/store','Hotel\HotelBookController@storePayment')->name('dashboard.hotel.book.payment.store');

@@ -12,6 +12,7 @@ use App\Model\book_tour as book;
 use App\Reservation;
 use App\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class TourBookController extends Controller
@@ -59,6 +60,7 @@ class TourBookController extends Controller
     {
         $book_tour = book::where('number',$number)->first();
         abort_if($book_tour == null,'404','Reservation not found');
+        abort_unless($book_tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
 
         if($book_tour->status == BookingStatus::Booked or $book_tour->payment_status == PaymentStatus::Successful or $book_tour->payment_status == PaymentStatus::UnderReview)
         {

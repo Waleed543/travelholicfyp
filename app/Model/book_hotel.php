@@ -19,4 +19,9 @@ class book_hotel extends Model
     {
         return $this->belongsTo('App\Hotel','hotel_id','id');
     }
+
+    public function room()
+    {
+        return $this->belongsTo('App\Room','room_id','id');
+    }
 }

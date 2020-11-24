@@ -65,16 +65,13 @@ class HotelBookController extends Controller
             'check_in_date' => $request->check_in_date,
             'check_out_date' => $request->check_out_date,
             'status' => BookingStatus::Reserved,
-            'payment_status' => 0,
             'payment_status' => PaymentStatus::Unpaid,
             'payment_type' => $request->payment_type,
         ]);
 
-        $room->available -= $request->total_rooms;
-        $hotel->available_rooms -= $request->total_rooms;
+//        $room->available -= $request->total_rooms;
+//        $hotel->available_rooms -= $request->total_rooms;
 
-        $hotel->save();
-        $room->save();
 
         return redirect(route('dashboard.hotel.book.payment',$book_hotel->number));
     }
@@ -89,8 +86,18 @@ class HotelBookController extends Controller
             return back()->with('popup_error', 'Order cannot be deleted because its payment has been received or under review. Kindly contact support');
         }
 
-        $book_hotel->delete();
+//        $room = $book_hotel->room;
+//        $room->available += $book_hotel->total_rooms;
+//
+//        $hotel = $book_hotel->hotel;
+//        $hotel->available_rooms += $book_hotel->total_rooms;
+//
+//        dd($room);
+//        $book_hotel->delete();
+//        $room->save();
+//        $hotel->save();
 
+        $book_hotel->delete();
         return back()->with('popop_success', 'Order has been deleted');
 
     }
