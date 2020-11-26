@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Hotel;
 
+use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Hotel\Room\EditRequest;
@@ -88,6 +89,7 @@ class RoomController extends Controller
         $room->available = $request->total;
         $room->description = $request->description;
         $room->price = $request->price;
+        $room->status = Status::InProgress;
 
         $room->save();
 

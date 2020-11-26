@@ -44,6 +44,7 @@
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th>Created at</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -55,6 +56,21 @@
                                         <td>{{$room->name}}</td>
                                         <td>{{$room->slug}}</td>
                                         <td>{{$room->created_at}}</td>
+                                        <td>
+                                            <form id="status-form-{{$room->slug}}">
+                                                @csrf
+                                                <select onchange="submit_status_form('{{$hotel->slug}}','{{$room->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
+                                                    <option value="">Please select</option>
+                                                    @foreach(App\Enums\Status::toArray() as $status)
+                                                        @if(old('status') ?? $room->status == $status)
+                                                            <option selected value="{{$status}}">{{$status}}</option>
+                                                        @else
+                                                            <option value="{{$status}}">{{$status}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </form>
+                                        </td>
                                         <td>
                                             <div class="d-inline" role="group">
                                                 {{-- Edit Room Button--}}
@@ -121,4 +137,35 @@
         </div>
     </section>
     <!-- end of tables -->
+
+@section('js')
+    <script>
+        function submit_status_form(hotel_slug, room_slug) {
+            var form = document.getElementById("status-form-"+room_slug);
+
+            $.ajax({
+                url:"/dashboard/hotel/"+hotel_slug+"/room/"+room_slug+"/status/update",
+                method:"POST",
+                data:new FormData(form),
+                dataType:'JSON',
+                contentType: false,
+                cache: false,
+                processData: false,
+                error:function()
+                {
+                    alert('Status was unable to change');
+                },
+                success:function(data)
+                {
+                    show_message(data);
+                }
+            });
+        }
+        function show_message(data)
+        {
+            alert(data.message);
+        }
+
+    </script>
+@endsection
 @endsection

@@ -109,6 +109,9 @@
                                 <a href="{{route('admin.dashboard.booking.tour')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                     Tour
                                 </a>
+                                <a href="{{route('admin.dashboard.booking.hotel')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                    Hotel
+                                </a>
                             </div>
                         </li>
 {{--                        <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link @yield('current')"><i class="fas fa-shopping-cart text-light fa-lg mr-3"></i>Sales</a></li>--}}

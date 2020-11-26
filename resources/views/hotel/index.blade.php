@@ -54,7 +54,7 @@
                             <h1 class="mt-4">Search</h1>
                         </div>
                         <hr>
-                        <form  id="search" method="GET" action="" enctype="multipart/form-data" class="form-horizontal">
+                        <form  id="search" method="GET" action="hotel.search" enctype="multipart/form-data" class="form-horizontal">
                             @csrf
                             @method('GET')
                             {{-- Name --}}

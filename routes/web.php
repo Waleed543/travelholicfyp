@@ -97,6 +97,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
                    Route::get('/create', 'Admin\RoomController@create')->name('.create');
                    Route::get('/store', 'Admin\RoomController@store')->name('.store');
                    Route::get('/edit/{room_slug}', 'Admin\RoomController@edit')->name('.edit');
+                   Route::post('/{room_slug}/status/update', 'Admin\RoomController@status')->name('.status');
                });
 
                //Setting Routes
@@ -118,9 +119,9 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
 
             //Hotel
-            Route::get('/hotel', 'Admin\BookingController@tour')->name('.tour');
-            Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
-            Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
+            Route::get('/hotel', 'Admin\HotelBookingController@hotel')->name('.hotel');
+            Route::post('/{number}/hotel/status/update','Admin\HotelBookingController@status')->name('.hotel.status');
+            Route::post('/{number}/hotel/payment/status/update','Admin\HotelBookingController@paymentStatus')->name('.hotel.payment.status');
             Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
             Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
         });
@@ -184,6 +185,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
             Route::get('/create', 'User\RoomController@create')->name('.create');
             Route::get('/store', 'User\RoomController@store')->name('.store');
             Route::get('/edit/{room_slug}', 'User\RoomController@edit')->name('.edit');
+            Route::post('/{room_slug}/status/update', 'User\RoomController@status')->name('.status');
 
         });
 
@@ -260,7 +262,8 @@ Route::resource('/tour','Tour\TourController');
 | Hotel Routes
 |--------------------------------------------------------------------------
 */
-
+//search
+Route::get('/hotel/search', 'Hotel\HotelSearchController')->name('hotel.search');
 Route::resource('/hotel','Hotel\HotelController');
 //rooms
 Route::resource('/hotel/{slug}/room','Hotel\RoomController');
