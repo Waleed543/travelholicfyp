@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Enums\Status;
 use App\Model\book_hotel;
 use App\Tour;
 use App\userIndex;
@@ -53,10 +54,11 @@ class RecommendorController extends Controller
 
 }
 
-public function GetRecommendationTour($userid)
+public function GetRecommendationTour()
 {
 
-
+    $userid=2;
+    RecommendorController::TourRecommendor();
     $temp=self::$matrix[$userid];
     $TopSimilar=collect([]);
     for($i=0;$i<5;$i++)
@@ -104,7 +106,8 @@ public function GetRecommendationTour($userid)
                 }
                 if ($recommendations->count() < 2) {
                     if ($add == 1) {
-                        $recommendations->push($booking);
+                        $temptour=Tour::where('id',$booking->tour_id)->first();
+                        $recommendations->push($temptour);
                     }
                 } else {
                     break;
@@ -117,7 +120,18 @@ public function GetRecommendationTour($userid)
 
     }
 
-
+    if($recommendations->count()<2)
+    {
+        $tours = Tour::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc')->limit(2)->get();
+        $j=0;
+        for($i=$recommendations->count();$i<2;$i++)
+        {
+            $recommendations->push($tours[$j]);
+            $j++;
+        }
+    }
+//one mistake same recommendations if less in no.
 return $recommendations;
 
 
