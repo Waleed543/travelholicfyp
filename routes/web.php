@@ -142,7 +142,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'RecommendorController@GetRecommendationTour')->name('home');
 //User Profile
 Route::prefix('profile')->middleware(['auth','can:notAdmin'])->group(function () {
     Route::get('/','User\ProfileController@index')->name('profile');
