@@ -7,6 +7,7 @@ use App\Enums\Payment;
 use App\Enums\PaymentStatus;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\RecommendorController;
 use App\Http\Requests\Tour\book_tour;
 use App\Model\book_tour as book;
 use App\Reservation;
@@ -51,6 +52,7 @@ class TourBookController extends Controller
             'payment_status' => PaymentStatus::Unpaid,
             'payment_type' => $request->payment_type,
         ]);
+        RecommendorController::TourRecommendor();
 
 
         return redirect(route('dashboard.tour.book.payment',$book_tour->number));

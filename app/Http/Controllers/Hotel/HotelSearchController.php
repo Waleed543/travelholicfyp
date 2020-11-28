@@ -25,6 +25,6 @@ class HotelSearchController extends Controller
 
         $cities = City::all();
 
-        $hotels = Hotel::where('')
+        $hotels = Hotel::where('');
     }
 }
