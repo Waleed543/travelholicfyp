@@ -30,7 +30,9 @@ class HotelController extends Controller
             ->where('status','=',Status::Active)
             ->orderBy('id','desc')->paginate(6);
 
-        return view('hotel.index', compact('hotels'));
+        $cities = City::all();
+
+        return view('hotel.index', compact('hotels','cities'));
     }
 
     /**

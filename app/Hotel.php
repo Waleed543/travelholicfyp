@@ -21,4 +21,9 @@ class Hotel extends Model
     {
         return $this->hasMany('App\Room','hotel_id','id');
     }
+
+    public function booking()
+    {
+        return $this->belongsTo('App\Model\book_hotel','hotel_id','id');
+    }
 }

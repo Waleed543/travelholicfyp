@@ -23,11 +23,11 @@
                             <!--Card content-->
                             <div class="card-body px-lg-5 pt-0">
                                 <div class="text-center">
-                                    <a class="mt-3 btn btn-light" href="#search" data-toggle="collapse">Search</a>
+                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Search</a>
                                 </div>
-                                <div id="search" class="collapse">
+                                <div id="searchs" class="collapse">
                                     <hr>
-                                    <form  id="search" method="GET" action="" enctype="multipart/form-data" class="form-horizontal">
+                                    <form  id="search" method="GET" action="{{route('dashboard.hotel.search')}}" enctype="multipart/form-data" class="form-horizontal">
                                         {{-- Name --}}
                                         <div class="row form-group">
                                             <div class="col-12 col-md-12">
@@ -35,27 +35,41 @@
                                                 <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
                                                 @error('name')
                                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        {{-- Rooms --}}
+                                        <div class="row form-group">
+                                            <div class="col-12 col-md-12">
+                                                <label for="rooms" class=" form-control-label">Available Rooms</label>
+                                                <input type="number" id="rooms" name="rooms" value="{{old('rooms')}}" class="form-control @error('rooms') is-invalid @enderror">
+                                                @error('rooms')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
                                             </div>
                                         </div>
 
-                                        {{-- Price --}}
+                                        {{-- City --}}
                                         <div class="row form-group">
-                                            <div class="col-12 col-md-6">
-                                                <label for="min_price" class=" form-control-label">Min Price</label>
-                                                <input type="min_price" min="0" max="120000" id="min_price" name="min_price" value="{{old('min_price')  ?? 0}}" class="form-control @error('min_price') is-invalid @enderror">
-                                                @error('min_price')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-12 col-md-6">
-                                                <label for="max_price" class=" form-control-label">Max Pice</label>
-                                                <input type="number" min="0" max="120000" id="max_price" name="max_price" value="{{old('max_price') ?? 120000}}" class="form-control @error('max_price') is-invalid @enderror">
-                                                @error('max_price')
+                                            <div class="col-12 col-md-12">
+                                                <label for="city" class=" form-control-label">City</label>
+                                                <select name="city" id="select" class="form-control @error('city') is-invalid @enderror">
+                                                    <option value="">Select</option>
+                                                    @if(count($cities)>0)
+                                                        @foreach($cities as $city)
+                                                            @if(old('city') == $city->id)
+                                                                <option selected value="{{$city->id}}">{{$city->name}}</option>
+                                                            @else
+                                                                <option value="{{$city->id}}">{{$city->name}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                @error('city')
                                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

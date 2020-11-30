@@ -83,13 +83,13 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
         Route::prefix('/hotel')->name('admin.dashboard.hotel')->group(function () {
             Route::get('/', 'Admin\HotelController@index');
             Route::post('/{slug}/status','Admin\HotelController@status')->name('.status');
-              Route::get('/create', 'Admin\HotelController@create')->name('.create');
+            Route::get('/create', 'Admin\HotelController@create')->name('.create');
              // Route::post('/update', 'Admin\HotelController@update')->name('.update');
-              Route::get('/{slug}/edit', 'Admin\HotelController@edit')->name('.edit');
+            Route::get('/{slug}/edit', 'Admin\HotelController@edit')->name('.edit');
 //            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
 //            Route::delete('/{slug}', 'Admin\TourController@destroy')->name('.delete');
-              Route::get('/setting','Admin\HotelController@setting')->name('.setting');
-//            Route::get('/search', 'Tour\TourSearchController')->name('.search');
+            Route::get('/setting','Admin\HotelController@setting')->name('.setting');
+            Route::get('/search', 'Hotel\HotelSearchController')->name('.search');
 
               //Rooms Routes
                Route::prefix('/{slug}/room')->name('.room')->group(function () {
@@ -178,6 +178,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/profile','User\HotelController@profile')->name('.profile');
         Route::delete('/{slug}', 'User\HotelController@destroy')->name('.delete');
         Route::get('/{slug}/status', 'User\HotelController@status')->name('.status.inactive');
+        Route::get('/search', 'Hotel\HotelSearchController')->name('.search');
 
         //Rooms Routes
         Route::prefix('/{slug}/room')->name('.room')->group(function () {
@@ -188,6 +189,9 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
             Route::post('/{room_slug}/status/update', 'User\RoomController@status')->name('.status');
 
         });
+        //Bookings Routes
+        Route::get('/bookings', 'User\HotelBookingController@index')->name('.bookings');
+
 
     });
     //My Bookings Routes

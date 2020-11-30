@@ -51,5 +51,10 @@ class HotelController extends Controller
 
     }
 
+    public function bookings()
+    {
+        dd(1);
+    }
+
 
 }

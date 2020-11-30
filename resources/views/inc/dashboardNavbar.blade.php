@@ -78,6 +78,9 @@
                                     <a href="{{route('dashboard.hotel.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Create
                                     </a>
+                                    <a href="{{route('dashboard.hotel.bookings')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Bookings
+                                    </a>
                                 </div>
                             </li>
                         @endcan

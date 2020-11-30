@@ -54,8 +54,7 @@
                             <h1 class="mt-4">Search</h1>
                         </div>
                         <hr>
-                        <form  id="search" method="GET" action="hotel.search" enctype="multipart/form-data" class="form-horizontal">
-                            @csrf
+                        <form  id="search" method="GET" action="{{route('hotel.search')}}" enctype="multipart/form-data" class="form-horizontal">
                             @method('GET')
                             {{-- Name --}}
                             <div class="row form-group">
@@ -69,34 +68,35 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- Seats --}}
+                            {{-- Rooms --}}
                             <div class="row form-group">
                                 <div class="col-12 col-md-12">
-                                    <label for="seats" class=" form-control-label">Seats</label>
-                                    <input type="number" min="0" max="100" id="seats" name="seats" value="{{old('seats')}}" class="form-control @error('seats') is-invalid @enderror">
-                                    @error('seats')
+                                    <label for="rooms" class=" form-control-label">Available Rooms</label>
+                                    <input type="number" id="rooms" name="rooms" value="{{old('rooms')}}" class="form-control @error('rooms') is-invalid @enderror">
+                                    @error('rooms')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-                            {{-- Cities --}}
-                            {{-- Price --}}
+                            {{-- City --}}
                             <div class="row form-group">
-                                <div class="col-12 col-md-6">
-                                    <label for="min_price" class=" form-control-label">Min Price</label>
-                                    <input type="min_price" min="0" max="120000" id="min_price" name="min_price" value="{{old('min_price')  ?? 0}}" class="form-control @error('min_price') is-invalid @enderror">
-                                    @error('min_price')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="max_price" class=" form-control-label">Max Pice</label>
-                                    <input type="number" min="0" max="120000" id="max_price" name="max_price" value="{{old('max_price') ?? 120000}}" class="form-control @error('max_price') is-invalid @enderror">
-                                    @error('max_price')
+                                <div class="col-12 col-md-12">
+                                    <label for="city" class=" form-control-label">City</label>
+                                    <select name="city" id="select" class="form-control @error('city') is-invalid @enderror">
+                                        <option value="">Select</option>
+                                        @if(count($cities)>0)
+                                            @foreach($cities as $city)
+                                                @if(old('city') == $city->id)
+                                                    <option selected value="{{$city->id}}">{{$city->name}}</option>
+                                                @else
+                                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
