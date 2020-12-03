@@ -15,13 +15,12 @@ class HotelBookingController extends Controller
 {
     public function index()
     {
-        $hotels = auth()->user()->hotels()->book_hotels;
-        dd($hotels);
-        $book_hotels = book_hotel::paginate(15);
+        $user_hotels = auth()->user()->hotels()->with('booking');
+        $user_hotels = $user_hotels->paginate(15);
 
         $hotels = Hotel::select('slug','name')->where('status',Status::Active)->get();
 
-        return view('admin.dashboard.booking.hotel',compact('book_hotels','hotels'));
+        return view('user.dashboard.hotel.booking',compact('user_hotels','hotels'));
     }
 
     public function status(Request $request, $number)
@@ -31,7 +30,9 @@ class HotelBookingController extends Controller
             'status' => 'required|string'
         ]);
 
+
         $book_hotel = book_hotel::where('number' , $number)->first();
+        auth()->user();
 
         if ($validator->fails() or $book_hotel == null)
         {

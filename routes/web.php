@@ -191,6 +191,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         });
         //Bookings Routes
         Route::get('/bookings', 'User\HotelBookingController@index')->name('.bookings');
+        Route::post('/bookings/{number}/status/update','User\HotelBookingController@status')->name('.hotel.status');
 
 
     });
