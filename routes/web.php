@@ -79,6 +79,26 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
 
         });
 
+        //Vehicle Routes
+        Route::prefix('/vehicle')->name('admin.dashboard.vehicle')->group(function () {
+            Route::get('/', 'Admin\VehicleController@index');
+//            Route::post('/{slug}/status','Admin\TourController@status')->name('.status');
+            Route::get('/create', 'Admin\VehicleController@create')->name('.create');
+//            Route::get('/{slug}/edit', 'Admin\TourController@edit')->name('.edit');
+//            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
+//            Route::get('/setting','Admin\TourController@setting')->name('.setting');
+//            Route::get('/search', 'Tour\TourSearchController')->name('.search');
+//
+//            //Tour Tags
+//            Route::get('/setting/tag','Admin\TourController@indexTag')->name('.setting.tag');
+//            Route::get('/setting/create/tag','Admin\TourController@createTag')->name('.setting.create.tag');
+//            Route::post('/setting/store/tag','Admin\TourController@storeTag')->name('.setting.store.tag');
+//            Route::get('/setting/tag/{tag}/edit','Admin\TourController@editTag')->name('.setting.tag.edit');
+//            Route::post('/setting/update/{tag}','Admin\TourController@updateTag')->name('.setting.update.tag');
+//            Route::get('/setting/tag/{tag}/destroy','Admin\TourController@destroyTag')->name('.setting.destroy.tag');
+
+        });
+
         //Hotel Routes
         Route::prefix('/hotel')->name('admin.dashboard.hotel')->group(function () {
             Route::get('/', 'Admin\HotelController@index');
@@ -261,6 +281,16 @@ Route::get('/tag/name',function (){
 Route::post('/{slug}/profile','Tour\TourController@profile')->name('tour.profile.store');
 Route::get('/tour/search', 'Tour\TourSearchController')->name('tour.search');
 Route::resource('/tour','Tour\TourController');
+
+
+/*
+|--------------------------------------------------------------------------
+| Vehicle Routes
+|--------------------------------------------------------------------------
+*/
+Route::post('/{slug}/profile','Tour\TourController@profile')->name('tour.profile.store');
+Route::get('/tour/search', 'Tour\TourSearchController')->name('tour.search');
+Route::resource('/vehicle','Vehicle\VehicleController');
 
 /*
 |--------------------------------------------------------------------------

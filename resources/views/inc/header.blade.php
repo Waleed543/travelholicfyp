@@ -16,6 +16,9 @@
                 <a class="nav-link" href="{{route('tour.index')}}">Tour</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route('vehicle.index')}}">Vehicle</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('hotel.index')}}">Hotel</a>
             </li>
 
