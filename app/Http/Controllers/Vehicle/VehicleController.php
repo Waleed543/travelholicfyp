@@ -55,6 +55,7 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         dd('vehicle');
+
     }
 
     /**

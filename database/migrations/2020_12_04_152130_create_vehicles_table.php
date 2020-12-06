@@ -26,6 +26,7 @@ class CreateVehiclesTable extends Migration
             $table->string('condition', 100);
             $table->integer('mileage');
             $table->string('VINumber', 100);
+            $table->integer('price');
             $table->unsignedInteger('city');
             $table->string('thumbnail');
             $table->string('status',100);

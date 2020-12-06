@@ -58,7 +58,7 @@
                         <div class="col-md-10">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong>Create Tour</strong>
+                                    <strong>Create Vehicle</strong>
                                 </div>
                                 <div class="card-body card-block">
                                     <form  id="create" method="post" action="{{route('vehicle.store')}}" enctype="multipart/form-data" class="form-horizontal">
@@ -91,7 +91,7 @@
                                         <div class="row form-group">
                                             <div class="col-lg-6">
                                                 <label for="make" class=" form-control-label"><h3>Make (Company)</h3></label>
-                                                <input type="text" id="make" name="nights_to_stay" value="{{old('make')}}" class="form-control datepicker @error('make') is-invalid @enderror" required>
+                                                <input type="text" id="make" name="make" value="{{old('make')}}" class="form-control @error('make') is-invalid @enderror" required>
                                                 @error('make')
                                                 <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
@@ -101,9 +101,64 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-lg-6">
-                                                <label for="total_seats" class=" form-control-label"><h3>Total seats</h3></label>
-                                                <input type="number" id="total_seats" name="total_seats" value="{{old('total_seats')}}" class="form-control @error('total_seats') is-invalid @enderror" required>
-                                                @error('total_seats')
+                                                <label for="model" class=" form-control-label"><h3>Model</h3></label>
+                                                <input type="text" id="model" name="model" value="{{old('model')}}" class="form-control @error('model') is-invalid @enderror" required>
+                                                @error('model')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-lg-6">
+                                                <label for="color" class=" form-control-label"><h3>Color</h3></label>
+                                                <input type="text" id="color" name="color" value="{{old('color')}}" class="form-control @error('color') is-invalid @enderror" required>
+                                                @error('color')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-lg-6">
+                                                <label for="year" class=" form-control-label"><h3>Year</h3></label>
+                                                <input type="number" maxlength="4" id="year" name="year" value="{{old('year')}}" class="form-control @error('year') is-invalid @enderror" required>
+                                                @error('year')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-lg-6">
+                                                <label for="condition" class=" form-control-label"><h3>Condition (Out of 10)</h3></label>
+                                                <input type="number" maxlength="2" id="condition" name="condition" value="{{old('condition')}}" class="form-control @error('year') is-invalid @enderror" required>
+                                                @error('condition')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-lg-6">
+                                                <label for="mileage" class=" form-control-label"><h3>MileAge</h3></label>
+                                                <input type="number" id="mileage" name="mileage" value="{{old('mileage')}}" class="form-control @error('mileage') is-invalid @enderror" required>
+                                                @error('mileage')
+                                                <span class="invalid-feedback" role="alert">
+                                                         <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-lg-6">
+                                                <label for="vinumber" class=" form-control-label"><h3>VINumber</h3></label>
+                                                <input type="number" id="vinumber" name="vinumber" value="{{old('vinumber')}}" class="form-control @error('vinumber') is-invalid @enderror" required>
+                                                @error('vinumber')
                                                 <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>
@@ -123,12 +178,12 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-lg-6">
-                                                <label for="destination_city" class=" form-control-label"><h3>Destination City</h3></label>
-                                                <select name="destination_city" id="destination_city" class="form-control @error('destination_city') is-invalid @enderror" required>
+                                                <label for="city" class=" form-control-label"><h3>City</h3></label>
+                                                <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
                                                     <option value="">Please select</option>
                                                     @if(count($cities)>0)
                                                         @foreach($cities as $city)
-                                                            @if(old('destination_city') == $city->id)
+                                                            @if(old('city') == $city->id)
                                                                 <option selected value="{{$city->id}}">{{$city->name}}</option>
                                                             @else
                                                                 <option value="{{$city->id}}">{{$city->name}}</option>
@@ -136,27 +191,7 @@
                                                         @endforeach
                                                     @endif
                                                 </select>
-                                                @error('destination_city')
-                                                <span class="invalid-feedback" role="alert">
-                                                         <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label for="departure_city" class=" form-control-label"><h3>Departure City</h3></label>
-                                                <select name="departure_city" id="departure_city" class="form-control @error('departure_city') is-invalid @enderror" required>
-                                                    <option value="">Please select</option>
-                                                    @if(count($cities)>0)
-                                                        @foreach($cities as $city)
-                                                            @if(old('departure_city') == $city->id)
-                                                                <option selected value="{{$city->id}}">{{$city->name}}</option>
-                                                            @else
-                                                                <option value="{{$city->id}}">{{$city->name}}</option>
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                @error('departure_city')
+                                                @error('city')
                                                 <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
                                                     </span>
@@ -164,39 +199,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label><h3>Departure date</h3></label><br>
-                                                <input type="date" name="departure_date" value="{{old('departure_date')}}" style="width: 100%" class="form-control @error('departure_date')is-invalid @enderror">
-                                                <span class="invalid-feedback alert alert-danger" role="alert" >
-                                                  <strong><i class="fas fa-exclamation-triangle"></i> @error('departure_date'){{$message}} @enderror</strong>
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label><h3>Departure Time</h3></label><br>
-                                                <input type="time" name="departure_time" value="{{old('departure_time')}}" style="width: 100%" class="form-control @error('departure_time')is-invalid @enderror">
-                                                <span class="invalid-feedback alert alert-danger" role="alert" >
-                                                  <strong><i class="fas fa-exclamation-triangle"></i> @error('departure_time'){{$message}} @enderror</strong>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <label><h3>Returning date</h3></label><br>
-                                                <input type="date" name="returning_date" value="{{old('returning_date')}}" style="width: 100%" class="form-control @error('returning_date')is-invalid @enderror">
-                                                <span class="invalid-feedback alert alert-danger" role="alert" >
-                                                  <strong><i class="fas fa-exclamation-triangle"></i> @error('returning_date'){{$message}} @enderror</strong>
-                                                </span>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label><h3>Returning Time</h3></label><br>
-                                                <input type="time" name="returning_time" value="{{old('returning_time')}}" style="width: 100%" class="form-control @error('returning_time')is-invalid @enderror">
-                                                <span class="invalid-feedback alert alert-danger" role="alert" >
-                                                  <strong><i class="fas fa-exclamation-triangle"></i> @error('returning_time'){{$message}} @enderror</strong>
-                                                </span>
-                                            </div>
-                                        </div>
 
                                         <div class="row form-group">
                                             <div class="col-12 col-md-12">
