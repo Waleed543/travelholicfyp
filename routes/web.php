@@ -84,7 +84,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::get('/', 'Admin\VehicleController@index');
 //            Route::post('/{slug}/status','Admin\TourController@status')->name('.status');
             Route::get('/create', 'Admin\VehicleController@create')->name('.create');
-//            Route::get('/{slug}/edit', 'Admin\TourController@edit')->name('.edit');
+            Route::get('/{slug}/edit', 'Admin\VehicleController@edit')->name('.edit');
 //            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
 //            Route::get('/setting','Admin\TourController@setting')->name('.setting');
 //            Route::get('/search', 'Tour\TourSearchController')->name('.search');
@@ -288,8 +288,7 @@ Route::resource('/tour','Tour\TourController');
 | Vehicle Routes
 |--------------------------------------------------------------------------
 */
-Route::post('/{slug}/profile','Tour\TourController@profile')->name('tour.profile.store');
-Route::get('/tour/search', 'Tour\TourSearchController')->name('tour.search');
+
 Route::resource('/vehicle','Vehicle\VehicleController');
 
 /*

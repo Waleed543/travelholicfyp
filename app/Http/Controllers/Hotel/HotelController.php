@@ -167,8 +167,9 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditRequest $request, $slug)
+    public function update(EditRequest $request, $hotel)
     {
+        $slug = $hotel;
         $hotel = Hotel::where('slug' , $slug)->first();
 
         abort_if($hotel == null,'404');

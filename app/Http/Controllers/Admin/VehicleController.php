@@ -21,4 +21,14 @@ class VehicleController extends Controller
         $cities = City::all();
         return view('admin.dashboard.vehicle.create',compact('cities'));
     }
+
+    public function edit($slug)
+    {
+        $vehicle = Vehicle::where('slug' , $slug)->first();
+        abort_if($vehicle == null,'404','Vehicle not found');
+
+        $cities = City::all();
+
+        return view('admin.dashboard.vehicle.edit',compact('vehicle','cities'));
+    }
 }

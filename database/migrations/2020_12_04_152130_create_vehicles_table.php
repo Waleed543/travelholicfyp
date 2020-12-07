@@ -19,13 +19,13 @@ class CreateVehiclesTable extends Migration
             $table->string('slug',100)->unique();
             $table->string('name', 100);
             $table->mediumText('description');
-            $table->date('year');
+            $table->string('year', 20);
             $table->string('make', 100);
             $table->string('model', 100);
             $table->string('color', 100);
             $table->string('condition', 100);
             $table->integer('mileage');
-            $table->string('VINumber', 100);
+            $table->string('vinumber', 100);
             $table->integer('price');
             $table->unsignedInteger('city');
             $table->string('thumbnail');

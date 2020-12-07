@@ -180,8 +180,9 @@ class TourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditRequest $request, $slug)
+    public function update(EditRequest $request, $tour)
     {
+        $slug = $tour;
         $tour = Tour::where('slug' , $slug)->first();
 
         abort_if($tour == null,'404');

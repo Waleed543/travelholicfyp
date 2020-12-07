@@ -148,16 +148,16 @@
                             @foreach($vehicles as $vehicle)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <td><a href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
-                                    <td>{{$tour->slug}}</td>
-                                    <td>{{$tour->created_at}}</td>
+                                    <td><a href="{{route('vehicle.show',$vehicle->slug)}}" target="_blank">{{$vehicle->name}}</a></td>
+                                    <td>{{$vehicle->slug}}</td>
+                                    <td>{{$vehicle->created_at}}</td>
                                     <td>
-                                        <form id="status-form-{{$tour->slug}}">
+                                        <form id="status-form-{{$vehicle->slug}}">
                                             @csrf
-                                            <select onchange="submit_status_form('{{$tour->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
+                                            <select onchange="submit_status_form('{{$vehicle->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
                                                 <option value="">Please select</option>
                                                 @foreach(App\Enums\Status::toArray() as $status)
-                                                    @if(old('status') ?? $tour->status == $status)
+                                                    @if(old('status') ?? $vehicle->status == $status)
                                                         <option selected value="{{$status}}">{{$status}}</option>
                                                     @else
                                                         <option value="{{$status}}">{{$status}}</option>
@@ -168,33 +168,23 @@
                                     </td>
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Profile Tour Button--}}
-                                            <a type="button" href="" class="btn btn-success btn-sm"
-                                               onclick="event.preventDefault();
-                                                   document.getElementById('profile-tour-{{$loop->iteration}}').submit();">
-                                                Profile
-                                            </a>
-                                            <form id="profile-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.profile',$tour->slug) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('GET')
-                                            </form>
                                             {{-- Edit Tour Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
+                                                   document.getElementById('edit-{{$loop->iteration}}').submit();">
                                                 Edit
                                             </a>
-                                            <form id="edit-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.tour.edit',$tour->slug) }}" method="POST" style="display: none;">
+                                            <form id="edit-{{$loop->iteration}}" action="{{ route('admin.dashboard.vehicle.edit',$vehicle->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
                                             {{-- Delete Tour Button--}}
                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
+                                                   document.getElementById('delete-{{$loop->iteration}}').submit();">
                                                 Delete
                                             </a>
-                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('tour.destroy',$tour->slug) }}" method="POST" style="display: none;">
+                                            <form id="delete-{{$loop->iteration}}" action="{{ route('vehicle.destroy',$vehicle->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -208,7 +198,7 @@
                     <!-- pagination -->
                     <nav>
                         <ul class="pagination justify-content-center">
-                            {{$tours->links()}}
+                            {{$vehicles->links()}}
                         </ul>
                     </nav>
                     <!-- end of pagination -->

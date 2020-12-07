@@ -12,4 +12,9 @@ class Vehicle extends Model
     {
         return $this->belongsTo('App\User','user_id','id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag','tags_vehicle','vehicle_id','tag_id','id','id');
+    }
 }

@@ -75,8 +75,6 @@
                                             </div>
                                         </div>
 
-
-
                                         <div class="row form-group">
                                             <div class="col-lg-6">
                                                 <label for="name" class=" form-control-label"><h3>Name</h3></label>
@@ -135,7 +133,7 @@
                                         <div class="row form-group">
                                             <div class="col-lg-6">
                                                 <label for="condition" class=" form-control-label"><h3>Condition (Out of 10)</h3></label>
-                                                <input type="number" maxlength="2" id="condition" name="condition" value="{{old('condition')}}" class="form-control @error('year') is-invalid @enderror" required>
+                                                <input type="number" maxlength="2" id="condition" name="condition" value="{{old('condition')}}" class="form-control @error('condition') is-invalid @enderror" required>
                                                 @error('condition')
                                                 <span class="invalid-feedback" role="alert">
                                                          <strong>{{ $message }}</strong>
