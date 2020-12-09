@@ -54,10 +54,10 @@ class RecommendorController extends Controller
 
 }
 
-public function GetRecommendationTour()
+public function GetRecommendationTour($userid)
 {
 
-    $userid=2;
+
     RecommendorController::TourRecommendor();
     $temp=self::$matrix[$userid];
     $TopSimilar=collect([]);
@@ -123,15 +123,44 @@ public function GetRecommendationTour()
     if($recommendations->count()<2)
     {
         $tours = Tour::with('user')->where('status','=',Status::Active)
-            ->orderBy('created_at','desc')->limit(2)->get();
+            ->orderBy('created_at','desc')->limit(4)->get();
         $j=0;
+        $x=0;
+        $max=count($tours);
+        $k=0;
         for($i=$recommendations->count();$i<2;$i++)
         {
-            $recommendations->push($tours[$j]);
+
+
+            foreach ($recommendations as $recommendation)
+            {
+
+                if($recommendation->id==$tours[$j]->id)
+                {
+                    $x=1;
+                    break;
+                }
+            }
+
+            if($x==0) {
+
+                $recommendations->push($tours[$j]);
+            }
+            else
+            {
+                $i--;
+            }
             $j++;
+            $x=0;
+            $k++;
+            if($k>=$max)
+            {
+                break;
+            }
         }
     }
-//one mistake same recommendations if less in no.
+
+
 return $recommendations;
 
 

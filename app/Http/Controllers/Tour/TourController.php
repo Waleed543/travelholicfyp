@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tour;
 
 use App\City;
 use App\Enums\PaymentStatus;
+use App\Http\Controllers\RecommendorController;
 use App\Model\tags_tour;
 use App\Model\tour_day;
 use App\Tag;
@@ -41,7 +42,21 @@ class TourController extends Controller
             ->where('status','=',Status::Active)
             ->orderBy('id','desc')->paginate(6);
         $cities = City::all();
-        return view('tour.index',compact('tours','cities'));
+        $recommendationg = new RecommendorController();
+        if(auth()->user()!=null) {
+
+            $recommendations=$recommendationg->GetRecommendationTour(auth()->user()->id);
+            return view('tour.index',compact('tours','cities','recommendations'));
+        }
+        else
+        {
+            return view('tour.index',compact('tours','cities'));
+        }
+
+
+
+
+
     }
 
     /**
