@@ -50,7 +50,8 @@ class TourController extends Controller
         }
         else
         {
-            return view('tour.index',compact('tours','cities'));
+            $recommendations = null;
+            return view('tour.index',compact('tours','cities','recommendations'));
         }
 
 

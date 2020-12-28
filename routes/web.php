@@ -82,7 +82,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
         //Vehicle Routes
         Route::prefix('/vehicle')->name('admin.dashboard.vehicle')->group(function () {
             Route::get('/', 'Admin\VehicleController@index');
-//            Route::post('/{slug}/status','Admin\TourController@status')->name('.status');
+            Route::post('/{slug}/status','Admin\VehicleController@status')->name('.status');
             Route::get('/create', 'Admin\VehicleController@create')->name('.create');
             Route::get('/{slug}/edit', 'Admin\VehicleController@edit')->name('.edit');
 //            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');

@@ -19,8 +19,8 @@
         </div>
     </div>
     <div class="caption text-center">
-        <h1>Tour</h1>
-        <h3>Check Our Latest Tour</h3>
+        <h1>Vehicle</h1>
+        <h3>Check Our Latest Vehicle</h3>
         <a class="btn btn-outline-light btn-lg" href="#course">Vehicle</a>
     </div>
     <!--- Start Courese Section -->
@@ -29,7 +29,7 @@
             <div class="col-12">
 
                 <p class="lead">You will find all the tours here that are posted by either users or by us.</p>
-                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.tour.create')}}" target="_blank">Create tour</a>
+                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.tour.create')}}" target="_blank">Create Vehicle</a>
             </div>
         </div><!--- End Narrow Section -->
     </div>
@@ -39,7 +39,7 @@
         <div class="container">
             <div class="row welcome text-center">
                 <div class="col-12">
-                    <h1 class="display-4">Tours</h1>
+                    <h1 class="display-4">Vehicle</h1>
                 </div>
                 <hr>
             </div>
@@ -172,7 +172,7 @@
                                                    onclick="document.getElementById('book-{{$vehicle->slug}}').submit();">
                                                     Book
                                                 </a>
-                                                <form id="book-{{$tour->slug}}" method="POST" action="{{route('dashboard.tour.book',$vehicle->slug)}}" class="d-none">
+                                                <form id="book-{{$vehicle->slug}}" method="POST" action="{{route('dashboard.tour.book',$vehicle->slug)}}" class="d-none">
                                                     @csrf
                                                     @method('GET')
                                                 </form>

@@ -77,6 +77,18 @@ class RoomController extends Controller
 
         //Slug Create
         $slug = Str::slug( $request->name, "-");
+        $slug = $slug."-";
+        $temp = Room::where('slug','like',"{$slug}%")->orderBy('slug')->get()->last();
+        if($temp != null)
+        {
+            $count = Str::afterLast($temp->slug, '-');
+            $count +=1;
+        }else{
+            $count = 1;
+        }
+        $slug = $slug."".$count;
+
+
         $room->slug = strtolower($slug);
 
         $room->hotel_id = $hotel->id;

@@ -215,7 +215,7 @@
             var form = document.getElementById("status-form-"+slug);
 
             $.ajax({
-                url:"/admin/dashboard/tour/"+slug+"/status",
+                url:"/admin/dashboard/vehicle/"+slug+"/status",
                 method:"POST",
                 data:new FormData(form),
                 dataType:'JSON',
@@ -224,7 +224,7 @@
                 processData: false,
                 error:function()
                 {
-                    alert('Status was unable to change');
+                    alert('Status was unable to change:100');
                 },
                 success:function(data)
                 {
