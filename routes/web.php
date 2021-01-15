@@ -46,17 +46,25 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
         });
 
         //Dashboard BLogs
-        Route::prefix('/blog')->group(function () {
-            Route::get('/','Admin\BlogController@index')->name('admin.dashboard.blog');
-            Route::get('/create','Admin\BlogController@create')->name('admin.dashboard.blog.create');
-            Route::get('/create', 'Admin\BlogController@create')->name('admin.dashboard.blog.create');
-            Route::get('/{slug}/edit', 'Admin\BlogController@edit')->name('admin.dashboard.blog.edit');
-            Route::delete('/{slug}', 'Admin\BlogController@destroy')->name('admin.dashboard.blog.delete');
-            Route::get('/search', 'Blog\BlogSearchController')->name('admin.dashboard.blog.search');
-            Route::get('/setting','Admin\BlogController@setting')->name('admin.dashboard.blog.setting');
-            Route::post('/{slug}/status','Admin\BlogController@status')->name('admin.dashboard.blog.status');
+        Route::prefix('/blog')->name('admin.dashboard.blog')->group(function () {
+            Route::get('/','Admin\BlogController@index');
+            Route::get('/create','Admin\BlogController@create')->name('.create');
+            Route::get('/create', 'Admin\BlogController@create')->name('.create');
+            Route::get('/{slug}/edit', 'Admin\BlogController@edit')->name('.edit');
+            Route::delete('/{slug}', 'Admin\BlogController@destroy')->name('.delete');
+            Route::get('/search', 'Blog\BlogSearchController')->name('.search');
+            Route::get('/setting','Admin\BlogController@setting')->name('.setting');
+            Route::post('/{slug}/status','Admin\BlogController@status')->name('.status');
             //Add Blog Category
-            Route::post('/setting/add/category','Admin\BlogController@addCategory')->name('admin.dashboard.blog.setting.add.category');
+            //Tour Tags
+            Route::get('/setting/category','Admin\BlogController@indexCategory')->name('.setting.category');
+            Route::get('/setting/create/category','Admin\BlogController@createCategory')->name('.setting.create.category');
+            Route::post('/setting/store/category','Admin\BlogController@storeCategory')->name('.setting.store.category');
+            Route::get('/setting/category/{slug}/edit','Admin\BlogController@editCategory')->name('.setting.category.edit');
+            Route::post('/setting/update/{slug}','Admin\BlogController@updateCategory')->name('.setting.update.category');
+            Route::get('/setting/category/{slug}/destroy','Admin\BlogController@destroyCategory')->name('.setting.destroy.category');
+
+            //Route::post('/setting/add/category','Admin\BlogController@addCategory')->name('admin.dashboard.blog.setting.add.category');
         });
 
         //Tour Routes

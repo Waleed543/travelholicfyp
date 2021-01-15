@@ -6,10 +6,12 @@ use App\Blog;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
 use App\Model\blog_category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -113,9 +115,96 @@ class BlogController extends Controller
 
     public function setting()
     {
-        $categories = DB::table('categories_for_blog')->get();
-        return view('admin.dashboard.blog.setting',compact('categories'));
+        return view('admin.dashboard.blog.setting.app');
     }
+    public function indexCategory()
+    {
+        $categories = blog_category::all();
+        return view('admin.dashboard.blog.setting.category.index',compact('categories'));
+    }
+    public function createCategory()
+    {
+        $categories = blog_category::all();
+        return view('admin.dashboard.blog.setting.category.create',compact('categories'));
+    }
+    public function storeCategory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|unique:tags|regex:/^[a-zA-Z ]*$/'
+        ],[],['name' => 'Category Name']);
+
+
+        $validator->validate();
+
+        $category = blog_category::firstOrNew([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ]);
+        if($category->exists)
+        {
+            return back()->with('popup_error', 'Category already exists');
+        }
+        $category->save();
+        return back()->with('popup_success', 'Category Created');
+    }
+    public function editCategory($slug)
+    {
+        $category = blog_category::where('slug','=',$slug)->first();
+        abort_if($category == null,'404','Category not found');
+
+
+        return view('admin.dashboard.blog.setting.category.edit',compact('category'));
+    }
+    public function updateCategory(Request $request, $slug)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|regex:/^[a-zA-Z ]*$/'
+        ],[],['name' => 'Tag Name']);
+
+
+        $validator->validate();
+
+        $category = blog_category::where('slug','=',$slug)->first();
+        abort_if($category == null,'404','Category not found');
+
+        if ($category->name != $request->name)
+        {
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->name);
+            $category->save();
+        }
+        else{
+            $validator->getMessageBag()->add('name', 'Name is already taken');
+            return back()->withErrors($validator)->withInput();
+        }
+
+        return redirect('admin/dashboard/blog/setting/category')->with('popup_success', 'Category Updated');
+    }
+
+    public function destroyCategory($slug)
+    {
+        $category = blog_category::where('slug','=',$slug)->first();
+        abort_if($category == null,'404','Category not found');
+
+        //Detach all tours
+        $category->blogs()->detach();
+
+        //Delete Tag
+
+        $category->delete();
+
+        return back()->with('popup_success','Category successfully deleted');
+    }
+
+
+
+
+
+
+
+
+
+
 
     public function addCategory(Request $request)
     {
