@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\Status;
 use App\Model\book_hotel;
-use App\Tour;
-use App\userIndex;
 use App\User;
 use App\Model\book_tour;
 use Illuminate\Http\Request;
@@ -23,11 +21,11 @@ class RecommendorController extends Controller
 
     foreach ($users as $user)
     {
-        $i=0;
 
         $otherusers = collect([]);
         foreach ($users as $otheruser)
         {
+<<<<<<< HEAD
             $jaccard=new RecommendorController();
 
             if($user->id!=$otheruser->id)
@@ -68,26 +66,21 @@ public function GetRecommendationTour($userid)
         $usr->index=0.0;
         $TopSimilar->push($usr);
     }
+=======
 
-    foreach ($temp as $tempp)
-    {
-        if($tempp->index>$TopSimilar->min('index'))
-        {
-            $TopSimilar->push($tempp);
-            $TopSimilar=$TopSimilar->sortByDesc('index');
+            if($user->id!=$otheruser->id)
+            {
+                $otherusers[$otheruser->id]=$this->jaccard();
 
-            $TopSimilar->pop();
-        }
 
-    }
 
-    $mainuser=User::where('id',$userid)->first();
-    $mainbookings=$mainuser->book_tour;
 
-    $recommendations= collect([]);
-    foreach ($TopSimilar as $Top)
-    {
+>>>>>>> parent of fd444e4... tour recommender
 
+            }
+
+
+<<<<<<< HEAD
         if($Top->userid!=null) {
 
             $User = User::where('id', $Top->userid)->first();
@@ -116,9 +109,13 @@ public function GetRecommendationTour($userid)
             if ($recommendations->count() >= 2) {
                 break;
             }
+=======
+>>>>>>> parent of fd444e4... tour recommender
         }
+        self::$matrix[$user->id]=$otherusers;
 
     }
+    dd(self::$matrix);
 
     if($recommendations->count()<2)
     {
@@ -161,22 +158,20 @@ public function GetRecommendationTour($userid)
     }
 
 
-return $recommendations;
-
 
 }
 
 
-
-public function jaccard($user1,$user2)
+public function jaccard()
 {
-
+    $user1= User::where('id' , 2)->get();
+    $user1=$user1[0];
+    $user2=$user1;
     $bookings1=$user1->book_tour()->get();
-    $bookings2=$user2->book_tour()->get();
+    $bookings2=$bookings1;
     $AintB=0;
     $A=count($bookings1);
     $B=count($bookings2);
-
     foreach ($bookings1 as $booking)
     {
         foreach ($bookings2 as $booking2)
@@ -188,10 +183,8 @@ public function jaccard($user1,$user2)
             }
         }
     }
-    $sum=$A+$B-$AintB;
 
-
-    return $sum == 0 ? 0.0 :floatval($AintB/$sum);
+    return $AintB/($A+$B-$AintB);
 
 
 }
