@@ -14,7 +14,7 @@ class RecommendorController extends Controller
 {
     public static $matrix;
 
-    public static function TourRecommendor()
+    public function TourRecommendor()
 {
     self::$matrix=collect([]);
     $users = User::all();
@@ -27,12 +27,16 @@ class RecommendorController extends Controller
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             $jaccard=new RecommendorController();
+=======
+
+>>>>>>> parent of 8cadabb... recommender changes
 
             if($user->id!=$otheruser->id)
             {
                 $newuser= new userIndex();
-                $temp=$jaccard->jaccard($user,$otheruser);
+                $temp=$this->jaccard($user,$otheruser);
                 $newuser->index=$temp;
                 $newuser->userid=$otheruser->id;
                 $otherusers[$i]=$newuser;
@@ -44,20 +48,23 @@ class RecommendorController extends Controller
         }
         self::$matrix[$user->id]=$otherusers;
 
-
     }
-
 
 
 
 
 }
 
-public function GetRecommendationTour($userid)
+public function GetRecommendationTour()
 {
+<<<<<<< HEAD
 
 
     RecommendorController::TourRecommendor();
+=======
+    $userid=2;
+    self::TourRecommendor();
+>>>>>>> parent of 8cadabb... recommender changes
     $temp=self::$matrix[$userid];
     $TopSimilar=collect([]);
     for($i=0;$i<5;$i++)
@@ -195,13 +202,9 @@ public function jaccard()
     $B=count($bookings2);
     foreach ($bookings1 as $booking)
     {
-        foreach ($bookings2 as $booking2)
+        if($booking['user_id']=$user2->id)
         {
-            if($booking->tour_id==$booking2->tour_id)
-            {
-                $AintB++;
-                break;
-            }
+            $AintB++;
         }
     }
 

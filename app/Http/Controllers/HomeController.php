@@ -27,9 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        RecommendorController::TourRecommendor();
-
-        //Recommender Initialization
 
 
         $tours = Tour::with('user')->where('status','=',Status::Active)
