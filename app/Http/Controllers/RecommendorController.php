@@ -26,6 +26,7 @@ class RecommendorController extends Controller
         foreach ($users as $otheruser)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             $jaccard=new RecommendorController();
 
             if($user->id!=$otheruser->id)
@@ -111,6 +112,20 @@ public function GetRecommendationTour($userid)
             }
 =======
 >>>>>>> parent of fd444e4... tour recommender
+=======
+
+            if($user->id!=$otheruser->id)
+            {
+                $otherusers[$otheruser->id]=$this->jaccard();
+
+
+
+
+
+            }
+
+
+>>>>>>> parent of fd444e4... tour recommender
         }
         self::$matrix[$user->id]=$otherusers;
 
@@ -128,9 +143,12 @@ public function GetRecommendationTour($userid)
         for($i=$recommendations->count();$i<2;$i++)
         {
 
+<<<<<<< HEAD
 
             foreach ($recommendations as $recommendation)
             {
+=======
+>>>>>>> parent of fd444e4... tour recommender
 
                 if($recommendation->id==$tours[$j]->id)
                 {
@@ -141,6 +159,7 @@ public function GetRecommendationTour($userid)
 
             if($x==0) {
 
+<<<<<<< HEAD
                 $recommendations->push($tours[$j]);
             }
             else
@@ -162,6 +181,8 @@ public function GetRecommendationTour($userid)
 }
 
 
+=======
+>>>>>>> parent of fd444e4... tour recommender
 public function jaccard()
 {
     $user1= User::where('id' , 2)->get();
