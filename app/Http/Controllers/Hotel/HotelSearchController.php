@@ -26,7 +26,6 @@ class HotelSearchController extends Controller
 
         $cities = City::all();
 
-<<<<<<< HEAD
         $hotels = Hotel::query();
 
         if($request->filled('name'))
@@ -64,8 +63,5 @@ class HotelSearchController extends Controller
 
         $request->flash();
         return view('hotel.index',compact('hotels','cities'));
-=======
-        $hotels = Hotel::where('')
->>>>>>> parent of 8cadabb... recommender changes
     }
 }
