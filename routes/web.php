@@ -158,6 +158,7 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
     //Admin Profile
     Route::prefix('profile')->group(function () {
         Route::get('/','Admin\ProfileController@index')->name('admin.profile');
+        Route::get('/verifications','Admin\ProfileController@verification')->name('admin.verification');
         Route::post('/update','Admin\ProfileController@update')->name('admin.update.profile');
         Route::post('/update/image','Admin\ProfileController@updateImage')->name('admin.update.image');
         Route::post('/update/password','Admin\ProfileController@updatePassword')->name('admin.update.password');
@@ -174,6 +175,7 @@ Route::get('/', 'HomeController@index')->name('home');
 //User Profile
 Route::prefix('profile')->middleware(['auth','can:notAdmin'])->group(function () {
     Route::get('/','User\ProfileController@index')->name('profile');
+    Route::get('/verifications','User\ProfileController@verification')->name('user.verification');
     Route::post('/update','User\ProfileController@update')->name('update.profile');
     Route::post('/update/image','User\ProfileController@updateImage')->name('update.image');
     Route::post('/update/password','User\ProfileController@updatePassword')->name('update.password');

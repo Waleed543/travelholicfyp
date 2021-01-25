@@ -10,7 +10,7 @@
                     <a href="{{route('admin')}}" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">TravelHolic</a>
                     <div class="bottom-border pb-3">
                         <img src="/storage/{{auth()->user()->username}}/profile_image/{{auth()->user()->profile->image}}" width="50" class="rounded-circle mr-3">
-                        <a href="{{route('profile')}}" class="text-white">{{auth()->user()->name}}</a>
+                        <a href="{{route('show.user.profile', auth()->user()->name)}}" class="text-white">{{auth()->user()->name}}</a>
                     </div>
                     <ul class="navbar-nav flex-column mt-4">
                         {{-- Dashboard --}}

@@ -215,6 +215,7 @@
                                 </div>
                             </div>
                         </div>
+                        <a type="button" class="btn btn-primary" href="{{route('user.verification')}}" value="submit" form="update">Request Verification</a>
                     </div>
                 </div>
             </div>

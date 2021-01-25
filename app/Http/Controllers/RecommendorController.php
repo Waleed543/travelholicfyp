@@ -21,6 +21,7 @@ class RecommendorController extends Controller
     self::$matrix=collect([]);
     $users = User::all();
 
+
     foreach ($users as $user)
     {
         $i=0;
@@ -85,6 +86,7 @@ public function GetRecommendationTour($userid)
     $mainbookings=$mainuser->book_tour;
 
     $recommendations= collect([]);
+
     foreach ($TopSimilar as $Top)
     {
 
@@ -122,40 +124,39 @@ public function GetRecommendationTour($userid)
 
     if($recommendations->count()<2)
     {
+
         $tours = Tour::with('user')->where('status','=',Status::Active)
             ->orderBy('created_at','desc')->limit(4)->get();
         $j=0;
         $x=0;
+
         $max=count($tours);
-        $k=0;
-        for($i=$recommendations->count();$i<2;$i++)
-        {
+        if($max!=0) {
+            $k = 0;
+            for ($i = $recommendations->count(); $i < 2; $i++) {
 
 
-            foreach ($recommendations as $recommendation)
-            {
+                foreach ($recommendations as $recommendation) {
 
-                if($recommendation->id==$tours[$j]->id)
-                {
-                    $x=1;
+
+                    if ($recommendation->id == $tours[$j]->id) {
+                        $x = 1;
+                        break;
+                    }
+                }
+
+                if ($x == 0) {
+
+                    $recommendations->push($tours[$j]);
+                } else {
+                    $i--;
+                }
+                $j++;
+                $x = 0;
+                $k++;
+                if ($k >= $max) {
                     break;
                 }
-            }
-
-            if($x==0) {
-
-                $recommendations->push($tours[$j]);
-            }
-            else
-            {
-                $i--;
-            }
-            $j++;
-            $x=0;
-            $k++;
-            if($k>=$max)
-            {
-                break;
             }
         }
     }
