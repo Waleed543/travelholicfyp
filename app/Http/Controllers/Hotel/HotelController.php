@@ -136,11 +136,12 @@ class HotelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($hotel)
     {
-        $hotel = Hotel::with('user')->where('slug','=',$slug)
+        $hotel = Hotel::with('user')->where('slug','=',$hotel)
             ->where('status','=',Status::Active)
             ->first();
+
 
         abort_if($hotel == null,'404');
 
