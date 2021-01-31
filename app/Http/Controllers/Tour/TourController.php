@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tour;
 
 use App\City;
+use App\Enums\BookingStatus;
 use App\Enums\PaymentStatus;
 use App\Http\Controllers\RecommendorController;
 use App\Model\tags_tour;
@@ -166,9 +167,9 @@ class TourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($tour)
     {
-        $tour = Tour::with('user')->where('slug','=',$slug)
+        $tour = Tour::with('user')->where('slug','=',$tour)
             ->where('status','=',Status::Active)
             ->first();
 
@@ -337,39 +338,41 @@ class TourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy($tour)
     {
-        $tour = Tour::where('slug', $slug)->first();
+        $tour = Tour::where('slug', $tour)->first();
         abort_if($tour == null, '404', 'Tour not found');
         abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
 
         $bookings = $tour->bookings;
-        $bookings_count = $bookings->where('payment_status',PaymentStatus::Successful)->count() > 0;
-        $booked_seats = $tour->total_seats - $tour->remaining_seats;
-        if ($booked_seats != 0) {
-            return back()->with('popup_error', 'Seats has been booked, you cannot delete the tour. Kindly contact support');
-        }elseif($bookings_count > 0)
-        {
-            return back()->with('popup_error', 'Payment has been made against your tour, you cannot delete the tour. Kindly contact support');
-        }
-
-        //Deleting Tour Thumbnail
-        Storage::delete('public/' . $tour->user->username . '/tour/' . $tour->thumbnail);
-
-        //deleting tags
-        $tour->tags()->detach();
-        //deleting tour days
-        $tour_days = $tour->tour_days;
-        foreach ($tour_days as $day) {
-            $day->delete();
-        }
-
+//        $bookings_count = $bookings->where('payment_status',PaymentStatus::Successful)->count() > 0;
+//        $booked_seats = $tour->total_seats - $tour->remaining_seats;
+//        if ($booked_seats != 0) {
+//            return back()->with('popup_error', 'Seats has been booked, you cannot delete the tour. Kindly contact support');
+//        }elseif($bookings_count > 0)
+//        {
+//            return back()->with('popup_error', 'Payment has been made against your tour, you cannot delete the tour. Kindly contact support');
+//        }
+//
+//        //Deleting Tour Thumbnail
+//        Storage::delete('public/' . $tour->user->username . '/tour/' . $tour->thumbnail);
+//
+//        //deleting tags
+//        $tour->tags()->detach();
+//        //deleting tour days
+//        $tour_days = $tour->tour_days;
+//        foreach ($tour_days as $day) {
+//            $day->delete();
+//        }
+//
         //Deleting Tour Bookings
         foreach ($bookings as $book)
         {
-            $book->delete();
+            $book->status = BookingStatus::Canceled;
+            $book->save();
         }
         //Deleting Tour
+        $tour->status = Status::Canceled;
         $tour->delete();
 
         return back()->with('popup_success', 'Tour deleted successfully');

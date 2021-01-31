@@ -14,6 +14,7 @@
                                 <thead>
                                 <tr class="">
                                     <th>#</th>
+                                    <th>Tour</th>
                                     <th>Seats</th>
                                     <th>Adults</th>
                                     <th>Children</th>
@@ -29,6 +30,12 @@
                                     @foreach($bookings as $booking)
                                         <tr>
                                             <th>{{$loop->iteration}}</th>
+                                            @if($booking->tour == NULL)
+                                                <th></th>
+                                            @else
+                                                <th><a style="color:White" href="{{route('tour.show',$booking->tour->slug)}}">{{$booking->tour->name}}</a></th>
+                                            @endif
+
                                             <td>{{$booking->seats}}</td>
                                             <td>{{$booking->adults}}</td>
                                             <td>{{$booking->children}}</td>
@@ -38,6 +45,8 @@
                                                     <span class="badge badge-danger w-75 py-2">Reserved</span>
                                                 @elseif($booking->status == \App\Enums\BookingStatus::Booked)
                                                     <span class="badge badge-success w-75 py-2">Booked</span>
+                                                @elseif($booking->status == \App\Enums\BookingStatus::Canceled)
+                                                    <span class="badge badge-success w-75 py-2">Canceled</span>
                                                 @endif
                                             </td>
                                             <td>{{$booking->payment_type}}</td>

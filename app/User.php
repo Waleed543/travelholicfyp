@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use SoftDeletes;
+
     use Notifiable;
     /**
      * The attributes that are mass assignable.
@@ -87,6 +88,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Hotel','user_id','id');
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany('App\Vehicle','user_id','id');
+    }
+
     public function book_hotel()
     {
         return $this->hasMany('App\Model\book_hotel','user_id','id');

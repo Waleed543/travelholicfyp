@@ -27,7 +27,7 @@ class TourController extends Controller
     public function edit($slug)
     {
         $tour = Tour::where('slug' , $slug)->first();
-        abort_if($tour == null,'404','Blog not found');
+        abort_if($tour == null,'404','Tour not found');
         abort_if($tour->user_id != auth()->user()->id,'401');
 
         $cities = City::all();

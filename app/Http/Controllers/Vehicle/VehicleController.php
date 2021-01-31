@@ -141,9 +141,15 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($vehicle)
     {
-        //
+        $vehicle = Vehicle::with('user')->where('slug','=',$vehicle)
+            ->where('status','=',Status::Active)
+            ->first();
+
+        abort_if($vehicle == null,'404');
+
+        return view('vehicle.show',compact('vehicle'));
     }
 
     /**
@@ -260,8 +266,18 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($vehicle)
     {
-        //
+        $vehicle = Vehicle::where('slug', $vehicle)->first();
+        abort_if($vehicle == null, '404', 'Vehicle not found');
+        abort_unless($vehicle->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        //Deleting Tour
+
+        $vehicle->delete();
+
+        return back()->with('popup_success', 'Vehicle deleted successfully');
+
+
     }
 }

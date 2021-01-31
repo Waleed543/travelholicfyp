@@ -25,13 +25,13 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             //User Index
             Route::get('/','Admin\UserController@index')->name('admin.dashboard.user');
             //User Action
-            Route::get('{user}/edit','Admin\UserController@edit')->name('admin.dashboard.user.edit');
-            Route::get('/{user}/delete','Admin\UserController@destroy')->name('admin.dashboard.user.delete');
+            Route::get('{username}/edit','Admin\UserController@edit')->name('admin.dashboard.user.edit');
+            Route::get('/{username}/delete','Admin\UserController@destroy')->name('admin.dashboard.user.delete');
             //User Create
             Route::get('/create','Admin\UserController@create')->name('admin.dashboard.user.create');
             Route::post('/store','Admin\UserController@store')->name('admin.dashboard.user.store');
             //User Update
-            Route::post('/update/{user}','Admin\UserController@update')->name('admin.dashboard.user.update');
+            Route::post('/update/{username}','Admin\UserController@update')->name('admin.dashboard.user.update');
             //User Settings
             Route::get('/setting','Admin\UserController@setting')->name('admin.dashboard.user.setting');
             //User Roles
@@ -225,6 +225,27 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
 
 
     });
+
+    //Vehicle Routes
+    Route::prefix('/vehicle')->middleware(['auth','can:notAdmin'])->name('dashboard.vehicle')->group(function () {
+        Route::get('/', 'User\VehicleController@index');
+        Route::post('/{slug}/status','User\VehicleController@status')->name('.status');
+        Route::get('/create', 'User\VehicleController@create')->name('.create');
+        Route::get('/{slug}/edit', 'User\VehicleController@edit')->name('.edit');
+//            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
+//            Route::get('/setting','Admin\TourController@setting')->name('.setting');
+//            Route::get('/search', 'Tour\TourSearchController')->name('.search');
+//
+//            //Tour Tags
+//            Route::get('/setting/tag','Admin\TourController@indexTag')->name('.setting.tag');
+//            Route::get('/setting/create/tag','Admin\TourController@createTag')->name('.setting.create.tag');
+//            Route::post('/setting/store/tag','Admin\TourController@storeTag')->name('.setting.store.tag');
+//            Route::get('/setting/tag/{tag}/edit','Admin\TourController@editTag')->name('.setting.tag.edit');
+//            Route::post('/setting/update/{tag}','Admin\TourController@updateTag')->name('.setting.update.tag');
+//            Route::get('/setting/tag/{tag}/destroy','Admin\TourController@destroyTag')->name('.setting.destroy.tag');
+
+    });
+
     //My Bookings Routes
     Route::prefix('booking')->middleware(['auth','can:isStandard'])->group(function () {
         //Tour Book

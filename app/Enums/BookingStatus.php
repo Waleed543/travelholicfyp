@@ -13,4 +13,5 @@ final class BookingStatus extends Enum
 {
     const Reserved =   'Reserved';
     const Booked =   'Booked';
+    const Canceled = 'Canceled';
 }

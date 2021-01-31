@@ -40,5 +40,8 @@ class UserSeeder extends Seeder
         Role::create([
             'name' => 'Hotel Vendor'
         ]);
+        Role::create([
+            'name' => 'Vehicle Vendor'
+        ]);
     }
 }

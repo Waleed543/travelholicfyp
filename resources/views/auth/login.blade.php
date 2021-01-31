@@ -92,6 +92,15 @@
                                             </a>
                                         @endif
                                     </div>
+                                    <div class="col-md-8 offset-md-4">
+                                        @if (Route::has('register'))
+                                            <span>Haven't register yet? Click on</span>
+                                            <a>
+                                                <a class="btn btn-sm btn-primary" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                            </a>
+                                            <span>button</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </form>
                         </div>

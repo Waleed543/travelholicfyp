@@ -66,4 +66,15 @@ class UserRole
         return false;
     }
 
+    public function isVehicleVendor(User $user)
+    {
+        $this->rolesToSession($user);
+        $roles = session('roles');
+        if(in_array('Vehicle Vendor',$roles))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

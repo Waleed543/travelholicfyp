@@ -68,7 +68,7 @@
                             <li class="nav-item dropdown" >
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white p-3 mb-2 sidebar-link @yield('hotel')" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
                                     <i class="fas fa-envelope text-light fa-lg mr-3"></i>
-                                    Hotel
+                                    Hotels
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a href="{{route('dashboard.hotel')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
@@ -79,6 +79,28 @@
                                         Create
                                     </a>
                                     <a href="{{route('dashboard.hotel.bookings')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Bookings
+                                    </a>
+                                </div>
+                            </li>
+                        @endcan
+
+                        {{-- Tour --}}
+                        @can('isVehicleVendor')
+                            <li class="nav-item dropdown" >
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white p-3 mb-2 sidebar-link @yield('vehicle')" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                                    <i class="fas fa-envelope text-light fa-lg mr-3"></i>
+                                    Vehicle
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a href="{{route('dashboard.vehicle')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Index
+                                    </a>
+
+                                    <a href="{{route('dashboard.vehicle.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Create
+                                    </a>
+                                    <a href="" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Bookings
                                     </a>
                                 </div>

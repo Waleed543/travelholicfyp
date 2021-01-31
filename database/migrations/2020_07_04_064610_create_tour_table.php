@@ -30,6 +30,7 @@ class CreateTourTable extends Migration
             $table->string('thumbnail');
             $table->string('status',50);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('departure_city')->references('id')->on('city');
             $table->foreign('destination_city')->references('id')->on('city');

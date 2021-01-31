@@ -31,5 +31,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isStandard','App\Gates\UserRole@isStandard');
         Gate::define('isTourVendor','App\Gates\UserRole@isTourVendor');
         Gate::define('isHotelVendor','App\Gates\UserRole@isHotelVendor');
+        Gate::define('isVehicleVendor','App\Gates\UserRole@isVehicleVendor');
     }
 }
