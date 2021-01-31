@@ -34,6 +34,10 @@ class ProfileController extends Controller
         $cities = DB::table('city')->get();
         return view('user.dashboard.profile',compact('user','cities','profile'));
     }
+    public function verification()
+    {
+        return view('admin.dashboard.verification');
+    }
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [

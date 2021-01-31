@@ -131,7 +131,15 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <a type="button" class="btn btn-primary"  href="{{route('admin.verification')}}" >Request Verified status
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div class="card">
                                         <div class="card-header">
@@ -187,6 +195,7 @@
                                             </button>
                                         </div>
                                     </div>
+
                             <br>
                             <div class="card">
                                 <div class="card-header">
@@ -214,6 +223,7 @@
                                     </button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
