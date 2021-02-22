@@ -146,6 +146,13 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
             Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
 
+            //Vehicle
+            Route::get('/vehicle', 'Vehicle\BookingController@tour')->name('.tour');
+            Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
+            Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
+            Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
+            Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
+
             //Hotel
             Route::get('/hotel', 'Admin\HotelBookingController@hotel')->name('.hotel');
             Route::post('/{number}/hotel/status/update','Admin\HotelBookingController@status')->name('.hotel.status');
@@ -259,6 +266,17 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         //Show Tour Bookings
         Route::get('/tour', 'User\BookingController@tour')->name('dashboard.tour.booking');
 
+        //Vehicle Book
+        Route::get('/vehicle/{slug}/bookings','Vehicle\VehicleBookController@index')->name('dashboard.vehicle.book');
+        Route::post('vehicle/{slug}/reserve','Vehicle\VehicleBookController@book')->name('dashboard.vehicle.book.store');
+        Route::delete('vehicle/order/{number}/delete', 'Vehicle\VehicleBookController@destroy')->name('dashboard.vehicle.book.delete');
+
+        //Vehicle Payment
+        Route::get('vehicle/order/{number}/payment','Vehicle\VehicleBookController@payment')->name('dashboard.vehicle.book.payment');
+        Route::post('vehicle/order/{number}/payment/easypaisa/trxid/store','Vehicle\VehicleBookController@storePayment')->name('dashboard.vehicle.book.payment.store');
+        //Show Vehicle Bookings
+        Route::get('/vehicle', 'User\BookingController@tour')->name('dashboard.tour.booking');
+
         //Hotel Room Book
         Route::get('/hotel/{slug}/room/{room_slug}/bookings','Hotel\HotelBookController@index')->name('dashboard.hotel.book');
         Route::post('hotel/{slug}/room/{room_slug}/reserve','Hotel\HotelBookController@book')->name('dashboard.hotel.book.store');
@@ -266,7 +284,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         //Hotel Payment
         Route::get('hotel/order/{number}/payment','Hotel\HotelBookController@payment')->name('dashboard.hotel.book.payment');
         Route::post('hotel/order/{number}/payment/easypaisa/trxid/store','Hotel\HotelBookController@storePayment')->name('dashboard.hotel.book.payment.store');
-        //Show Tour Bookings
+        //Show Hotel Bookings
         Route::get('/hotel', 'User\BookingController@hotel')->name('dashboard.hotel.booking');
 
         //Payment For All

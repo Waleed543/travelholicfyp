@@ -61,7 +61,7 @@
                                     <label for="name" class=" form-control-label">Name</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
+                                    <input type="text" id="name" name="name" value="{{old('name')}}"  class="form-control @error('name') is-invalid @enderror">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <select name="category_id" id="select" class="form-control @error('category_id') is-invalid @enderror">
-                                        <option value="">Please select</option>
+                                        <option value="0">Please select</option>
                                         @if(count($categories)>0)
                                             @foreach($categories as $category)
                                                 @if(old('category_id') == $category->id)

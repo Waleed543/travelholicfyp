@@ -17,8 +17,8 @@
 
                 <div class="row" style="margin-top: 3rem;">
                     <div class="col-3" style="margin-left: 5rem">
-                        <label style=" "><b>Per Seat Cost: {{$tour->price}}</b></label>
-                        <label>4599</label>
+                        <label style=" "><b>Per Seat Cost: </b></label>
+                        <label>{{$tour->price}}</label>
                     </div>
                     <div class="col-4" style="">
                         <label style=" "><b>Departure Date:</b></label>

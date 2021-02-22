@@ -156,9 +156,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($blog)
     {
-        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $slug)
+        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $blog)
             ->where('status','=',Status::Active)
             ->first();
 

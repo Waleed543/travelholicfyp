@@ -17,8 +17,10 @@ class BlogSearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request )
     {
+        dd(1);
+
         $this->validate($request, [
             'name' => 'nullable|string|regex:/^[a-zA-Z ]*$/',
             'category_id' => 'nullable|integer|exists:categories_for_blog,id'

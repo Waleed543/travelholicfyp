@@ -172,7 +172,7 @@
                                                    onclick="document.getElementById('book-{{$vehicle->slug}}').submit();">
                                                     Book
                                                 </a>
-                                                <form id="book-{{$vehicle->slug}}" method="POST" action="{{route('dashboard.tour.book',$vehicle->slug)}}" class="d-none">
+                                                <form id="book-{{$vehicle->slug}}" method="POST" action="{{route('dashboard.vehicle.book',$vehicle->slug)}}" class="d-none">
                                                     @csrf
                                                     @method('GET')
                                                 </form>
