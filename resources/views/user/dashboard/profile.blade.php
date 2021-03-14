@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3">
-                                                <label for="select" class=" form-control-label">City</label>
+                                                <label for="select" class=" form-control-label">Gender</label>
                                             </div>
                                             <div class="col-12 col-md-9">
                                                 <select name="gender_id" id="select" class="form-control @error('gender_id') is-invalid @enderror">

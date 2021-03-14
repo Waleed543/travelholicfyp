@@ -58,6 +58,37 @@ class TourBookController extends Controller
         return redirect(route('dashboard.tour.book.payment',$book_tour->number));
     }
 
+    public function cancel($number)
+    {
+        $book = book::where('number',$number)->first();
+        abort_if($book == null,'404','Reservation not found');
+
+        $tour = $book->tour;
+        abort_unless($book->user_id == auth()->user()->id or $tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        $book->status = Status::Canceled;
+        $book->save();
+
+        return back()->with('popop_success', 'Order has been Canceled');
+
+    }
+
+    public function booked($number)
+    {
+        $book = book::where('number',$number)->first();
+        abort_if($book == null,'404','Reservation not found');
+
+        $tour = $book->tour;
+
+        abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+
+        $book->status = BookingStatus::Booked;
+        $book->save();
+
+        return back()->with('popop_success', 'Order has been booked');
+    }
+
     public function destroy($number)
     {
         $book_tour = book::where('number',$number)->first();

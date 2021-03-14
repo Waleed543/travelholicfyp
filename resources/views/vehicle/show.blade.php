@@ -11,9 +11,9 @@
         </div>
     </div>
     <div class="caption text-center">
-        <h1>Tours</h1>
-        <h3>Check Our Latest Tour</h3>
-        <a class="btn btn-outline-light btn-lg" href="#course">Create Tour</a>
+        <h1>Vehicle</h1>
+        <h3>Check Our Latest Vehicle</h3>
+        <a class="btn btn-outline-light btn-lg" href="#course">Book Your own Vehicle</a>
     </div>
     <!--- Start Courese Section -->
     <div class="jumbotron">
@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row welcome text-center">
                 <div class="col-12">
-                    <h1 class="display-4">Tour</h1>
+                    <h1 class="display-4">Vehicle</h1>
                 </div>
                 <hr>
             </div>
@@ -61,11 +61,11 @@
                                                             <p class="card-text">Make : {{$vehicle->make}}</p>
                                                             <p class="card-text">Model : {{$vehicle->model}}</p>
                                                             <p class="card-text">Color : {{$vehicle->color}}</p>
-                                                            <p class="card-text">Year : {{date('d-M-Y', strtotime($vehicle->year))}}</p>
+                                                            <p class="card-text">Year : {{$vehicle->year}}</p>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <p class="card-text">Price : {{$vehicle->price}} Nights</p>
-                                                            <p class="card-text">City : {{$vehicle->city}} Days</p>
+                                                            <p class="card-text">Price : {{$vehicle->price}}  per Day</p>
+                                                            <p class="card-text">City : {{App\City::find($vehicle->city)->name}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,13 +102,9 @@
                         <a href="{{route('show.user.profile',$vehicle->user->username)}}"><img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail"></a>
                     @endif
                     <br>
-                    <h1>{{$vehicle->user->name}}</h1>
-                    <p class="title">CEO & Founder, Example</p>
-                    <p>Harvard University</p>
-                    {{--                    <a href="#"><i class="fa fa-dribbble"></i></a>--}}
-                    {{--                    <a href="#"><i class="fa fa-twitter"></i></a>--}}
-                    {{--                    <a href="#"><i class="fa fa-linkedin"></i></a>--}}
-                    {{--                    <a href="#"><i class="fa fa-facebook"></i></a>--}}
+                    <h1 style="text-transform: uppercase"> {{$vehicle->user->name}}</h1>
+                    <p class="title">Vehicle Vendor</p>
+                    <p>Total Vehicles = {{$vehicle->user->vehicles->count()}}</p>
                 </div>
             </div>
         </div>

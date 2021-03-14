@@ -19,7 +19,6 @@ class BlogSearchController extends Controller
      */
     public function __invoke(Request $request )
     {
-        dd(1);
 
         $this->validate($request, [
             'name' => 'nullable|string|regex:/^[a-zA-Z ]*$/',

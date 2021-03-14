@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -86,6 +87,11 @@ class RegisterController extends Controller
         $user_id = User::find($user->username);
         Profile::create([
             'user_id' => $user_id->id,
+        ]);
+
+        DB::table('role_user')->insert([
+            'user_id' => $user_id->id,
+            'role_id' => '2'
         ]);
     }
 }

@@ -30,6 +30,7 @@ class CreateBookVehicle extends Migration
             $table->string('payment_type');
             $table->string('payment_status');
             $table->string('trxid')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->on('users')->references('id');

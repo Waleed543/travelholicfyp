@@ -42,19 +42,21 @@
                                             <td>{{$booking->check_out_date}}</td>
                                             <td>
                                                 @if($booking->status == \App\Enums\BookingStatus::Reserved)
-                                                    <span class="badge badge-danger w-75 py-2">Reserved</span>
+                                                    <span class="badge badge-warning w-90 py-2">Reserved</span>
                                                 @elseif($booking->status == \App\Enums\BookingStatus::Booked)
-                                                    <span class="badge badge-success w-75 py-2">Booked</span>
+                                                    <span class="badge badge-success w-90 py-2">Booked</span>
+                                                @elseif($booking->status == \App\Enums\BookingStatus::Canceled)
+                                                    <span class="badge badge-danger w-90 py-2">Canceled</span>
                                                 @endif
                                             </td>
                                             <td>{{$booking->payment_type}}</td>
                                             <td>
                                                 @if($booking->payment_status == \App\Enums\PaymentStatus::Unpaid)
-                                                    <span class="badge badge-danger w-75 py-2">Unpaid</span>
+                                                    <span class="badge badge-danger w-80 py-2">Unpaid</span>
                                                 @elseif($booking->payment_status == \App\Enums\PaymentStatus::UnderReview)
-                                                    <span class="badge badge-warning w-75 py-2">Under Review</span>
+                                                    <span class="badge badge-warning w-80 py-2">Under Review</span>
                                                 @elseif($booking->payment_status == \App\Enums\PaymentStatus::Successful)
-                                                    <span class="badge badge-success w-75 py-2">Successful</span>
+                                                    <span class="badge badge-success w-80 py-2">Successful</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -67,15 +69,22 @@
 
                                             <td>
                                                 <div class="d-inline" role="group">
+                                                    <a type="button" href="" class="btn btn-primary btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('add-trxid-{{$loop->iteration}}').submit();">
+                                                        @if($booking->trxid != null) Update Trxid @else Add Trxid @endif
+                                                    </a>
+                                                    <form id="add-trxid-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.payment',$booking->number) }}" method="GET" style="display: none;">
+                                                        @method('GET')
+                                                    </form>
                                                      {{-- Delete Order Button --}}
                                                     <a type="button" href="" class="btn btn-danger btn-sm"
                                                        onclick="event.preventDefault();
                                                            document.getElementById('delete-hotel-{{$loop->iteration}}').submit();">
-                                                        Delete
+                                                        Cancel
                                                     </a>
-                                                    <form id="delete-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.delete',$booking->number) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                    <form id="delete-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.cancel',$booking->number) }}" method="POST" style="display: none;">
+                                                        @method('GET')
                                                     </form>
                                                 </div>
                                             </td>

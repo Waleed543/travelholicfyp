@@ -3,12 +3,15 @@
 namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class book_vehicle extends Model
 {
     protected $table = 'book_vehicle';
 
     protected $guarded = [];
+
+    use SoftDeletes;
 
     public function user()
     {

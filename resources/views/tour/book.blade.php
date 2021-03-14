@@ -90,12 +90,11 @@
                                         <label class="form-check-label" for="payment_type1">
                                             Easy Paisa
                                         </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment_type" id="payment_type2" value="2">
-                                        <label class="form-check-label" for="payment_type2">
-                                            Cash
-                                        </label>
+                                        @error('payment_type')
+                                         <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                         </span>
+                                        @enderror
                                     </div>
                                     @error('payment_type')
                                     <span class="invalid-feedback" role="alert">

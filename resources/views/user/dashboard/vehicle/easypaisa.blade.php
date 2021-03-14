@@ -60,7 +60,7 @@
                 <p style="text-align: center;color: #ff0000;">Note: After payment enter your TRX id provided by easypaisa by SMS in the feild below to confirm payment</p>
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="reserve" method="post" action="{{route('dashboard.tour.book.payment.store',$book->number)}}" enctype="multipart/form-data" class="form-horizontal">
+                        <form id="reserve" method="post" action="{{route('dashboard.vehicle.book.payment.store',$book->number)}}" enctype="multipart/form-data" class="form-horizontal">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-4" style="text-align: right"><label for="trxinput" class=" form-control-label"><h4>Trx ID:</h4></label></div>

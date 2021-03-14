@@ -6,26 +6,26 @@
 
     <div class="row">
         <div class="col-lg-3" style="height: 600px; background-color: white; padding: 0; margin-top: 3rem;margin-left: 2rem; border-radius: 20px">
-            <h3 style="text-align: center; margin-top: 1rem">{{$user->name}}</h3>
+            <h3 style="text-align: center; margin-top: 1rem;text-transform: uppercase;">{{$user->name}}</h3>
             <div style="height: 300px; overflow-y: hidden;margin-bottom: 1.5rem" >
                 @if($profile->image != NULL)
-                    <img src="{{asset('storage/'.$user->username.'/profile_image/'.$profile->image)}}" class="img-thumbnail">
+                    <img src="{{asset('storage/'.$user->username.'/profile_image/'.$profile->image)}}" class="img-thumbnail mx-auto d-block">
                 @else
-                    <img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail">
+                    <img src="{{asset('storage/temp/dummy_profile_pic.jpg')}}" class="img-thumbnail mx-auto d-block">
                 @endif
             </div>
             <div class="row" style="margin-bottom: 0;">
                 <div class="col-lg-6">
             <label style=" margin-left: 1.5rem"><b>Gender:</b></label>
                 </div>
-                <label class="col-lg-6">{{$profile->gender}}</label>
+                <label class="col-lg-6">{{$profile->gender != null ? ($profile->gender == 'M' ? 'Male' : 'Female') : 'Null'}}</label>
             </div>
 
             <div class="row" style="">
                 <div class="col-lg-6">
                     <label style=" margin-left: 1.5rem"><b>City:</b></label>
                 </div>
-                <label class="col-lg-6">@if($city != NULL){{$city->name}}@endif</label>
+                <label class="col-lg-6">{{$city != NULL ? $city->name : 'Null'}}</label>
             </div>
         </div>
         <div class="col-lg-8" style="height: 600px; background-color: white; padding: 0; margin-top: 3rem;margin-left: 2rem; border-radius: 20px">

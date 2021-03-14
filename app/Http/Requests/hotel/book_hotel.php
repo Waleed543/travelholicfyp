@@ -34,6 +34,7 @@ class book_hotel extends FormRequest
             'total_rooms' => 'required|integer',
             'check_in_date'=>'required|date|after:today',
             'check_out_date'=>'required|date|after:today',
+            'payment_type' => 'required|gte:1|lte:1'
         ];
     }
     /**
@@ -55,7 +56,7 @@ class book_hotel extends FormRequest
             }elseif($this->payment_type = 3){
                 $this->payment_type = Payment::CreditCard;
             }else{
-                $validator -> errors() -> add('payment_type', 'Error in Payment type field');
+                $validator -> errors() -> add('payment_type', 'Please select a valid payment type');
             }
         });
 

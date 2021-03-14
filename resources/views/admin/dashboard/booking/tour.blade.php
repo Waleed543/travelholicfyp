@@ -23,7 +23,7 @@
                             <!--Card content-->
                             <div class="card-body px-lg-5 pt-0">
                                 <div class="text-center">
-                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Seaaaaaarch</a>
+                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Search</a>
                                 </div>
                                 <div id="searchs" class="collapse">
                                     <hr>
@@ -92,6 +92,7 @@
                         <tr class="">
                             <th>#</th>
                             <th>Order No.</th>
+                            <th>Tour</th>
                             <th>Seats</th>
                             <th>Adults</th>
                             <th>Children</th>
@@ -109,6 +110,11 @@
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
                                     <th>{{$book_tour->number}}</th>
+                                    <td>
+                                        @if($book_tour->tour != NULL)
+                                            <a class="btn btn-link" href="{{route('tour.show',$book_tour->tour->slug)}}">{{$book_tour->tour->name}}</a>
+                                        @endif
+                                    </td>
                                     <td>{{$book_tour->seats}}</td>
                                     <td>{{$book_tour->adults}}</td>
                                     <td>{{$book_tour->children}}</td>
@@ -150,12 +156,11 @@
                                             {{-- Delete Order Button --}}
                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
-                                                Delete
+                                                   document.getElementById('delete-{{$loop->iteration}}').submit();">
+                                                Cancel
                                             </a>
-                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.booking.tour.delete',$book_tour->number) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
+                                            <form id="delete-{{$loop->iteration}}" action="{{ route('admin.dashboard.booking.tour.cancel',$book_tour->number) }}" method="POST" style="display: none;">
+                                                @method('GET')
                                             </form>
                                         </div>
                                     </td>

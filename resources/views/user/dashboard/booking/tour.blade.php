@@ -62,15 +62,22 @@
 
                                             <td>
                                                 <div class="d-inline" role="group">
-                                                     {{-- Delete Order Button --}}
+                                                    <a type="button" href="" class="btn btn-primary btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('add-trxid-{{$loop->iteration}}').submit();">
+                                                        @if($booking->trxid != null) Update Trxid @else Add Trxid @endif
+                                                    </a>
+                                                    <form id="add-trxid-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.payment',$booking->number) }}" method="GET" style="display: none;">
+                                                        @method('GET')
+                                                    </form>
+                                                     {{-- Cancel Order Button --}}
                                                     <a type="button" href="" class="btn btn-danger btn-sm"
                                                        onclick="event.preventDefault();
-                                                           document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
-                                                        Delete
+                                                           document.getElementById('cancel-{{$loop->iteration}}').submit();">
+                                                        Cancel
                                                     </a>
-                                                    <form id="delete-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.delete',$booking->number) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
+                                                    <form id="cancel-{{$loop->iteration}}" action="{{ route('dashboard.tour.book.cancel',$booking->number) }}" method="POST" style="display: none;">
+                                                        @method('GET')
                                                     </form>
                                                 </div>
                                             </td>

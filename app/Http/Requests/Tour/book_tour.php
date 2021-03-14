@@ -33,7 +33,7 @@ class book_tour extends FormRequest
             'adults' => 'required|integer',
             'children' => 'required|integer',
             'phone' => 'required|size:11',
-            'payment_type' => 'required|gte:1|lte:2'
+            'payment_type' => 'required|gte:1|lte:1'
         ];
     }
 

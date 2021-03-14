@@ -145,7 +145,7 @@ class HotelController extends Controller
 
         abort_if($hotel == null,'404');
 
-        $rooms = $hotel->rooms;
+        $rooms = $hotel->rooms->where('status','=','Active');
 
         return view('hotel.show',compact('hotel','rooms'));
     }

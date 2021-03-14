@@ -144,21 +144,23 @@ Route::prefix('admin')->middleware(['auth','can:isAdmin'])->group(function () {
             Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
             Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
             Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
+            Route::get('tour/order/{number}/cancel', 'Admin\BookingController@cancel')->name('.tour.cancel');
             Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
 
             //Vehicle
-            Route::get('/vehicle', 'Vehicle\BookingController@tour')->name('.tour');
-            Route::post('/{number}/tour/status/update','Admin\BookingController@status')->name('.tour.status');
-            Route::post('/{number}/tour/payment/status/update','Admin\BookingController@paymentStatus')->name('.tour.payment.status');
-            Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
-            Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
+            Route::get('/vehicle', 'Admin\VehicleBookingController@vehicle')->name('.vehicle');
+            Route::post('/{number}/vehicle/status/update','Admin\VehicleBookingController@status')->name('.vehicle.status');
+            Route::post('/{number}/vehicle/payment/status/update','Admin\VehicleBookingController@paymentStatus')->name('.vehicle.payment.status');
+            Route::get('/vehicle/search', 'Booking\SearchController@vehicle')->name('.vehicle.search');
+            Route::get('vehicle/order/{number}/cancel', 'Admin\VehicleBookingController@cancel')->name('.vehicle.cancel');
+            //Route::delete('vehicle/order/{number}/delete', 'Vehicle\TourBookController@destroy')->name('.vehicle.delete');
 
             //Hotel
             Route::get('/hotel', 'Admin\HotelBookingController@hotel')->name('.hotel');
             Route::post('/{number}/hotel/status/update','Admin\HotelBookingController@status')->name('.hotel.status');
             Route::post('/{number}/hotel/payment/status/update','Admin\HotelBookingController@paymentStatus')->name('.hotel.payment.status');
-            Route::get('/tour/search', 'Booking\SearchController@tour')->name('.tour.search');
-            Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('.tour.delete');
+            Route::get('/{number}/hotel/cancel', 'Admin\HotelBookingController@cancel')->name('.hotel.cancel');
+            Route::get('/hotel/search', 'Booking\SearchController@hotel')->name('.hotel.search');
         });
 
     });
@@ -199,13 +201,17 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/search', 'Blog\BlogSearchController')->name('dashboard.blog.search');
     });
     //Tour Routes
-    Route::prefix('tour')->middleware(['auth','can:notAdmin'])->group(function () {
-        Route::get('/', 'User\TourController@index')->name('dashboard.tour');
-        Route::get('/create', 'User\TourController@create')->name('dashboard.tour.create');
-        Route::get('/{slug}/edit', 'User\TourController@edit')->name('dashboard.tour.edit');
-        Route::get('/search', 'Tour\TourSearchController')->name('dashboard.tour.search');
-        Route::get('/{slug}/profile','User\TourController@profile')->name('dashboard.tour.profile');
-        Route::get('/{slug}/status', 'User\TourController@status')->name('dashboard.tour.status.inactive');
+    Route::prefix('tour')->middleware(['auth','can:notAdmin'])->name('dashboard.tour')->group(function () {
+        Route::get('/', 'User\TourController@index');
+        Route::get('/create', 'User\TourController@create')->name('.create');
+        Route::get('/{slug}/edit', 'User\TourController@edit')->name('.edit');
+        Route::get('/search', 'Tour\TourSearchController')->name('.search');
+        Route::get('/{slug}/profile','User\TourController@profile')->name('.profile');
+        Route::get('/{slug}/status', 'User\TourController@status')->name('.status.inactive');
+
+        //Bookings Routes
+        Route::get('/bookings', 'User\TourBookingController@index')->name('.bookings');
+        Route::post('/bookings/{number}/status/update','User\HotelBookingController@status')->name('.hotel.status');
     });
     //Hotel Routes
     Route::prefix('hotel')->middleware(['auth','can:notAdmin'])->name('dashboard.hotel')->group(function () {
@@ -239,6 +245,12 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::post('/{slug}/status','User\VehicleController@status')->name('.status');
         Route::get('/create', 'User\VehicleController@create')->name('.create');
         Route::get('/{slug}/edit', 'User\VehicleController@edit')->name('.edit');
+        Route::get('/{slug}/status', 'User\VehicleController@status')->name('.status.inactive');
+
+        //Bookings Routes
+        Route::get('/bookings', 'User\VehicleBookingController@index')->name('.bookings');
+        Route::post('/bookings/{number}/status/update','User\HotelBookingController@status')->name('.hotel.status');
+
 //            Route::get('/{slug}/profile','Admin\TourController@profile')->name('.profile');
 //            Route::get('/setting','Admin\TourController@setting')->name('.setting');
 //            Route::get('/search', 'Tour\TourSearchController')->name('.search');
@@ -259,6 +271,8 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/tour/{slug}/bookings','Tour\TourBookController@index')->name('dashboard.tour.book');
         Route::post('tour/{slug}/reserve','Tour\TourBookController@book')->name('dashboard.tour.book.store');
         Route::delete('tour/order/{number}/delete', 'Tour\TourBookController@destroy')->name('dashboard.tour.book.delete');
+        Route::get('tour/order/{number}/booked', 'Tour\TourBookController@booked')->name('dashboard.tour.book.booked');
+        Route::get('tour/order/{number}/cancel', 'Tour\TourBookController@cancel')->name('dashboard.tour.book.cancel');
 
         //Tour Payment
         Route::get('tour/order/{number}/payment','Tour\TourBookController@payment')->name('dashboard.tour.book.payment');
@@ -269,17 +283,20 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         //Vehicle Book
         Route::get('/vehicle/{slug}/bookings','Vehicle\VehicleBookController@index')->name('dashboard.vehicle.book');
         Route::post('vehicle/{slug}/reserve','Vehicle\VehicleBookController@book')->name('dashboard.vehicle.book.store');
-        Route::delete('vehicle/order/{number}/delete', 'Vehicle\VehicleBookController@destroy')->name('dashboard.vehicle.book.delete');
+        Route::get('vehicle/order/{number}/booked', 'Vehicle\VehicleBookController@booked')->name('dashboard.vehicle.book.booked');
+        Route::get('vehicle/order/{number}/cancel', 'Vehicle\VehicleBookController@cancel')->name('dashboard.vehicle.book.cancel');
 
         //Vehicle Payment
         Route::get('vehicle/order/{number}/payment','Vehicle\VehicleBookController@payment')->name('dashboard.vehicle.book.payment');
         Route::post('vehicle/order/{number}/payment/easypaisa/trxid/store','Vehicle\VehicleBookController@storePayment')->name('dashboard.vehicle.book.payment.store');
         //Show Vehicle Bookings
-        Route::get('/vehicle', 'User\BookingController@tour')->name('dashboard.tour.booking');
+        Route::get('/vehicle', 'User\BookingController@vehicle')->name('dashboard.vehicle.booking');
 
         //Hotel Room Book
         Route::get('/hotel/{slug}/room/{room_slug}/bookings','Hotel\HotelBookController@index')->name('dashboard.hotel.book');
         Route::post('hotel/{slug}/room/{room_slug}/reserve','Hotel\HotelBookController@book')->name('dashboard.hotel.book.store');
+        Route::get('hotel/order/{number}/booked', 'Hotel\HotelBookController@booked')->name('dashboard.hotel.book.booked');
+        Route::get('hotel/order/{number}/cancel', 'Hotel\HotelBookController@cancel')->name('dashboard.hotel.book.cancel');
         Route::delete('hotel/order/{number}/delete', 'Hotel\HotelBookController@destroy')->name('dashboard.hotel.book.delete');
         //Hotel Payment
         Route::get('hotel/order/{number}/payment','Hotel\HotelBookController@payment')->name('dashboard.hotel.book.payment');

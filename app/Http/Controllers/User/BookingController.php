@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tour\book_tour;
 use App\Payment;
@@ -21,6 +22,15 @@ class BookingController extends Controller
 
         return view('user.dashboard.booking.hotel',compact('bookings'));
     }
+
+    public function vehicle()
+    {
+        $bookings = auth()->user()->book_vehicle()->with('vehicle')->paginate(15);
+        $cities = City::all();
+
+        return view('user.dashboard.booking.vehicle',compact('bookings','cities'));
+    }
+
 
     public function payment($order_table, $number, Request $request)
     {

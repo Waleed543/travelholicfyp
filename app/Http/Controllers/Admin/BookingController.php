@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Model\book_tour;
 use App\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class BookingController extends Controller
@@ -20,6 +21,21 @@ class BookingController extends Controller
         $tours = Tour::select('slug','name')->where('status',Status::Active)->get();
 
         return view('admin.dashboard.booking.tour',compact('book_tours','tours'));
+    }
+
+
+    public function cancel($number)
+    {
+        $book_tour = book_tour::where('number',$number)->first();
+        abort_if($book_tour == null,'404','Reservation not found');
+        $tour = $book_tour->tour;
+
+        abort_unless($tour->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        $book_tour->status = BookingStatus::Canceled;
+        $book_tour->save();
+
+        return back()->with('popop_success', 'Order has been Canceled');
     }
 
     public function status(Request $request, $number)

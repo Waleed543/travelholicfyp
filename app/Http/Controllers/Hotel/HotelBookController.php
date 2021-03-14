@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Model\book_hotel as book;
 use App\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class HotelBookController extends Controller
@@ -76,6 +77,35 @@ class HotelBookController extends Controller
         return redirect(route('dashboard.hotel.book.payment',$book_hotel->number));
     }
 
+    public function cancel($number)
+    {
+        $book_hotel = book::where('number',$number)->first();
+        abort_if($book_hotel == null,'404','Reservation not found');
+        $hotel = $book_hotel->hotel;
+
+        abort_unless($hotel->user_id == auth()->user()->id or $book_hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        $book_hotel->status = BookingStatus::Canceled;
+        $book_hotel->save();
+
+        return back()->with('popop_success', 'Order has been Canceled');
+    }
+
+    public function booked($number)
+    {
+        $book_hotel = book::where('number',$number)->first();
+        abort_if($book_hotel == null,'404','Reservation not found');
+
+        $hotel = $book_hotel->hotel;
+
+        abort_unless($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+
+        $book_hotel->status = BookingStatus::Booked;
+        $book_hotel->save();
+
+        return back()->with('popop_success', 'Order has been booked');
+    }
     public function destroy($number)
     {
         $book_hotel = book::where('number',$number)->first();

@@ -49,6 +49,7 @@
                                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+
                                                 @enderror
                                             </div>
                                         </div>
@@ -152,39 +153,43 @@
                                     <td>{{$vehicle->slug}}</td>
                                     <td>{{$vehicle->created_at}}</td>
                                     <td>
-                                        <form id="status-form-{{$vehicle->slug}}">
-                                            @csrf
-                                            <select onchange="submit_status_form('{{$vehicle->slug}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
-                                                <option value="">Please select</option>
-                                                @foreach(App\Enums\Status::toArray() as $status)
-                                                    @if(old('status') ?? $vehicle->status == $status)
-                                                        <option selected value="{{$status}}">{{$status}}</option>
-                                                    @else
-                                                        <option value="{{$status}}">{{$status}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </form>
+                                        @if($vehicle->status == \App\Enums\Status::Active)
+                                            <span class="badge badge-success w-75 py-2">Active</span>
+                                        @elseif($vehicle->status == \App\Enums\Status::InProgress)
+                                            <span class="badge badge-warning w-75 py-2">In progress</span>
+                                        @elseif($vehicle->status == \App\Enums\Status::InActive)
+                                            <span class="badge badge-danger w-75 py-2">InActive</span>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Edit Tour Button--}}
-                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                            {{-- Inactive Tour Button--}}
+                                            <a type="button" href="" class="btn btn-warning btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('edit-{{$loop->iteration}}').submit();">
-                                                Edit
+                                                   document.getElementById('inactive-tour-{{$loop->iteration}}').submit();">
+                                                Inavtive
                                             </a>
-                                            <form id="edit-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.edit',$vehicle->slug) }}" method="POST" style="display: none;">
+                                            <form id="inactive-tour-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.status.inactive',$vehicle->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('GET')
                                             </form>
-                                            {{-- Delete Tour Button--}}
+                                            {{-- Edit Vehicle Button--}}
+                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                               onclick="event.preventDefault();
+                                                   document.getElementById('edit-tour-{{$loop->iteration}}').submit();">
+                                                Edit
+                                            </a>
+                                            <form id="edit-tour-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.edit',$vehicle->slug) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                            {{-- Delete Blog Button--}}
                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-{{$loop->iteration}}').submit();">
+                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
                                                 Delete
                                             </a>
-                                            <form id="delete-{{$loop->iteration}}" action="{{ route('vehicle.destroy',$vehicle->slug) }}" method="POST" style="display: none;">
+                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('vehicle.destroy',$vehicle->slug) }}" method="POST" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

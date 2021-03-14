@@ -23,11 +23,58 @@
                             <!--Card content-->
                             <div class="card-body px-lg-5 pt-0">
                                 <div class="text-center">
-                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Seaaaaaarch</a>
+                                    <a class="mt-3 btn btn-light" href="#searchs" data-toggle="collapse">Search</a>
                                 </div>
                                 <div id="searchs" class="collapse">
                                     <hr>
+                                    <form  id="search" method="GET" action="{{route('admin.dashboard.booking.hotel.search')}}" enctype="multipart/form-data" class="form-horizontal">
+                                        {{-- Tour Name --}}
+                                        <div class="col-12 col-md-6">
+                                            <label for="departure_city" class=" form-control-label">Hotel Name</label>
+                                            <select name="hotel_slug" id="select" class="form-control @error('hotel_slug') is-invalid @enderror">
+                                                <option value="">Select</option>
+                                                @if(count($hotels)>0)
+                                                    @foreach($hotels as $hotel)
+                                                        @if(old('hotel_slug') == $hotel->slug)
+                                                            <option selected value="{{$hotel->slug}}">{{$hotel->name}}</option>
+                                                        @else
+                                                            <option value="{{$hotel->slug}}">{{$hotel->name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @error('departure_city')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
 
+                                        {{-- Order No --}}
+                                        <div class="row form-group">
+                                            <div class="col-12 col-md-6">
+                                                <label for="order_no" class=" form-control-label">Order Number</label>
+                                                <input type="number" id="order_no" name="order_no" value="{{old('order_no')}}" class="form-control @error('order_no') is-invalid @enderror">
+                                                @error('order_no')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <label for="phone_no" class=" form-control-label">Phone Number</label>
+                                                <input type="number" id="phone_no" name="phone_no" value="{{old('phone_no')}}" class="form-control @error('phone_no') is-invalid @enderror">
+                                                @error('phone_no')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-secondary btn-sm" value="submit" form="search">
+                                            Search
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -44,6 +91,7 @@
                         <thead>
                         <tr class="">
                             <th>#</th>
+                            <th>Order No.</th>
                             <th>Hotel</th>
                             <th>Room Type</th>
                             <th>Total Rooms</th>
@@ -63,7 +111,12 @@
                             @foreach($book_hotels as $book_hotel)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <td>{{$book_hotel->hotel->name}}</td>
+                                    <th>{{$book_hotel->number}}</th>
+                                    <td>
+                                        @if($book_hotel->hotel != NULL)
+                                            <a class="btn btn-link" href="{{route('hotel.show',$book_hotel->hotel->slug)}}">{{$book_hotel->hotel->name}}</a>
+                                        @endif
+                                    </td>
                                     <td>{{$book_hotel->room->name}}</td>
                                     <td>{{$book_hotel->total_rooms}}</td>
                                     <td>{{$book_hotel->adults}}</td>
@@ -71,6 +124,13 @@
                                     <td>{{$book_hotel->check_in_date}}</td>
                                     <td>{{$book_hotel->check_out_date}}</td>
                                     <td>
+{{--                                        @if($book_hotel->status == \App\Enums\BookingStatus::Reserved)--}}
+{{--                                            <span class="badge badge-danger w-85 py-2">Reserved</span>--}}
+{{--                                        @elseif($book_hotel->status == \App\Enums\BookingStatus::Booked)--}}
+{{--                                            <span class="badge badge-success w-85 py-2">Booked</span>--}}
+{{--                                        @elseif($book_hotel->status == \App\Enums\BookingStatus::Canceled)--}}
+{{--                                            <span class="badge badge-danger w-85 py-2">Canceled</span>--}}
+{{--                                        @endif--}}
                                         <form id="status-form-{{$book_hotel->number}}">
                                             @csrf
                                             <select onchange="submit_status_form('{{$book_hotel->number}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
@@ -107,49 +167,14 @@
                                             {{-- Delete Order Button --}}
                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                onclick="event.preventDefault();
-                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">
-                                                Delete
+                                                   document.getElementById('cancel-{{$loop->iteration}}').submit();">
+                                                Cancel
                                             </a>
-                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('admin.dashboard.booking.tour.delete',$book_hotel->number) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
+                                            <form id="cancel-{{$loop->iteration}}" action="{{ route('admin.dashboard.booking.hotel.cancel',$book_hotel->number) }}" method="GET" style="display: none;">
+                                                @method('GET')
                                             </form>
                                         </div>
                                     </td>
-                                    {{--                                    <td>--}}
-                                    {{--                                        <div class="d-inline" role="group">--}}
-                                    {{--                                            --}}{{-- Add Room Hotel Button--}}
-                                    {{--                                            <a type="button" href="" class="btn btn-success btn-sm"--}}
-                                    {{--                                               onclick="event.preventDefault();--}}
-                                    {{--                                                   document.getElementById('add-room-hotel-{{$loop->iteration}}').submit();">--}}
-                                    {{--                                                Rooms--}}
-                                    {{--                                            </a>--}}
-                                    {{--                                            <form id="add-room-hotel-{{$loop->iteration}}" action="{{route('admin.dashboard.hotel.room.index',$hotel->slug)}}" method="POST" style="display: none;">--}}
-                                    {{--                                                @csrf--}}
-                                    {{--                                                @method('GET')--}}
-                                    {{--                                            </form>--}}
-                                    {{--                                            --}}{{-- Edit Tour Button--}}
-                                    {{--                                            <a type="button" href="" class="btn btn-success btn-sm"--}}
-                                    {{--                                               onclick="event.preventDefault();--}}
-                                    {{--                                                   document.getElementById('edit-hotel-{{$loop->iteration}}').submit();">--}}
-                                    {{--                                                Edit--}}
-                                    {{--                                            </a>--}}
-                                    {{--                                            <form id="edit-hotel-{{$loop->iteration}}" action="{{ route('admin.dashboard.hotel.edit',$hotel->slug) }}" method="POST" style="display: none;">--}}
-                                    {{--                                                @csrf--}}
-                                    {{--                                                @method('GET')--}}
-                                    {{--                                            </form>--}}
-                                    {{--                                            --}}{{-- Delete Tour Button--}}
-                                    {{--                                            <a type="button" href="" class="btn btn-danger btn-sm"--}}
-                                    {{--                                               onclick="event.preventDefault();--}}
-                                    {{--                                                   document.getElementById('delete-tour-{{$loop->iteration}}').submit();">--}}
-                                    {{--                                                Delete--}}
-                                    {{--                                            </a>--}}
-                                    {{--                                            <form id="delete-tour-{{$loop->iteration}}" action="{{ route('hotel.destroy',$hotel->slug) }}" method="POST" style="display: none;">--}}
-                                    {{--                                                @csrf--}}
-                                    {{--                                                @method('DELETE')--}}
-                                    {{--                                            </form>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </td>--}}
                                 </tr>
                             @endforeach
                         @endif

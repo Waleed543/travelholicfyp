@@ -18,6 +18,7 @@ class HotelBookingController extends Controller
         $user_hotels = auth()->user()->hotels()->with('booking');
         $user_hotels = $user_hotels->paginate(15);
 
+
         $hotels = Hotel::select('slug','name')->where('status',Status::Active)->get();
 
         return view('user.dashboard.hotel.booking',compact('user_hotels','hotels'));

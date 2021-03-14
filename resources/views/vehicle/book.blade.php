@@ -119,7 +119,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label><h3>Departure date</h3></label><br>
-                                    <input type="date" name="departure_date" min="{{$date_today}}" max="{{$date_max}}" value="{{old('departure_date')}}" style="width: 100%" class="form-control @error('departure_date')is-invalid @enderror">
+                                    <input id="test" type="text" name="departure_date" min="{{$date_today}}" value="{{old('departure_date')}}" style="width: 100%" class="date form-control @error('departure_date')is-invalid @enderror">
                                     <span class="invalid-feedback alert alert-danger" role="alert" >
                                                   <strong><i class="fas fa-exclamation-triangle"></i> @error('departure_date'){{$message}} @enderror</strong>
                                                 </span>
@@ -158,17 +158,9 @@
                                             Easy Paisa
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment_type" id="payment_type2" value="2">
-                                        <label class="form-check-label" for="payment_type2">
-                                            Cash
-                                        </label>
-                                    </div>
-                                    @error('payment_type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <span class="invalid-feedback alert alert-danger" role="alert" >
+                                                  <strong><i class="fas fa-exclamation-triangle"></i> @error('payment_type'){{$message}} @enderror</strong>
+                                                </span>
                                 </div>
                             </div>
 
@@ -189,9 +181,18 @@
 
     </div>
 
+@endsection
 
-
-
-
-
+@section('js_bottom')
+    <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script type="text/javascript">
+        var array = @json($booking_dates);
+        $('#test').datepicker({
+            beforeShowDay: function(date){
+                var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+                return [ array.indexOf(string) == -1 ]
+            }
+        });
+    </script>
 @endsection

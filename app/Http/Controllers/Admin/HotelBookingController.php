@@ -8,7 +8,9 @@ use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
 use App\Model\book_hotel;
+use App\Model\book_hotel as book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class HotelBookingController extends Controller
@@ -20,6 +22,20 @@ class HotelBookingController extends Controller
         $hotels = Hotel::select('slug','name')->where('status',Status::Active)->get();
 
         return view('admin.dashboard.booking.hotel',compact('book_hotels','hotels'));
+    }
+
+    public function cancel($number)
+    {
+        $book_hotel = book::where('number',$number)->first();
+        abort_if($book_hotel == null,'404','Reservation not found');
+        $hotel = $book_hotel->hotel;
+
+        abort_unless($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
+
+        $book_hotel->status = BookingStatus::Canceled;
+        $book_hotel->save();
+
+        return back()->with('popop_success', 'Order has been Canceled');
     }
 
     public function status(Request $request, $number)

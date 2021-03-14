@@ -88,7 +88,7 @@ class VehicleController extends Controller
         //Slug Create
         $slug = Str::slug( $request->name, "-");
         $slug = $slug."-";
-        $temp = Vehicle::where('slug','like',"{$slug}%")->orderBy('slug')->get()->last();
+        $temp = Vehicle::withTrashed()->where('slug','like',"{$slug}%")->orderBy('slug')->get()->last();
         if($temp != null)
         {
             $count = Str::afterLast($temp->slug, '-');
@@ -272,9 +272,17 @@ class VehicleController extends Controller
         abort_if($vehicle == null, '404', 'Vehicle not found');
         abort_unless($vehicle->user_id == auth()->user()->id or Gate::allows('isAdmin'),'401');
 
+        //cancel bookings
+        $bookings = $vehicle->bookings;
+        foreach ($bookings as $booking)
+        {
+            $booking->status = Status::Canceled;
+            $booking->save();
+        }
         //Deleting Tour
 
         $vehicle->delete();
+
 
         return back()->with('popup_success', 'Vehicle deleted successfully');
 

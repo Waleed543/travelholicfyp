@@ -20,4 +20,9 @@ class Vehicle extends Model
     {
         return $this->belongsToMany('App\Tag','tags_vehicle','vehicle_id','tag_id','id','id');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\Model\book_vehicle', 'vehicle_id', 'id');
+    }
 }

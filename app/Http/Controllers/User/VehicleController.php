@@ -36,39 +36,18 @@ class VehicleController extends Controller
         return view('user.dashboard.vehicle.edit',compact('vehicle','cities'));
     }
 
-    public function status(Request $request, $slug)
+    public function status($slug)
     {
-        $validator = Validator::make($request->all(), [
-            'status' => 'required|string'
-        ]);
-
         $vehicle = Vehicle::where('slug' , $slug)->first();
 
-        if ($validator->fails() or $vehicle == null)
-        {
-            return response()->json([
-                'message'   => 'Status was unable to change:200',
-                'error' => 1
-            ]);
-        }
-        switch ($request->status)
-        {
-            case Status::InProgress:
-                $vehicle->status = Status::InProgress;
-                break;
-            case Status::InActive:
-                $vehicle->status = Status::InActive;
-                break;
-            case Status::Active:
-                $vehicle->status = Status::Active;
-                break;
-        }
+        abort_if($vehicle == null,'404','Vehicle not found');
+        abort_if($vehicle->user_id != auth()->user()->id,'401');
+
+        $vehicle->status= Status::InActive;
 
         $vehicle->save();
 
-        return response()->json([
-            'message'   => 'Status changed',
-            'error' => 0
-        ]);
+        return back()->with('popup_success','Success');
+
     }
 }

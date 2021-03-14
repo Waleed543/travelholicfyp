@@ -59,6 +59,9 @@
                                     <a href="{{route('dashboard.tour.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Create
                                     </a>
+                                    <a href="{{route('dashboard.tour.bookings')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Bookings
+                                    </a>
                                 </div>
                             </li>
                         @endcan
@@ -100,7 +103,7 @@
                                     <a href="{{route('dashboard.vehicle.create')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Create
                                     </a>
-                                    <a href="" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                    <a href="{{route('dashboard.vehicle.bookings')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Bookings
                                     </a>
                                 </div>
@@ -119,6 +122,9 @@
                                     </a>
                                     <a href="{{route('dashboard.hotel.booking')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
                                         Hotel
+                                    </a>
+                                    <a href="{{route('dashboard.vehicle.booking')}}" class="nav-item dropdown-item text-white p-3 mb-2 sidebar-link">
+                                        Vehicle
                                     </a>
                                 </div>
                             </li>

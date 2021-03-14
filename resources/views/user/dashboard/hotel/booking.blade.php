@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title','My Hotel Bookings')
-@section('booking','current')
+@section('hotel','current')
 @section('headerName', 'Booking')
 @section('content')
     <section>
@@ -24,7 +24,6 @@
                                     <th>Status</th>
                                     <th>Payment Type</th>
                                     <th>Payment Status</th>
-                                    <th>TrxId</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -47,19 +46,13 @@
                                                     <td>{{$booking->check_in_date}}</td>
                                                     <td>{{$booking->check_out_date}}</td>
                                                     <td>
-                                                        <form id="status-form-{{$booking->number}}">
-                                                            @csrf
-                                                            <select onchange="submit_status_form('{{$booking->number}}')" name="status" id="status" class="form-control @error('status') is-invalid @enderror" required>
-                                                                <option value="">Please select</option>
-                                                                @foreach(App\Enums\BookingStatus::toArray() as $status)
-                                                                    @if(old('status') ?? $booking->status == $status)
-                                                                        <option selected value="{{$status}}">{{$status}}</option>
-                                                                    @else
-                                                                        <option value="{{$status}}">{{$status}}</option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </form>
+                                                        @if($booking->status == \App\Enums\BookingStatus::Reserved)
+                                                            <span class="badge badge-warning w-90 py-2">Reserved</span>
+                                                        @elseif($booking->status == \App\Enums\BookingStatus::Booked)
+                                                            <span class="badge badge-success w-90 py-2">Booked</span>
+                                                        @elseif($booking->status == \App\Enums\BookingStatus::Canceled)
+                                                            <span class="badge badge-danger w-90 py-2">Canceled</span>
+                                                        @endif
                                                     </td>
                                                     <td>{{$booking->payment_type}}</td>
                                                     <td>
@@ -71,24 +64,25 @@
                                                             <span class="badge badge-success w-75 py-2">Successful</span>
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        @if($booking->trxid != NULL)
-                                                            {{$booking->trxid}}
-                                                        @else
-                                                            Null
-                                                        @endif
-                                                    </td>
 
                                                     <td>
                                                         <div class="d-inline" role="group">
+                                                            <a type="button" href="" class="btn btn-success btn-sm"
+                                                               onclick="event.preventDefault();
+                                                                   submit_status_form('{{$booking->number}}')">
+                                                                Confirm Booking
+                                                            </a>
+                                                            <form id="status-form-{{$booking->number}}"  name="status" id="status" style="display: none;">
+                                                                @csrf
+                                                                <input name="status" type="text" value="Booked">
+                                                            </form>
                                                             <a type="button" href="" class="btn btn-danger btn-sm"
                                                                onclick="event.preventDefault();
-                                                                   document.getElementById('delete-hotel-{{$loop->iteration}}').submit();">
-                                                                Delete
+                                                                   document.getElementById('cancel-hotel-{{$loop->iteration}}').submit();">
+                                                                Cancel
                                                             </a>
-                                                            <form id="delete-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.delete',$booking->number) }}" method="POST" style="display: none;">
-                                                                @csrf
-                                                                @method('DELETE')
+                                                            <form id="cancel-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.book.cancel',$booking->number) }}" method="POST" style="display: none;">
+                                                                @method('GET')
                                                             </form>
                                                         </div>
                                                     </td>
