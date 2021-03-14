@@ -13,7 +13,7 @@
     <div class="caption text-center">
         <h1>Tours</h1>
         <h3>Check Our Latest Tour</h3>
-        <a class="btn btn-outline-light btn-lg" href="#course">Create Tour</a>
+        
     </div>
     <!--- Start Courese Section -->
 
