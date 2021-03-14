@@ -13,7 +13,6 @@
     <div class="caption text-center">
         <h1>Tours</h1>
         <h3>Check Our Latest Tour</h3>
-        
     </div>
     <!--- Start Courese Section -->
 

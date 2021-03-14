@@ -13,10 +13,10 @@
                             <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
-                                        <i class="fas fa-shopping-cart fa-3x text-warning"></i>
+                                        <i class="fas fa-hotel fa-3x text-warning"></i>
                                         <div class="text-right text-secondary">
-                                            <h5>Sales</h5>
-                                            <h3>$135,000</h3>
+                                            <h5>Total Hotels</h5>
+                                            <h3>{{$hotelcount}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -30,10 +30,10 @@
                             <div class="card card-common">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
-                                        <i class="fas fa-money-bill-alt fa-3x text-success"></i>
+                                        <i class="fas fa-plane fa-3x text-success"></i>
                                         <div class="text-right text-secondary">
-                                            <h5>Expenses</h5>
-                                            <h3>$39,000</h3>
+                                            <h5>Tours Active</h5>
+                                            <h3>{{$tourcount}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                         <i class="fas fa-users fa-3x text-info"></i>
                                         <div class="text-right text-secondary">
                                             <h5>Users</h5>
-                                            <h3>15,000</h3>
+                                            <h3>{{$usercount}}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -66,8 +66,8 @@
                                     <div class="d-flex justify-content-between">
                                         <i class="fas fa-chart-line fa-3x text-danger"></i>
                                         <div class="text-right text-secondary">
-                                            <h5>Visitors</h5>
-                                            <h3>45,000</h3>
+                                            <h5>Tour Bookings</h5>
+                                            <h3>{{$bookingcount}}</h3>
                                         </div>
                                     </div>
                                 </div>
