@@ -21,7 +21,7 @@
     <div class="caption text-center">
         <h1>Blogs</h1>
         <h3>Check Our Latest Blog</h3>
-        <a class="btn btn-outline-light btn-lg" href="#course">Write Blog</a>
+
     </div>
     <!--- Start Courese Section -->
     <div class="jumbotron">
@@ -29,7 +29,7 @@
             <div class="col-12">
 
                 <p class="lead">You will find all the tips and articles which will help you in tourism.</p>
-                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.blog.create')}}" target="_blank">Write Your Own Blog</a>
+                <a class="btn btn-secondary btn-md" href="{{route('dashboard.blog.create')}}" target="_blank">Write Your Own Blog</a>
             </div>
         </div><!--- End Narrow Section -->
     </div>

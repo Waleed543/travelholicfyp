@@ -96,18 +96,20 @@
                                                     <strong class="card-title" style="color: white">Rooms</strong>
                                                 </div>
                                                 <div class="card-body">
-                                                    @if(count($rooms) != 0)
-                                                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                                                    <div class="carousel-inner">
-                                                                        <div class="carousel-item active">
-                                                                            <div class="row">
-                                                                                @foreach($rooms as $room)
-                                                                                    <div class="card col-md-3" style="margin-left: 3.5rem">
-                                                                                        <div class="card-header" style="background-color: grey;">
-                                                                                            <strong class="card-title">{{$room->name}}</strong>
-                                                                                        </div>
+                                                    @if(count($rooms) > 0)
+                                                        <div class="container text-center my-3">
+
+                                                            <div class="row mx-auto my-auto">
+                                                                <div id="BlogCarousel" class="carousel slide w-100" data-ride="carousel">
+                                                                    <div class="carousel-inner w-100" role="listbox">
+                                                                        @foreach($rooms as $room)
+                                                                            <div class="carousel-item @if($loop->iteration == 1) active @endif">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="card">
+                                                                                        <img class="card-img-top" style="height: 15rem" src="{{asset('storage/'.$hotel->user->username.'/hotel/room/'.$room->thumbnail)}}">
                                                                                         <div class="card-body">
-                                                                                            <img class="img-fluid" src="{{asset('storage/'.$hotel->user->username.'/hotel/room/'.$room->thumbnail)}}">
+                                                                                            <h4 class="card-title">{{$room->name}}</h4>
+
                                                                                         </div>
                                                                                         <div class="card-footer">
                                                                                             <div class="row">
@@ -124,21 +126,21 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                @endforeach
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @endforeach
                                                                     </div>
-                                                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                                                        <i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true" style="color: black"></i>
+                                                                    <a class="carousel-control-prev w-auto" href="#BlogCarousel" role="button" data-slide="prev">
+                                                                        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                                                                         <span class="sr-only">Previous</span>
                                                                     </a>
-                                                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                                                        <i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true" style="color: black"></i>
+                                                                    <a class="carousel-control-next w-auto" href="#BlogCarousel" role="button" data-slide="next">
+                                                                        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                                                                         <span class="sr-only">Next</span>
                                                                     </a>
                                                                 </div>
-                                                    @else
-                                                        No Room Type Found
+                                                            </div>
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>

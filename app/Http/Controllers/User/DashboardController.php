@@ -28,7 +28,17 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $profile = DB::table('user_profile')->where('user_id','=',$user->id)->first();
-        return view('user.dashboard.index',compact('user','profile'));
+        $users= DB::table('users');
+        $usercount=$users->count();
+        $hotels=DB::table('hotels');
+        $hotelcount=$hotels->count();
+        $tours=DB::table('tours')->where('status','=','Active');
+        $tourcount=$tours->count();
+        $bookingtour=DB::table('book_tour');
+        $bookingcount=$bookingtour->count();
+
+
+        return view('user.dashboard.index',compact('user','profile','usercount','hotelcount','tourcount','bookingcount'));
     }
 
     public function destroy($slug)

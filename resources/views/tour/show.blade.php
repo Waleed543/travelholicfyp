@@ -16,15 +16,7 @@
         <a class="btn btn-outline-light btn-lg" href="#course">Create Tour</a>
     </div>
     <!--- Start Courese Section -->
-    <div class="jumbotron">
-        <div class="narrow text-center">
-            <div class="col-12">
-                <h1>All Blogs Related To Tourism</h1>
-                <p class="lead">You will find all the tips and articles which will help you in tourism.</p>
-                <a class="btn btn-secondary btn-md" href="#" target="_blank">Write Your Own Blog</a>
-            </div>
-        </div><!--- End Narrow Section -->
-    </div>
+
     <!--- Start Courese Section -->
     <!--- Start Blog Section -->
     <div class="container-fluid">
@@ -101,22 +93,14 @@
                                                         </p>
                                                     @endforeach
 
-                                                    <span class="badge badge-success">Included</span>
-                                                    <p>
-                                                        -Food
-                                                        -Stay
-                                                        -Travel
 
-                                                    </p>
-                                                    <span class="badge badge-warning">Excluded</span>
-                                                    <p>
-                                                        -Camera
-
-                                                    </p>
 
 
                                                 </div>
-
+                                                <a target="_blank" class="btn btn-outline-primary"
+                                                   onclick="document.getElementById('book-{{$tour->slug}}').submit();">
+                                                    Book
+                                                </a>
 
                                             </div>
                                         </div>

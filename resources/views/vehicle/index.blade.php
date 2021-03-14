@@ -28,8 +28,8 @@
         <div class="narrow text-center">
             <div class="col-12">
 
-                <p class="lead">You will find all the tours here that are posted by either users or by us.</p>
-                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.tour.create')}}" target="_blank">Create Vehicle</a>
+                <p class="lead">You will find all Vehicles here posted by users.</p>
+                <a class="btn btn-secondary btn-md" href="{{route('dashboard.vehicle.create')}}" target="_blank">Create Vehicle</a>
             </div>
         </div><!--- End Narrow Section -->
     </div>

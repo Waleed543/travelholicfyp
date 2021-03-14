@@ -29,7 +29,7 @@
             <div class="col-12">
 
                 <p class="lead">All the hotels posted by vendors.</p>
-                <a class="btn btn-secondary btn-md" href="{{route('admin.dashboard.hotel.create')}}" target="_blank">Add your hotel</a>
+
             </div>
         </div><!--- End Narrow Section -->
     </div>
