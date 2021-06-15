@@ -33,7 +33,7 @@ class book_tour extends FormRequest
             'adults' => 'required|integer',
             'children' => 'required|integer',
             'phone' => 'required|size:11',
-            'payment_type' => 'required|gte:1|lte:1'
+//            'payment_type' => 'required|gte:1|lte:1'
         ];
     }
 
@@ -55,18 +55,18 @@ class book_tour extends FormRequest
                 $validator -> errors() -> add('seats', 'Seats must be equal to adult and children sum');
             }
 
-            if ($this->payment_type = 1)
-            {
-                $this->payment_type = Payment::EasyPaisa;
-                //$this->request->add(['payment_type'=>$this->tour]);
-            }elseif($this->payment_type = 2)
-            {
-                $this->payment_type = Payment::Cash;
-            }elseif($this->payment_type = 3){
-                $this->payment_type = Payment::CreditCard;
-            }else{
-                $validator -> errors() -> add('payment_type', 'Error in Payment type field');
-            }
+//            if ($this->payment_type = 1)
+//            {
+//                $this->payment_type = Payment::EasyPaisa;
+//                //$this->request->add(['payment_type'=>$this->tour]);
+//            }elseif($this->payment_type = 2)
+//            {
+//                $this->payment_type = Payment::Cash;
+//            }elseif($this->payment_type = 3){
+//                $this->payment_type = Payment::CreditCard;
+//            }else{
+//                $validator -> errors() -> add('payment_type', 'Error in Payment type field');
+//            }
 
 //            $departure_date = new \Illuminate\Support\Carbon( $this->tour->departure_date);
 //            $returning_date = new \Illuminate\Support\Carbon( $this->tour->returning_date);
