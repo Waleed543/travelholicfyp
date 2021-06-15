@@ -6,7 +6,7 @@ use App\City;
 use App\Enums\BookingStatus;
 use App\Enums\Status;
 use App\Http\Controllers\Controller;
-use App\model\book_vehicle;
+use App\Model\book_vehicle;
 use App\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;

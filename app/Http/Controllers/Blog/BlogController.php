@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     /**
@@ -93,7 +94,7 @@ class BlogController extends Controller
 
         $blog->slug = strtolower($slug);
         $blog->thumbnail = $fileNameToStore;
-        $blog->status = Status::InProgress;
+        $blog->status = Status::Requested;
         $blog->save();
 
         //create tags
@@ -158,11 +159,20 @@ class BlogController extends Controller
      */
     public function show($blog)
     {
-        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $blog)
-            ->where('status','=',Status::Active)
-            ->first();
-
-        abort_if($blog == null , '404');
+        $blog = Blog::with(['user.profile','comments.user.profile','comments.replies.user.profile'])->where('slug', $blog)->first();
+        
+        abort_if($blog == null,'404');
+        
+        if(Auth::check())
+        {
+            if($blog->user_id == auth()->user()->id or Gate::allows('isAdmin')){
+            return view('blog.show',compact('blog'));
+        }
+        }
+        if($blog->status != Status::Active){
+            abort('404');
+        }
+        
 
         return view('blog.show',compact('blog'));
     }
@@ -222,7 +232,7 @@ class BlogController extends Controller
             $blog->slug = strtolower($slug);
         }
         $blog->body = $request->body;
-        $blog->status = Status::InProgress;
+        $blog->status = Status::Requested;
         $blog->save();
 
         //delete changed tags

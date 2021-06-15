@@ -153,7 +153,7 @@
                                 <div class="col-lg-6">
                                     <label for="payment_type" class="form-control-label"><h3>Payment Type</h3></label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment_type" id="payment_type1" value="1">
+                                        <input checked disabled class="form-check-input" type="radio" name="payment_type" id="payment_type1" value="1">
                                         <label class="form-check-label" for="payment_type1">
                                             Easy Paisa
                                         </label>

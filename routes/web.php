@@ -199,6 +199,8 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/edit', 'User\BlogController@edit')->name('dashboard.blog.edit');
         Route::delete('/{slug}', 'User\BlogController@destroy')->name('dashboard.blog.delete');
         Route::get('/search', 'Blog\BlogSearchController')->name('dashboard.blog.search');
+        Route::get('/{slug}/status/update', 'User\BlogController@status')->name('dashboard.blog.status.inactive');
+        Route::get('/{slug}/status', 'User\BlogController@statusRequested')->name('dashboard.blog.status.requested');
     });
     //Tour Routes
     Route::prefix('tour')->middleware(['auth','can:notAdmin'])->name('dashboard.tour')->group(function () {
@@ -207,7 +209,8 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/edit', 'User\TourController@edit')->name('.edit');
         Route::get('/search', 'Tour\TourSearchController')->name('.search');
         Route::get('/{slug}/profile','User\TourController@profile')->name('.profile');
-        Route::get('/{slug}/status', 'User\TourController@status')->name('.status.inactive');
+        Route::get('/{slug}/status/update', 'User\TourController@status')->name('.status.inactive');
+        Route::get('/{slug}/status', 'User\TourController@statusRequested')->name('.status.requested');
 
         //Bookings Routes
         Route::get('/bookings', 'User\TourBookingController@index')->name('.bookings');
@@ -220,7 +223,8 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::get('/{slug}/edit', 'User\HotelController@edit')->name('.edit');
         Route::get('/{slug}/profile','User\HotelController@profile')->name('.profile');
         Route::delete('/{slug}', 'User\HotelController@destroy')->name('.delete');
-        Route::get('/{slug}/status', 'User\HotelController@status')->name('.status.inactive');
+        Route::get('/{slug}/status/update', 'User\HotelController@status')->name('.status.inactive');
+        Route::get('/{slug}/status', 'User\HotelController@statusRequested')->name('.status.requested');
         Route::get('/search', 'Hotel\HotelSearchController')->name('.search');
 
         //Rooms Routes
@@ -230,6 +234,7 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
             Route::get('/store', 'User\RoomController@store')->name('.store');
             Route::get('/edit/{room_slug}', 'User\RoomController@edit')->name('.edit');
             Route::post('/{room_slug}/status/update', 'User\RoomController@status')->name('.status');
+            
 
         });
         //Bookings Routes
@@ -245,7 +250,8 @@ Route::prefix('dashboard')->middleware(['auth','can:notAdmin'])->group(function 
         Route::post('/{slug}/status','User\VehicleController@status')->name('.status');
         Route::get('/create', 'User\VehicleController@create')->name('.create');
         Route::get('/{slug}/edit', 'User\VehicleController@edit')->name('.edit');
-        Route::get('/{slug}/status', 'User\VehicleController@status')->name('.status.inactive');
+        Route::get('/{slug}/status/update', 'User\VehicleController@status')->name('.status.inactive');
+        Route::get('/{slug}/status', 'User\VehicleController@statusRequested')->name('.status.requested');
 
         //Bookings Routes
         Route::get('/bookings', 'User\VehicleBookingController@index')->name('.bookings');
@@ -355,6 +361,7 @@ Route::resource('/tour','Tour\TourController');
 |--------------------------------------------------------------------------
 */
 
+Route::get('/vehicle/search', 'Vehicle\VehicleSearchController')->name('vehicle.search');
 Route::resource('/vehicle','Vehicle\VehicleController');
 
 /*

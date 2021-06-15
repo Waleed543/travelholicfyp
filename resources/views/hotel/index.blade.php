@@ -132,7 +132,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                No Tours Found
+                                No Hotels Found
                             @endif
                         </div>
                     </div>

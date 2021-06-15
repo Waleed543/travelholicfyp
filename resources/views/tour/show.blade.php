@@ -96,10 +96,15 @@
 
 
                                                 </div>
+                                                
                                                 <a target="_blank" class="btn btn-outline-primary"
                                                    onclick="document.getElementById('book-{{$tour->slug}}').submit();">
                                                     Book
                                                 </a>
+                                                <form id="book-{{$tour->slug}}" method="POST" action="{{route('dashboard.tour.book',$tour->slug)}}" class="d-none">
+                                                    @csrf
+                                                    @method('GET')
+                                                </form>
 
                                             </div>
                                         </div>

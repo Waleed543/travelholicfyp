@@ -27,7 +27,7 @@ class HotelBookController extends Controller
         return view('hotel.book',compact('hotel','room'));
     }
 
-    public function book(\App\Http\Requests\Hotel\book_hotel $request, $slug, $room_slug)
+    public function book(\App\Http\Requests\hotel\book_hotel $request, $slug, $room_slug)
     {
         $hotel = $request->hotel;
 
@@ -35,16 +35,6 @@ class HotelBookController extends Controller
             ->where('hotel_id',$hotel->id)->first();
 
         abort_if($room == null,'404','Room not found');
-
-        if($room->available < $request->total_rooms)
-        {
-            return back()->with('popup_error','There are not enough rooms');
-        }
-
-        if($room->capacity < $request->adults+$request->children)
-        {
-            return back()->with('popup_error','Only '.$room->capacity.' persons allowed');
-        }
 
         $number = book::select('number')->orderBy('created_at','desc')->limit(1)->first();
 

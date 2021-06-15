@@ -159,20 +159,36 @@
                                             <span class="badge badge-warning w-75 py-2">In progress</span>
                                         @elseif($vehicle->status == \App\Enums\Status::InActive)
                                             <span class="badge badge-danger w-75 py-2">InActive</span>
+                                        @elseif($vehicle->status == \App\Enums\Status::Requested)
+                                            <span class="badge badge-warning w-75 py-2">Requested</span>
                                         @endif
+                                        
                                     </td>
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Inactive Tour Button--}}
-                                            <a type="button" href="" class="btn btn-warning btn-sm"
-                                               onclick="event.preventDefault();
-                                                   document.getElementById('inactive-tour-{{$loop->iteration}}').submit();">
-                                                Inavtive
-                                            </a>
-                                            <form id="inactive-tour-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.status.inactive',$vehicle->slug) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('GET')
-                                            </form>
+                                            @if($vehicle->status == \App\Enums\Status::InActive)
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('request-{{$loop->iteration}}').submit();">
+                                                        Request Avtive
+                                                    </a>
+                                                    <form id="request-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.status.requested',$vehicle->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @else
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('inactive-{{$loop->iteration}}').submit();">
+                                                        Inactive
+                                                    </a>
+                                                    <form id="inactive-{{$loop->iteration}}" action="{{ route('dashboard.vehicle.status.inactive',$vehicle->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @endif
                                             {{-- Edit Vehicle Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();

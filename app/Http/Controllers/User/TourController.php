@@ -67,6 +67,20 @@ class TourController extends Controller
                 return back()->with('popup_success','Success');
 
         }
+        public function statusRequested($slug)
+        {
+                $tour = Tour::where('slug' , $slug)->first();
+
+                abort_if($tour == null,'404','Tour not found');
+                abort_if($tour->user_id != auth()->user()->id,'401');
+
+                $tour->status= Status::Requested;
+
+                $tour->save();
+
+                return back()->with('popup_success','Success');
+
+        }
 
     public function profile($slug)
     {

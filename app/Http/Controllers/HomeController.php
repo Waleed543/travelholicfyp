@@ -12,6 +12,7 @@ use App\Model\tags_hotel;
 use App\Tag;
 use App\Tour;
 use App\User;
+use App\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -38,6 +39,16 @@ class HomeController extends Controller
         $tours_count = count($tours->get());
         $tours = $tours->limit(6)->get();
 
+        $hotels = Hotel::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc');
+        $hotels_count = count($hotels->get());
+        $hotels = $hotels->limit(6)->get();
+
+        $vehicles = Vehicle::with('user')->where('status','=',Status::Active)
+            ->orderBy('created_at','desc');
+        $vehicles_count = count($vehicles->get());
+        $vehicles = $vehicles->limit(6)->get();
+
         $blogs = Blog::with('user')->where('status','=',Status::Active)
             ->orderBy('created_at','desc');
 
@@ -46,7 +57,7 @@ class HomeController extends Controller
 
         $users_count = count(User::all());
 
-        return view('home',compact('tours','blogs','tours_count','blogs_count','users_count'));
+        return view('home',compact('tours','blogs','tours_count','blogs_count','users_count','hotels','hotels_count','vehicles','vehicles_count'));
     }
     public function  contactus()
     {

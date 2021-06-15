@@ -6,7 +6,7 @@
 @section('content')
     <div class="landing">
         <div class="home-wrap">
-            <div class="home-inner" style="background-image: url('{{asset('img/blog.jpg')}}')">
+            <div class="home-inner" style="background-image: url('{{asset('img/vehicle.jpg')}}')">
             </div>
         </div>
     </div>

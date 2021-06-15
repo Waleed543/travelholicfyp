@@ -148,7 +148,7 @@
                             @foreach($tours as $tour)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <td><a href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
+                                    <td><a  href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
                                     <td>{{$tour->slug}}</td>
                                     <td>{{$tour->created_at}}</td>
                                     <td>

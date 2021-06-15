@@ -8,7 +8,7 @@ use App\Enums\PaymentStatus;
 use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
-use App\model\book_vehicle;
+use App\Model\book_vehicle;
 use App\Tour;
 use App\Vehicle;
 use Illuminate\Http\Request;

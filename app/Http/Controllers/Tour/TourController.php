@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Enums\Status;
+use Illuminate\Support\Facades\Auth;
 
 class TourController extends Controller
 {
@@ -137,7 +138,7 @@ class TourController extends Controller
         $tour->description = $request->input('description');
         $tour->price = $request->input('price');
 
-        $tour->status = Status::InProgress;
+        $tour->status = Status::Requested;
 
         $tour->save();
 
@@ -169,11 +170,20 @@ class TourController extends Controller
      */
     public function show($tour)
     {
-        $tour = Tour::with('user')->where('slug','=',$tour)
-            ->where('status','=',Status::Active)
-            ->first();
-
+        $tour = Tour::with('user')->where('slug','=',$tour)->first();
         abort_if($tour == null,'404');
+        
+        if(Auth::check())
+        {
+            if($tour->user_id == auth()->user()->id or Gate::allows('isAdmin')){
+            $tour_days = $tour->tour_days;
+        return view('tour.show',compact('tour','tour_days'));
+        }
+        }
+        if($tour->status != Status::Active){
+            abort('404');
+        }
+    
 
         $tour_days = $tour->tour_days;
         return view('tour.show',compact('tour','tour_days'));
@@ -272,7 +282,7 @@ class TourController extends Controller
         $tour->description = $request->input('description');
         $tour->price = $request->input('price');
 
-        $tour->status = Status::InProgress;
+        $tour->status = Status::Requested;
         $tour->save();
 
         //delete changed tags

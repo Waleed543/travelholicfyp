@@ -139,7 +139,7 @@
                                 @foreach($tours as $tour)
                                     <tr>
                                         <th>{{$loop->iteration}}</th>
-                                        <td>{{$tour->name}}</td>
+                                        <td><a style="color:white" href="{{route('tour.show',$tour->slug)}}" target="_blank">{{$tour->name}}</a></td>
                                         <td>{{$tour->slug}}</td>
                                         <td>{{$tour->created_at}}</td>
                                         <td>
@@ -149,20 +149,36 @@
                                                 <span class="badge badge-warning w-75 py-2">In progress</span>
                                             @elseif($tour->status == \App\Enums\Status::InActive)
                                                 <span class="badge badge-danger w-75 py-2">InActive</span>
+                                            @elseif($tour->status == \App\Enums\Status::Requested)
+                                            <span class="badge badge-warning w-75 py-2">Requested</span>
                                             @endif
                                         </td>
                                         <td>
                                             <div class="d-inline" role="group">
-                                                {{-- Inactive Tour Button--}}
-                                                <a type="button" href="" class="btn btn-warning btn-sm"
-                                                   onclick="event.preventDefault();
-                                                       document.getElementById('inactive-tour-{{$loop->iteration}}').submit();">
-                                                    Inavtive
-                                                </a>
-                                                <form id="inactive-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.status.inactive',$tour->slug) }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                    @method('GET')
-                                                </form>
+                                                @if($tour->status == \App\Enums\Status::InActive)
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('request-{{$loop->iteration}}').submit();">
+                                                        Request Avtive
+                                                    </a>
+                                                    <form id="request-{{$loop->iteration}}" action="{{ route('dashboard.tour.status.requested',$tour->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @else
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('inactive-tour-{{$loop->iteration}}').submit();">
+                                                        Inactive
+                                                    </a>
+                                                    <form id="inactive-tour-{{$loop->iteration}}" action="{{ route('dashboard.tour.status.inactive',$tour->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @endif
+                                                
                                                 {{-- Profile Tour Button--}}
                                                 <a type="button" href="" class="btn btn-success btn-sm"
                                                    onclick="event.preventDefault();

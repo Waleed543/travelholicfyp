@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('nav','fixed-top')
 @section('content')
+@include('inc.message_popup')
 
     <div class="container" style="margin-top: 10rem; background-color: lightgrey; height: 900px; border-radius: 20px; color: #40474e">
 
@@ -80,7 +81,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col-lg-6">
-                                    <label><h3>Check Out date</h3></label><br>
+                                    <label><h3>Check In date</h3></label><br>
                                     <input type="date" name="check_in_date" value="{{old('check_in_date')}}" style="width: 100%" class="form-control @error('check_in_date')is-invalid @enderror">
                                     <span class="invalid-feedback alert alert-danger" role="alert" >
                                         <strong><i class="fas fa-exclamation-triangle"></i> @error('check_in_date'){{$message}} @enderror</strong>
@@ -107,7 +108,7 @@
                                 <div class="col-lg-6">
                                     <label for="payment_type" class="form-control-label"><h3>Payment Type</h3></label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment_type" id="payment_type1" value="1">
+                                        <input checked disabled class="form-check-input" type="radio" name="payment_type" id="payment_type1" value="1">
                                         <label class="form-check-label" for="payment_type1">
                                             Easy Paisa
                                         </label>

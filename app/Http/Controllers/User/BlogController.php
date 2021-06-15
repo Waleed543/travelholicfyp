@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\blog_category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\Status;
 
 class BlogController extends Controller
 {
@@ -33,6 +34,35 @@ class BlogController extends Controller
         return view('user.dashboard.blog.edit',compact('blog','categories'));
 
     }
+    
+    public function status($slug)
+        {
+                $blog = Blog::where('slug' , $slug)->first();
+
+                abort_if($blog == null,'404','Blog not found');
+                abort_if($blog->user_id != auth()->user()->id,'401');
+
+                $blog->status= Status::InActive;
+
+                $blog->save();
+
+                return back()->with('popup_success','Success');
+
+        }
+        public function statusRequested($slug)
+        {
+                $blog = Blog::where('slug' , $slug)->first();
+
+                abort_if($blog == null,'404','Tour not found');
+                abort_if($blog->user_id != auth()->user()->id,'401');
+
+                $blog->status= Status::Requested;
+
+                $blog->save();
+
+                return back()->with('popup_success','Success');
+
+        }
 
     public function destroy($slug)
     {

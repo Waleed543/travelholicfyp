@@ -14,7 +14,7 @@
     </style>
     <div class="landing">
         <div class="home-wrap">
-            <div class="home-inner" style="background-image: url('{{asset('img/tour.jpg')}}')">
+            <div class="home-inner" style="background-image: url('{{asset('img/vehicle.jpg')}}')">
             </div>
         </div>
     </div>
@@ -54,8 +54,7 @@
                             <h1 class="mt-4">Search</h1>
                         </div>
                         <hr>
-                        <form  id="search" method="GET" action="" enctype="multipart/form-data" class="form-horizontal">
-                            @csrf
+                        <form  id="search" method="GET" action="{{route('vehicle.search')}}" enctype="multipart/form-data" class="form-horizontal">
                             @method('GET')
                             {{-- Name --}}
                             <div class="row form-group">
@@ -72,9 +71,9 @@
                             {{-- Seats --}}
                             <div class="row form-group">
                                 <div class="col-12 col-md-12">
-                                    <label for="seats" class=" form-control-label">Seats</label>
-                                    <input type="number" min="0" max="100" id="seats" name="seats" value="{{old('seats')}}" class="form-control @error('seats') is-invalid @enderror">
-                                    @error('seats')
+                                    <label for="seats" class=" form-control-label">Make</label>
+                                    <input type="text" id="make" name="make" value="{{old('make')}}" class="form-control @error('make') is-invalid @enderror">
+                                    @error('make')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -84,12 +83,12 @@
                             {{-- Cities --}}
                             <div class="row form-group">
                                 <div class="col-12 col-md-6">
-                                    <label for="departure_city" class=" form-control-label">Departure City</label>
-                                    <select name="departure_city" id="select" class="form-control @error('departure_city') is-invalid @enderror">
+                                    <label for="city" class=" form-control-label">Departure City</label>
+                                    <select name="city" id="select" class="form-control @error('city') is-invalid @enderror">
                                         <option value="">Select</option>
                                         @if(count($cities)>0)
                                             @foreach($cities as $city)
-                                                @if(old('departure_city') == $city->id)
+                                                @if(old('city') == $city->id)
                                                     <option selected value="{{$city->id}}">{{$city->name}}</option>
                                                 @else
                                                     <option value="{{$city->id}}">{{$city->name}}</option>
@@ -97,27 +96,7 @@
                                             @endforeach
                                         @endif
                                     </select>
-                                    @error('departure_city')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="destination_city" class=" form-control-label">Destination City</label>
-                                    <select name="destination_city" id="select" class="form-control @error('destination_city') is-invalid @enderror">
-                                        <option value="">Select</option>
-                                        @if(count($cities)>0)
-                                            @foreach($cities as $city)
-                                                @if(old('destination_city') == $city->id)
-                                                    <option selected value="{{$city->id}}">{{$city->name}}</option>
-                                                @else
-                                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    @error('destination_city')
+                                    @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -182,7 +161,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                No Tours Found
+                                No Vehicle Found
                             @endif
                         </div>
                     </div>

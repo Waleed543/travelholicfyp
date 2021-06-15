@@ -50,4 +50,18 @@ class VehicleController extends Controller
         return back()->with('popup_success','Success');
 
     }
+    public function statusRequested($slug)
+        {
+                $vehicle = Vehicle::where('slug' , $slug)->first();
+
+                abort_if($vehicle == null,'404','Vehicle not found');
+                abort_if($vehicle->user_id != auth()->user()->id,'401');
+
+                $vehicle->status= Status::Requested;
+
+                $vehicle->save();
+
+                return back()->with('popup_success','Success');
+
+        }
 }

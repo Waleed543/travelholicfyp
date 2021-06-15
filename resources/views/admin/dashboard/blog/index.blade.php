@@ -86,7 +86,7 @@
                                     @foreach($blogs as $blog)
                                         <tr>
                                             <th>{{$loop->iteration}}</th>
-                                            <td>{{$blog->title}}</td>
+                                            <td><a style="color:white" href="{{route('blog.show',$blog->slug)}}" target="_blank">{{$blog->title}}</a></td>
                                             <td>{{$blog->slug}}</td>
                                             <td>{{$blog->created_at}}</td>
                                             <td>

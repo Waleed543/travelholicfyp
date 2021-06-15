@@ -15,4 +15,5 @@ final class Status extends Enum
     const InActive =   'In Active';
     const InProgress = 'In Progress';
     const Canceled = 'Canceled';
+    const Requested = 'Requested';
 }

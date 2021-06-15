@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
@@ -110,7 +111,7 @@ class VehicleController extends Controller
         $vehicle->price = $request->input('price');
         $vehicle->city = $request->input('city');
         $vehicle->description = $request->input('description');
-        $vehicle->status = Status::InProgress;
+        $vehicle->status = Status::Requested;
 
         $vehicle->save();
 
@@ -143,11 +144,18 @@ class VehicleController extends Controller
      */
     public function show($vehicle)
     {
-        $vehicle = Vehicle::with('user')->where('slug','=',$vehicle)
-            ->where('status','=',Status::Active)
-            ->first();
-
+        $vehicle = Vehicle::with('user')->where('slug','=',$vehicle)->first();
         abort_if($vehicle == null,'404');
+        
+        if(Auth::check())
+        {
+            if($vehicle->user_id == auth()->user()->id or Gate::allows('isAdmin')){
+            return view('vehicle.show',compact('vehicle'));
+        }
+        }
+        if($vehicle->status != Status::Active){
+            abort('404');
+        }
 
         return view('vehicle.show',compact('vehicle'));
     }
@@ -227,7 +235,7 @@ class VehicleController extends Controller
         $vehicle->price = $request->input('price');
         $vehicle->city = $request->input('city');
         $vehicle->description = $request->input('description');
-        $vehicle->status = Status::InProgress;
+        $vehicle->status = Status::Requested;
 
         $vehicle->save();
 

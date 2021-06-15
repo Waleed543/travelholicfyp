@@ -28,17 +28,15 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $profile = DB::table('user_profile')->where('user_id','=',$user->id)->first();
-        $users= DB::table('users');
-        $usercount=$users->count();
-        $hotels=DB::table('hotels');
-        $hotelcount=$hotels->count();
-        $tours=DB::table('tours')->where('status','=','Active');
-        $tourcount=$tours->count();
-        $bookingtour=DB::table('book_tour');
-        $bookingcount=$bookingtour->count();
+
+        $hotelcount = $user->hotels()->count();
+
+        $tourcount = $user->tours()->count();
+
+        $vehiclecount = $user->vehicles()->count();
 
 
-        return view('user.dashboard.index',compact('user','profile','usercount','hotelcount','tourcount','bookingcount'));
+        return view('user.dashboard.index',compact('user','profile','hotelcount','tourcount','vehiclecount'));
     }
 
     public function destroy($slug)

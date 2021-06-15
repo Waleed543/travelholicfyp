@@ -85,7 +85,7 @@
                                     @foreach($blogs as $blog)
                                         <tr>
                                             <th>{{$loop->iteration}}</th>
-                                            <td>{{$blog->title}}</td>
+                                            <td><a style="color:white" href="{{route('blog.show',$blog->slug)}}" target="_blank">{{$blog->title}}</a></td>
                                             <td>{{$blog->slug}}</td>
                                             <td>{{$blog->created_at}}</td>
                                             <td>
@@ -95,9 +95,34 @@
                                                     <span class="badge badge-warning w-75 py-2">In progress</span>
                                                 @elseif($blog->status == \App\Enums\Status::InActive)
                                                     <span class="badge badge-danger w-75 py-2">InActive</span>
+                                                @elseif($blog->status == \App\Enums\Status::Requested)
+                                                    <span class="badge badge-warning w-75 py-2">Requested</span>
                                                 @endif
                                             </td>
                                             <td>
+                                                @if($blog->status == \App\Enums\Status::InActive)
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('request-{{$loop->iteration}}').submit();">
+                                                        Request Avtive
+                                                    </a>
+                                                    <form id="request-{{$loop->iteration}}" action="{{ route('dashboard.blog.status.requested',$blog->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @else
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('inactive-{{$loop->iteration}}').submit();">
+                                                        Inactive
+                                                    </a>
+                                                    <form id="inactive-{{$loop->iteration}}" action="{{ route('dashboard.blog.status.inactive',$blog->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @endif
                                                 <div class="d-inline" role="group">
                                                     {{-- Edit Blog Button--}}
                                                     <a type="button" href="" class="btn btn-success btn-sm"

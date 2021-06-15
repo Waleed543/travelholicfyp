@@ -55,7 +55,7 @@
                         </div>
                         <hr>
                         <form  id="search" method="GET" action="{{route('tour.search')}}" enctype="multipart/form-data" class="form-horizontal">
-                            @csrf
+                         
                             @method('GET')
                             {{-- Name --}}
                             <div class="row form-group">
@@ -183,48 +183,6 @@
                                 @endforeach
                             @else
                                 No Tours Found
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-8">
-                <div class="product">
-                    <!--- Cards -->
-                    @if($recommendations != null and count($recommendations) > 0)
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="container">
-                                <div class="row welcome text-center">
-                                    <div class="col-12">
-                                        <h1 class="display-4">Your Recomendation</h1>
-                                    </div>
-                                    <hr>
-                                </div>
-                            </div>
-
-                                @foreach($recommendations as $recommendation)
-                                    <div class="col-sm-12 col-md-10 col-lg-6 col-xl-4 align-center">
-                                        <div class="card">
-                                            <img class="card-img-top" style="height: 15rem" src="{{asset('storage/'.$recommendation->user->username.'/tour/'.$recommendation->thumbnail)}}">
-                                            <div class="card-body">
-                                                <h4 class="card-title">{{$recommendation->name}}</h4>
-                                                <cite title="Source Title">{{$recommendation->user->name}}</cite>
-                                            </div>
-                                            <div class="card-footer text-right bg-transparent">
-                                                <a target="_blank" class="btn btn-outline-primary"
-                                                   onclick="document.getElementById('book-{{$recommendation->slug}}').submit();">
-                                                    Book
-                                                </a>
-                                                <form id="book-{{$recommendation->slug}}" method="POST" action="{{route('dashboard.tour.book',$recommendation->slug)}}" class="d-none">
-                                                    @csrf
-                                                    @method('GET')
-                                                </form>
-                                                <a type="button" href="{{route('tour.show',$recommendation->slug)}}" class="btn btn-outline-secondary">See More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
                             @endif
                         </div>
                     </div>

@@ -17,7 +17,7 @@
     @yield('css-files')
 </head>
 
-<body>
+<body onload='submit_button()'>
 
 @yield('css_top')
     <!-- Navigation -->

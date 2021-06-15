@@ -6,8 +6,8 @@ use App\City;
 use App\Enums\Status;
 use App\Hotel;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Hotel\EditRequest;
-use App\Http\Requests\Hotel\StoreRequest;
+use App\Http\Requests\hotel\EditRequest;
+use App\Http\Requests\hotel\StoreRequest;
 use App\Model\tags_hotel;
 use App\Room;
 use App\Tag;
@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class HotelController extends Controller
 {
@@ -103,7 +104,7 @@ class HotelController extends Controller
         $hotel->total_rooms = $hotel->available_rooms = 0;
         $hotel->description = $request->input('description');
 
-        $hotel->status = Status::InProgress;
+        $hotel->status = Status::Requested;
         $hotel->city= $request->input('city');
 
 
@@ -138,12 +139,21 @@ class HotelController extends Controller
      */
     public function show($hotel)
     {
-        $hotel = Hotel::with('user')->where('slug','=',$hotel)
-            ->where('status','=',Status::Active)
-            ->first();
-
-
+        $hotel = Hotel::with('user')->where('slug','=',$hotel)->first();
         abort_if($hotel == null,'404');
+        
+        
+        if(Auth::check())
+        {
+            if($hotel->user_id == auth()->user()->id or Gate::allows('isAdmin')){
+            $rooms = $hotel->rooms->where('status','=','Active');
+
+        return view('hotel.show',compact('hotel','rooms'));
+        }
+        }
+        if($hotel->status != Status::Active){
+            abort('404');
+        }
 
         $rooms = $hotel->rooms->where('status','=','Active');
 
@@ -242,7 +252,7 @@ class HotelController extends Controller
         $hotel->city= $request->input('city');
 
 
-        $hotel->status = Status::InProgress;
+        $hotel->status = Status::Requested;
 
 
         $hotel->save();

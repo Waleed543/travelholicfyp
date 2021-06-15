@@ -50,6 +50,20 @@ class HotelController extends Controller
             return back()->with('popup_success','Success');
 
     }
+    public function statusRequested($slug)
+        {
+                $hotel = Hotel::where('slug' , $slug)->first();
+
+                abort_if($hotel == null,'404','Hotel not found');
+                abort_if($hotel->user_id != auth()->user()->id,'401');
+
+                $hotel->status= Status::Requested;
+
+                $hotel->save();
+
+                return back()->with('popup_success','Success');
+
+        }
 
     public function bookings()
     {

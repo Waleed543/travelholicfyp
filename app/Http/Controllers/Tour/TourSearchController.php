@@ -67,7 +67,7 @@ class TourSearchController extends Controller
         //Check if status is Active
         $tours->where('status','=',Status::Active);
 
-        $tours = $tours()->paginate(15);
+        $tours = $tours->paginate(15);
 
         return view('tour.index',compact('tours','cities'));
     }

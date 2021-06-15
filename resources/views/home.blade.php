@@ -57,15 +57,18 @@
 
         <div class="fixed-background">
             <div class="row dark text-center">
-                <div class="col-md-4">
-                    <h3>Numbers of Trips</h3>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-2">
+                    <h3>Numbers of User</h3>
                     <div class="feature">
-                        <i class="fas fa-code fa-3x"></i>
+                        <i class="fas fa-users fa-css3 fa-3x"></i>
                     </div>
-                    <p class="lead">{{$tours_count}}</p>
+                    <p class="lead">{{$users_count}}</p>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <h3>Numbers of Blogs</h3>
                     <div class="feature">
                         <i class="fas fa-bold fa-3x"></i>
@@ -73,12 +76,28 @@
                     <p class="lead">{{$blogs_count}}</p>
                 </div>
 
-                <div class="col-md-4">
-                    <h3>Numbers of User</h3>
+                <div class="col-md-2">
+                    <h3>Numbers of Trips</h3>
                     <div class="feature">
-                        <i class="fab fa-css3 fa-3x"></i>
+                        <i class="fas fa-plane fa-3x"></i>
                     </div>
-                    <p class="lead">{{$users_count}}</p>
+                    <p class="lead">{{$tours_count}}</p>
+                </div>
+
+                <div class="col-md-2">
+                    <h3>Numbers of Hotels</h3>
+                    <div class="feature">
+                        <i class="fas fa-hotel fa-3x"></i>
+                    </div>
+                    <p class="lead">{{$hotels_count}}</p>
+                </div>
+
+                <div class="col-md-2">
+                    <h3>Numbers of Vehicles</h3>
+                    <div class="feature">
+                        <i class="fas fa-truck-pickup fa-3x"></i>
+                    </div>
+                    <p class="lead">{{$vehicles_count}}</p>
                 </div>
 
             </div><!--- End Row Dark Section -->
@@ -170,6 +189,89 @@
                         <span class="sr-only">Previous</span>
                     </a>
                     <a class="carousel-control-next w-auto" href="#TourCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
+
+
+    @if(count($hotels) > 0)
+        <div class="container text-center my-3">
+            <h2 class="font-weight-bold mt-2">Our Latest Hotels</h2>
+            <div style=" width: 12rem" class="heading-underline"></div>
+            <div class="row mx-auto my-auto">
+                <div id="HotelCarousel" class="carousel slide w-100" data-ride="carousel">
+                    <div class="carousel-inner w-100" role="listbox">
+                        @foreach($hotels as $hotel)
+                            <div class="carousel-item @if($loop->iteration == 1) active @endif">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top" style="height: 15rem" src="{{asset('storage/'.$hotel->user->username.'/hotel/'.$hotel->thumbnail)}}">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{$hotel->name}}</h4>
+                                            <cite title="Source Title">{{$hotel->user->name}}</cite>
+                                        </div>
+                                        <div class="card-footer text-right bg-transparent">
+                                            <a type="button" href="{{route('hotel.show',$hotel->slug)}}" class="btn btn-outline-secondary">See More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev w-auto" href="#HotelCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next w-auto" href="#HotelCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(count($vehicles) > 0)
+        <div class="container text-center my-3">
+            <h2 class="font-weight-bold mt-2">Our Latest Vehicles</h2>
+            <div style=" width: 12rem" class="heading-underline"></div>
+            <div class="row mx-auto my-auto">
+                <div id="VehicleCarousel" class="carousel slide w-100" data-ride="carousel">
+                    <div class="carousel-inner w-100" role="listbox">
+                        @foreach($vehicles as $vehicle)
+                            <div class="carousel-item @if($loop->iteration == 1) active @endif">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <img class="card-img-top" style="height: 15rem" src="{{asset('storage/'.$vehicle->user->username.'/vehicle/'.$vehicle->thumbnail)}}">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{$vehicle->name}}</h4>
+                                            <cite title="Source Title">{{$vehicle->user->name}}</cite>
+                                        </div>
+                                        <div class="card-footer text-right bg-transparent">
+                                            <a target="_blank" class="btn btn-outline-primary"
+                                               onclick="document.getElementById('book-{{$vehicle->slug}}').submit();">
+                                                Book
+                                            </a>
+                                            <form id="book-{{$vehicle->slug}}" method="POST" action="{{route('dashboard.vehicle.book',$vehicle->slug)}}" class="d-none">
+                                                @csrf
+                                                @method('GET')
+                                            </form>
+                                            <a type="button" href="{{route('vehicle.show',$vehicle->slug)}}" class="btn btn-outline-secondary">See More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev w-auto" href="#VehicleCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next w-auto" href="#VehicleCarousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>

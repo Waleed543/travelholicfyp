@@ -111,20 +111,43 @@
                                     <td><a href="{{route('hotel.show',$hotel->slug)}}" target="_blank">{{$hotel->name}}</a></td>
                                     <td>{{$hotel->slug}}</td>
                                     <td>{{$hotel->created_at}}</td>
-                                    <td> {{$hotel->status}}</td>
+                                    <td>
+                                        @if($hotel->status == \App\Enums\Status::Active)
+                                            <span class="badge badge-success w-75 py-2">Active</span>
+                                        @elseif($hotel->status == \App\Enums\Status::InProgress)
+                                            <span class="badge badge-warning w-75 py-2">In progress</span>
+                                        @elseif($hotel->status == \App\Enums\Status::InActive)
+                                            <span class="badge badge-danger w-75 py-2">InActive</span>
+                                        @elseif($hotel->status == \App\Enums\Status::Requested)
+                                            <span class="badge badge-warning w-75 py-2">Requested</span>
+                                        @endif
+                                    </td>
 
                                     <td>
                                         <div class="d-inline" role="group">
-                                            {{-- Inactive Hotel Button--}}
-                                            <a type="button" href="" class="btn btn-warning btn-sm"
-                                               onclick="event.preventDefault();
-                                                   document.getElementById('inactive-hotel-{{$loop->iteration}}').submit();">
-                                                Inavtive
-                                            </a>
-                                            <form id="inactive-hotel-{{$loop->iteration}}" action="{{ route('dashboard.hotel.status.inactive',$hotel->slug) }}" method="POST" style="display: none;">
-                                                @csrf
-                                                @method('GET')
-                                            </form>
+                                            @if($hotel->status == \App\Enums\Status::InActive)
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('request-{{$loop->iteration}}').submit();">
+                                                        Request Avtive
+                                                    </a>
+                                                    <form id="request-{{$loop->iteration}}" action="{{ route('dashboard.hotel.status.requested',$hotel->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @else
+                                                    {{-- Inactive Tour Button--}}
+                                                    <a type="button" href="" class="btn btn-warning btn-sm"
+                                                       onclick="event.preventDefault();
+                                                           document.getElementById('inactive-{{$loop->iteration}}').submit();">
+                                                        Inactive
+                                                    </a>
+                                                    <form id="inactive-{{$loop->iteration}}" action="{{ route('dashboard.hotel.status.inactive',$hotel->slug) }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        @method('GET')
+                                                    </form>
+                                                @endif
                                             {{-- Add Room Hotel Button--}}
                                             <a type="button" href="" class="btn btn-success btn-sm"
                                                onclick="event.preventDefault();
